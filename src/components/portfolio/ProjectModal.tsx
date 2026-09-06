@@ -99,11 +99,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               </div>
             </div>
 
-            {/* IHC Heuristic applied to this project */}
+            {/* UX/Usabilidade applied to this project */}
             <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
               <div className="flex items-center gap-2 text-xs font-bold text-emerald-400">
                 <Shield className="w-4 h-4" />
-                <span>Conformidade com IHC & Usabilidade</span>
+                <span>Boas Práticas de UX & Usabilidade</span>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Este projeto atende aos requisitos de responsividade, hierarquia visual de tipografia, leitores de tela e estados de feedback imediato ao usuário.

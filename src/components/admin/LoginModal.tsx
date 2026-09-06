@@ -68,14 +68,14 @@ export const LoginModal: React.FC = () => {
           </div>
 
           <p className="text-xs text-slate-300 mb-4 leading-relaxed">
-            O modo Administrador permite cadastrar novos projetos, editar projetos existentes e excluí-los (funcionalidades opcionais para pontuação máxima do Projeto IV-A).
+            O modo Administrador permite cadastrar novos projetos, editar projetos existentes e excluí-los diretamente pelo painel de gerenciamento.
           </p>
 
           {/* Quick Demo Hint */}
           <div className="p-3 rounded-xl bg-indigo-950/60 border border-indigo-500/30 text-xs text-indigo-200 mb-4 flex items-start gap-2">
             <Info className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
             <span>
-              <strong>Dica de teste para o professor/avaliador:</strong> Digite <code>admin123</code> ou <code>admin</code> para entrar.
+              <strong>Acesso restrito:</strong> Digite <code>admin123</code> ou <code>admin</code> para entrar.
             </span>
           </div>
 

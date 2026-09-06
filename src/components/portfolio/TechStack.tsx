@@ -68,13 +68,13 @@ export const TechStack: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 text-xs font-semibold">
             <Cpu className="w-3.5 h-3.5" />
-            <span>Ferramentas & IHC</span>
+            <span>Stack &amp; Dev</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Tecnologias & Princípios de Usabilidade
           </h2>
           <p className="text-slate-400 text-base">
-            Stack tecnológica completa combinada com a aplicação prática dos conceitos fundamentais de Interface Humano-Computador.
+            Stack tecnológica completa combinada com boas práticas de UX, acessibilidade e design de interfaces que tornam a experiência do usuário fluida e intuitiva.
           </p>
         </div>
 
@@ -110,11 +110,11 @@ export const TechStack: React.FC = () => {
         <div className="glass-panel p-8 rounded-2xl border border-slate-800 text-left space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 gap-2">
             <div>
-              <h3 className="text-xl font-bold text-white">Aplicação dos Princípios de IHC no Projeto</h3>
-              <p className="text-xs text-slate-400">Heurísticas aplicadas na arquitetura e navegação do portfólio</p>
+              <h3 className="text-xl font-bold text-white">Boas Práticas de UX &amp; Usabilidade</h3>
+              <p className="text-xs text-slate-400">Princípios aplicados na arquitetura e navegação do portfólio para entregar uma experiência de qualidade</p>
             </div>
             <span className="text-xs px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 font-medium border border-emerald-800 self-start sm:self-auto">
-              Avaliação de IHC 2026.2
+              UX / Acessibilidade
             </span>
           </div>
 

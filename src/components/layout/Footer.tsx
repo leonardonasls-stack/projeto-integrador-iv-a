@@ -18,10 +18,10 @@ export const Footer: React.FC = () => {
               <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
                 <Code2 className="w-4 h-4" />
               </div>
-              <span className="font-bold text-white text-base">Portfólio Dev — Projeto IV-A</span>
+              <span className="font-bold text-white text-base">Leonardo Nascimento</span>
             </div>
             <p className="text-xs text-slate-400 max-w-md leading-relaxed">
-              Trabalho prático desenvolvido para as disciplinas de <strong>Ferramentas Web</strong> e <strong>Interface Humano-Computador</strong> (IHC). 2026.2.
+              Portfólio pessoal de <strong>Leonardo Nascimento</strong> — Desenvolvedor backend especializado em <strong>Python</strong> e <strong>FastAPI</strong>. Aberto a oportunidades e colaborações.
             </p>
           </div>
 
@@ -63,7 +63,7 @@ export const Footer: React.FC = () => {
 
         {/* Footer Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-          <p>© 2026 Leonardo Silveira. Desenvolvido com React, TypeScript e Tailwind CSS.</p>
+          <p>© 2026 Leonardo Nascimento. Desenvolvido com React, TypeScript e Tailwind CSS.</p>
 
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />

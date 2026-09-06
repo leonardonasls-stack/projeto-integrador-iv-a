@@ -32,7 +32,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const login = (passcode: string): boolean => {
     if (passcode === 'admin123' || passcode === 'admin') {
       const adminUser: User = {
-        username: 'Professor / Avaliador Admin',
+        username: 'Administrador',
         role: 'admin',
         isLoggedIn: true
       };

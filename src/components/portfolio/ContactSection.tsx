@@ -58,7 +58,7 @@ export const ContactSection: React.FC = () => {
             Entre em Contato
           </h2>
           <p className="text-slate-400 text-base">
-            Tem alguma pergunta sobre o projeto ou proposta? Envie uma mensagem no formulário abaixo.
+            Tem alguma proposta, dúvida ou quer apenas trocar uma ideia? Envie uma mensagem e responderei em breve.
           </p>
         </div>
 
@@ -76,8 +76,8 @@ export const ContactSection: React.FC = () => {
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white">E-mail Acadêmico</h4>
-                  <p className="text-slate-400">leonardo.dev@universidade.edu.br</p>
+                  <h4 className="font-semibold text-white">E-mail</h4>
+                  <p className="text-slate-400">leonardonasls@gmail.com</p>
                 </div>
               </div>
 
@@ -86,7 +86,7 @@ export const ContactSection: React.FC = () => {
                   <MessageSquare className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white">Redes Acadêmicas & Portfólio</h4>
+                  <h4 className="font-semibold text-white">Redes Sociais &amp; Portfólio</h4>
                   <p className="text-slate-400">GitHub: github.com/leodev</p>
                   <p className="text-slate-400">LinkedIn: linkedin.com/in/leodev</p>
                 </div>
@@ -94,9 +94,9 @@ export const ContactSection: React.FC = () => {
             </div>
 
             <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-400 space-y-2">
-              <h4 className="font-bold text-indigo-300">💡 Nota de Usabilidade (IHC)</h4>
+              <h4 className="font-bold text-indigo-300">💡 UX &amp; Acessibilidade</h4>
               <p>
-                Este formulário conta com feedback visual de validação em tempo real, prevenção de campos nulos e resposta ao usuário.
+                Este formulário conta com feedback visual de validação em tempo real, prevenção de campos nulos e confirmação de envio ao usuário.
               </p>
             </div>
           </div>
@@ -108,7 +108,7 @@ export const ContactSection: React.FC = () => {
                 <CheckCircle2 className="w-14 h-14 text-emerald-400 mx-auto" />
                 <h3 className="text-2xl font-bold text-white">Mensagem Enviada!</h3>
                 <p className="text-xs text-slate-300 max-w-md mx-auto">
-                  Agradecemos o seu contato. Sua mensagem foi registrada para a demonstração do Projeto IV-A.
+                  Obrigado pelo contato! Sua mensagem foi recebida e responderei o mais breve possível.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
@@ -133,7 +133,7 @@ export const ContactSection: React.FC = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Ex: Prof. Carlos Silva"
+                      placeholder="Ex: Maria Santos"
                       required
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500"
                     />
@@ -171,7 +171,7 @@ export const ContactSection: React.FC = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Ex: Avaliação do Projeto Integrador IV-A"
+                    placeholder="Ex: Proposta de Colaboração"
                     className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500"
                   />
                 </div>

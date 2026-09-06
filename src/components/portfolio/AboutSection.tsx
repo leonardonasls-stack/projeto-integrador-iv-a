@@ -29,7 +29,7 @@ export const AboutSection: React.FC = () => {
             Sobre o Desenvolvedor
           </h2>
           <p className="text-slate-400 text-base">
-            Combinando conceitos técnicos de desenvolvimento web com fundamentos essenciais de usabilidade e Interface Humano-Computador.
+            Desenvolvedor apaixonado por resolver problemas reais com código limpo, arquitetura sólida e experiências de usuário que realmente funcionam.
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export const AboutSection: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-bold text-white">{profile.name}</h3>
                   <p className="text-sm text-emerald-400 font-medium">{profile.role}</p>
-                  <p className="text-xs text-slate-400">Projeto Integrador IV-A | 2026.2</p>
+                  <p className="text-xs text-slate-400">Python &amp; FastAPI Developer</p>
                 </div>
               </div>
 
@@ -100,7 +100,7 @@ export const AboutSection: React.FC = () => {
             <div className="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
               <div className="flex items-center gap-2 text-indigo-400 font-bold text-sm">
                 <GraduationCap className="w-5 h-5" />
-                <span>Formação Acadêmica</span>
+                <span>Formação &amp; Experiência</span>
               </div>
 
               <div className="space-y-4 text-xs text-slate-300">
@@ -125,20 +125,20 @@ export const AboutSection: React.FC = () => {
             <div className="glass-panel p-6 rounded-2xl border border-slate-800 space-y-3">
               <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm">
                 <Award className="w-5 h-5" />
-                <span>Metas do Projeto IV-A</span>
+                <span>Objetivos Profissionais</span>
               </div>
               <ul className="space-y-2 text-xs text-slate-300">
                 <li className="flex items-start gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5" />
-                  <span>Atender 100% dos requisitos obrigatórios da avaliação.</span>
+                  <span>Construir soluções backend robustas e de alta disponibilidade.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5" />
-                  <span>Demonstrar aplicação prática de Heurísticas de Usabilidade de Nielsen.</span>
+                  <span>Contribuir com projetos open source e comunidades de Python.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5" />
-                  <span>Oferecer módulo opcional de CRUD e Autenticação.</span>
+                  <span>Crescer em ambientes ágeis com código limpo e boas práticas de engenharia.</span>
                 </li>
               </ul>
             </div>

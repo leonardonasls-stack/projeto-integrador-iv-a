@@ -34,7 +34,7 @@ export const Hero: React.FC = () => {
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 text-xs font-semibold backdrop-blur-md"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Disponível para Projetos & Oportunidades Python | 2026.2</span>
+              <span>Disponível para Novas Oportunidades & Projetos</span>
             </motion.div>
 
             {/* Main Headline */}
@@ -44,9 +44,9 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]"
             >
-              Desenvolvimento Web & Backend com{' '}
+              Desenvolvedor de Software{' '}
               <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">
-                Python & FastAPI
+                Backend &amp; Mobile
               </span>
             </motion.h1>
 
@@ -57,7 +57,7 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-slate-300 max-w-2xl leading-relaxed font-normal"
             >
-              Olá! Sou estudante de Análise e Desenvolvimento de Sistemas (4º período de 6), dedicado ao desenvolvimento de APIs RESTful de alta performance, microsserviços e sistemas assíncronos utilizando Python com FastAPI.
+              Olá! Sou Leonardo Nascimento, estudante de Análise e Desenvolvimento de Sistemas. Crio APIs RESTful de alta performance e microsserviços com Python (FastAPI) e Java, além de desenvolver interfaces e aplicativos com TypeScript e React Native. Trabalho com modelagem de dados, Docker e integrações assíncronas, sempre com foco em arquitetura eficiente, código limpo e sistemas altamente escaláveis.
             </motion.p>
 
             {/* Highlights / Badges */}
@@ -101,11 +101,11 @@ export const Hero: React.FC = () => {
                 className="px-6 py-3.5 rounded-xl glass-panel text-slate-200 hover:text-white hover:bg-slate-800/80 font-semibold text-sm border border-slate-700 transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-emerald-400"
               >
                 <Mail className="w-4 h-4 text-emerald-400" />
-                <span>Falar Conosco</span>
+                <span>Entrar em Contato</span>
               </button>
 
               <button
-                onClick={() => alert('Download de Currículo demonstrativo (Projeto Integrador IV-A).')}
+                onClick={() => alert('Em breve! O currículo completo estará disponível para download.')}
                 className="p-3.5 rounded-xl glass-panel text-slate-400 hover:text-white border border-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
                 title="Baixar Currículo (PDF)"
                 aria-label="Baixar Currículo em formato PDF"
@@ -183,7 +183,7 @@ export const Hero: React.FC = () => {
                     <span className="text-purple-400">return</span> &#123;
                   </p>
                   <p className="pl-8">
-                    <span className="text-emerald-300">"name"</span>: <span className="text-emerald-300">"Leonardo Silveira"</span>,
+                    <span className="text-emerald-300">"name"</span>: <span className="text-emerald-300">"Leonardo Nascimento"</span>,
                   </p>
                   <p className="pl-8">
                     <span className="text-emerald-300">"role"</span>: <span className="text-emerald-300">"Python & FastAPI Dev"</span>,
@@ -203,7 +203,7 @@ export const Hero: React.FC = () => {
                     <span>Focus: <strong>FastAPI / Python</strong></span>
                   </div>
                   <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-semibold border border-emerald-800">
-                    2026.2
+                    Open to Work
                   </span>
                 </div>
               </div>

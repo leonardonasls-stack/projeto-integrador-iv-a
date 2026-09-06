@@ -41,7 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminDashboard }) => {
   const navLinks = [
     { id: 'inicio', label: 'Início' },
     { id: 'sobre', label: 'Sobre Mim' },
-    { id: 'habilidades', label: 'Habilidades & IHC' },
+    { id: 'habilidades', label: 'Habilidades' },
     { id: 'projetos', label: 'Projetos' },
     { id: 'contato', label: 'Contato' },
   ];
@@ -76,10 +76,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminDashboard }) => {
           </div>
           <div className="flex flex-col">
             <span className="font-bold text-lg text-white tracking-tight leading-none group-hover:text-indigo-400 transition-colors">
-              Leo.dev
+              Leonardo Nascimento
             </span>
             <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase">
-              Projeto Integrador IV-A
+              Python & FastAPI Dev
             </span>
           </div>
         </a>
@@ -131,10 +131,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminDashboard }) => {
             <button
               onClick={() => setIsLoginModalOpen(true)}
               className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              title="Acesso de Avaliador / Admin"
+              title="Área Restrita — Acesso Administrativo"
             >
               <ShieldCheck className="w-4 h-4 text-indigo-400" />
-              <span>Modo Admin (IHC)</span>
+              <span>Área Restrita</span>
             </button>
           )}
 
