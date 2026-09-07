@@ -12,7 +12,7 @@ interface ProfileContextType {
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY = 'dev_portfolio_profile_v1';
+const LOCAL_STORAGE_KEY = 'dev_portfolio_profile_v2';
 
 export const ProfileProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { addToast } = useToast();
@@ -20,7 +20,12 @@ export const ProfileProvider: React.FC<{ children: ReactNode }> = ({ children })
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (saved) {
       try {
-        return { ...defaultProfileData, ...JSON.parse(saved) };
+        const parsed = JSON.parse(saved);
+        // Clean up any residual Java mentions in saved browser cache
+        if (parsed.heroDescription && parsed.heroDescription.includes('Java')) {
+          parsed.heroDescription = defaultProfileData.heroDescription;
+        }
+        return { ...defaultProfileData, ...parsed };
       } catch (e) {
         console.error('Failed to parse local profile:', e);
       }
