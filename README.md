@@ -1,7 +1,7 @@
-﻿# 🚀 Portfólio Pessoal — Leonardo Nascimento
+# 🚀 Portfólio Pessoal — Leonardo Nascimento
 
-> **Desenvolvedor de Software | Backend (Python/Java) & Mobile (React Native)**
-> 📍 Estudante de Análise e Desenvolvimento de Sistemas
+> **Desenvolvedor de Software | Backend Python & Frontend (TypeScript/JavaScript/React)**
+> 📍 Estudante de Análise e Desenvolvimento de Sistemas no CESMAC
 > 🔗 [github.com/leonardonasls-stack/projeto-integrador-iv-a](https://github.com/leonardonasls-stack/projeto-integrador-iv-a)
 > 📧 leonardonasls@gmail.com
 
@@ -11,7 +11,7 @@
 
 Portfólio pessoal desenvolvido em **React 19 + TypeScript + Vite**, com design dark premium (glassmorphism), animações fluidas com Framer Motion e arquitetura modular baseada em Context API. A aplicação permite gerenciar e exibir projetos dinamicamente, com painel administrativo completo (CRUD) e persistência local via `localStorage`.
 
-Crio APIs RESTful de alta performance e microsserviços com **Python (FastAPI)** e **Java**, além de desenvolver interfaces e aplicativos com **TypeScript** e **React Native**. Trabalho com modelagem de dados, Docker e integrações assíncronas, sempre com foco em arquitetura eficiente, código limpo e sistemas altamente escaláveis.
+Crio APIs RESTful de alta performance e microsserviços com **Python (FastAPI)**, além de desenvolver interfaces modernas e responsivas com **TypeScript**, **JavaScript** e **React**. Trabalho com modelagem de dados, Docker e integrações assíncronas, sempre com foco em arquitetura eficiente, código limpo e sistemas altamente escaláveis.
 
 ---
 

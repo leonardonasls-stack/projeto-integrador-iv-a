@@ -87,7 +87,17 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-white">Redes Sociais &amp; Portfólio</h4>
-                  <p className="text-slate-400">GitHub: github.com/leodev</p>
+                  <p className="text-slate-400">
+                    GitHub:{' '}
+                    <a
+                      href="https://github.com/leonardonasls-stack"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-indigo-400 hover:underline"
+                    >
+                      github.com/leonardonasls-stack
+                    </a>
+                  </p>
                   <p className="text-slate-400">LinkedIn: linkedin.com/in/leodev</p>
                 </div>
               </div>

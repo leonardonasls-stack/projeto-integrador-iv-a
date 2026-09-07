@@ -2,8 +2,10 @@ import React from 'react';
 import { ArrowRight, Mail, Download, Sparkles, CheckCircle2, Layout, ShieldCheck } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../ui/SocialIcons';
 import { motion } from 'framer-motion';
+import { useProfile } from '../../context/ProfileContext';
 
 export const Hero: React.FC = () => {
+  const { profile } = useProfile();
   const scrollToProjetos = () => {
     const el = document.getElementById('projetos');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -57,7 +59,7 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-slate-300 max-w-2xl leading-relaxed font-normal"
             >
-              Olá! Sou Leonardo Nascimento, estudante de Análise e Desenvolvimento de Sistemas. Crio APIs RESTful de alta performance e microsserviços com Python (FastAPI) e Java, além de desenvolver interfaces e aplicativos com TypeScript e React Native. Trabalho com modelagem de dados, Docker e integrações assíncronas, sempre com foco em arquitetura eficiente, código limpo e sistemas altamente escaláveis.
+              {profile.heroDescription}
             </motion.p>
 
             {/* Highlights / Badges */}

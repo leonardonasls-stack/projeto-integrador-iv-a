@@ -106,10 +106,13 @@ export const AboutSection: React.FC = () => {
               <div className="space-y-4 text-xs text-slate-300">
                 <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-1">
                   <div className="flex justify-between items-center text-white font-semibold">
-                    <span>Análise e Desenvolvimento de Sistemas</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-indigo-950 text-indigo-300">2024 - 2026</span>
+                    <span>{profile.academicTitle || 'Análise e Desenvolvimento de Sistemas'}</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-indigo-950 text-indigo-300">{profile.academicPeriod || '2024 - 2026'}</span>
                   </div>
-                  <p className="text-slate-400">Enfâse em Engenharia de Software, Web e IHC.</p>
+                  <p className="text-slate-400 font-medium text-[11px] text-indigo-300/90">
+                    🏛️ {profile.academicInstitution || 'CESMAC - Centro Universitário CESMAC'}
+                  </p>
+                  <p className="text-slate-400">Ênfase em Engenharia de Software, Web e IHC.</p>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-1">
