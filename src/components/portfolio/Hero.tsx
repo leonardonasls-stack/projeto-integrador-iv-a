@@ -46,9 +46,9 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]"
             >
-              Desenvolvedor de Software{' '}
+              {profile.heroTitlePrefix || 'Desenvolvedor de Software'}{' '}
               <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">
-                Backend &amp; Mobile
+                {profile.heroTitleHighlight || 'Backend Python & Frontend Web'}
               </span>
             </motion.h1>
 
