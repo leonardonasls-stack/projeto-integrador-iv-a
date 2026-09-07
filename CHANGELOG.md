@@ -8,6 +8,10 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ## [Unreleased / Recent] — 2026-09-07
 
+### 📌 Commit [`9f526c8`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/9f526c8) — `feat(hero): atualiza texto de inicio com foco em Backend Python e Frontend Web`
+- **Headline Dinâmico no Hero**: Atualizados o título principal e destaque visual em [`Hero.tsx`](file:///c:/Users/Leo-dev/Projeto%20Integrador%20IV-A/src/components/portfolio/Hero.tsx) para renderizar dinamicamente `Backend Python & Frontend Web` a partir do contexto.
+- **Formação CESMAC & Cargo**: Atualizados `role`, `statusBadge` e `heroDescription` em [`profile.ts`](file:///c:/Users/Leo-dev/Projeto%20Integrador%20IV-A/src/types/profile.ts) para referenciar a formação em Análise e Desenvolvimento de Sistemas no **CESMAC** e a stack em **Python (FastAPI)**, **TypeScript**, **JavaScript** e **React**.
+
 ### 📌 Commit [`6a53f44`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/6a53f448407a64c044ffa3a8a6bcc46b335edcea) — `feat(profile): adiciona faculdade CESMAC, atualiza links do GitHub e remove mencoes a Java`
 
 #### 🎓 Formação Acadêmica & CESMAC
