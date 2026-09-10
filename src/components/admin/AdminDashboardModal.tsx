@@ -88,7 +88,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
       fullDescription: proj.fullDescription || '',
       category: proj.category,
       techsInput: proj.techs.join(', '),
-      githubUrl: proj.githubUrl,
+      githubUrl: proj.githubUrl || '',
       demoUrl: proj.demoUrl || '',
       imageUrl: proj.imageUrl,
       featured: proj.featured
