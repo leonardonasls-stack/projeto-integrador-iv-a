@@ -37,5 +37,16 @@ export const initialProjects: Project[] = [
     imageUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1000&q=80',
     featured: true,
     createdAt: '2026-09-09'
+  },
+  {
+    id: 'proj-llsystem-v3',
+    title: 'LLSystem v3 — Gestão Multi-Tenant & Ordens de Serviço',
+    description: 'Plataforma enterprise para gestão de assistências técnicas e licenciamento multi-tenant com FastAPI, MySQL, MinIO S3 e WhatsApp Gateway.',
+    fullDescription: 'Plataforma completa para gerenciamento operacional de assistências técnicas e empresas licenciadas em arquitetura Multi-Tenant com isolamento estrito de dados. Conta com backend assíncrono em FastAPI e Python 3.12, banco MySQL 8.0 via SQLAlchemy 2.0/Alembic, armazenamento de fotos e documentos no MinIO (compatível S3) com buckets dedicados por tenant e URLs pré-assinadas, controle de acesso RBAC com 4 papéis (Superadmin, Admin, Operador, Técnico), gerador de relatórios e PDFs institucionais com WeasyPrint, e gateway de notificações automáticas via WhatsApp.',
+    category: 'Backend',
+    techs: ['FastAPI', 'Python 3.12', 'MySQL', 'MinIO (S3)', 'Docker', 'WhatsApp API', 'JWT / RBAC'],
+    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80',
+    featured: true,
+    createdAt: '2026-09-09'
   }
 ];

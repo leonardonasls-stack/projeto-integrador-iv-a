@@ -7,7 +7,7 @@ export interface Project {
   fullDescription?: string;
   category: ProjectCategory;
   techs: string[];
-  githubUrl: string;
+  githubUrl?: string;
   demoUrl?: string;
   imageUrl: string;
   featured: boolean;
