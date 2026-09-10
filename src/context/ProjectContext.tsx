@@ -19,7 +19,7 @@ interface ProjectContextType {
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY = 'dev_portfolio_projects_v2';
+const LOCAL_STORAGE_KEY = 'dev_portfolio_projects_v5';
 
 export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { addToast } = useToast();

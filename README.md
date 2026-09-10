@@ -71,7 +71,7 @@ src/
 │   └── ToastContext.tsx        # Sistema global de notificações
 │
 ├── data/
-│   └── initialProjects.ts     # Dataset inicial com 6 projetos de exemplo
+│   └── initialProjects.ts     # Dataset inicial de projetos reais (Telegram Bot, Gerador de OS, Billy)
 │
 └── types/
     ├── index.ts               # Tipos: Project, ProjectCategory
@@ -104,14 +104,11 @@ src/
 
 ## 📁 Projetos no Portfólio (Dataset Inicial)
 
-| Projeto | Categoria | Stack Principal |
-|---|---|---|
-| Console Telegram Bot — Gestão Docker | Backend | Python, Docker API, Asyncio |
-| API RESTful FastAPI & Microserviços | Backend | Python, FastAPI, PostgreSQL, Docker |
-| DevConnect Fullstack Platform | Fullstack | React, FastAPI, TypeScript, PostgreSQL |
-| TaskFlow — Kanban Board | Frontend | React, TypeScript, Framer Motion |
-| EcoTracker Mobile | Mobile | React Native, Expo, TypeScript |
-| Design System & Boas Práticas de UX | IHC / UX | React, Storybook, Radix UI |
+| Projeto | Categoria | Stack Principal | Repositório & Links |
+|---|---|---|---|
+| Console Telegram Bot — Gestão Docker | Backend | Python 3.12, Docker API, Asyncio | [GitHub](https://github.com/leonardonasls-stack/Console-Telegram-Bot) |
+| Gerador de OS — Sistema de Ordens de Serviço | Fullstack | React 19, Supabase, Tailwind CSS 4, PWA | [GitHub](https://github.com/leonardonasls-stack/Gerador-de-OS-e-recibo) \| [Demo Online](https://gerador-de-os-e-recibo.vercel.app/) |
+| Billy — Assistente Financeiro | Mobile | React Native, Expo, Firebase, Biometria | [GitHub](https://github.com/leonardonasls-stack/billy-assistente-financeiro) |
 
 ---
 
