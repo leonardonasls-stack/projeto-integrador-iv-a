@@ -22,19 +22,19 @@ export const LoginModal: React.FC = () => {
 
   if (!isLoginModalOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = login(passcode);
+    const success = await login(passcode);
     if (success) {
       setPasscode('');
       setErrorMsg('');
     } else {
-      setErrorMsg('Senha incorreta. Utilize "admin123" ou "admin" para testar.');
+      setErrorMsg('Senha incorreta. Verifique suas credenciais.');
     }
   };
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       <div 
         className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md"
         onClick={() => setIsLoginModalOpen(false)}
@@ -75,7 +75,7 @@ export const LoginModal: React.FC = () => {
           <div className="p-3 rounded-xl bg-indigo-950/60 border border-indigo-500/30 text-xs text-indigo-200 mb-4 flex items-start gap-2">
             <Info className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
             <span>
-              <strong>Acesso restrito:</strong> Digite <code>admin123</code> ou <code>admin</code> para entrar.
+              <strong>Acesso restrito:</strong> Digite a senha administrativa para entrar.
             </span>
           </div>
 
@@ -91,7 +91,7 @@ export const LoginModal: React.FC = () => {
                 type="password"
                 value={passcode}
                 onChange={(e) => setPasscode(e.target.value)}
-                placeholder="Digite admin123..."
+                placeholder="Digite sua senha..."
                 autoFocus
                 required
                 className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500"

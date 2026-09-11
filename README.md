@@ -91,7 +91,7 @@ src/
 - **Formulário de Contato**: Validação de campos obrigatórios, estado de loading e feedback via toast
 
 ### 🔐 Painel Administrativo (Área Restrita)
-- Login por senha (`admin123` ou `admin`)
+- Login por senha configurada via variável de ambiente (`VITE_ADMIN_HASH`)
 - **Aba Projetos**: Criar, editar e excluir projetos com confirmação de ação destrutiva
 - **Aba Perfil**: Editar textos do Hero e bio do About em tempo real
 - Resetar projetos ou textos para o estado padrão
@@ -144,11 +144,7 @@ npm run lint     # Linting com OxLint
 
 ## 🔑 Acesso ao Painel Admin
 
-Clique em **"Área Restrita"** na navbar e utilize uma das senhas:
-
-```
-admin123   ou   admin
-```
+Clique em **"Área Restrita"** na navbar e insira a senha administrativa configurada na aplicação (`VITE_ADMIN_HASH`).
 
 ---
 

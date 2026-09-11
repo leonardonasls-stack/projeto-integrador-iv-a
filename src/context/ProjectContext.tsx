@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import type { ReactNode } from 'react';
 import type { Project, ProjectCategory } from '../types';
 import { initialProjects } from '../data/initialProjects';
@@ -52,7 +52,7 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
   const addProject = (projectData: Omit<Project, 'id' | 'createdAt'>) => {
     const newProject: Project = {
       ...projectData,
-      id: `proj-${Date.now()}`,
+      id: `proj-${crypto.randomUUID()}`,
       createdAt: new Date().toISOString().split('T')[0]
     };
     setProjects((prev) => [newProject, ...prev]);
@@ -78,15 +78,17 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
     addToast('info', 'Projetos Restaurados', 'A lista de projetos foi restaurada para o estado inicial.');
   };
 
-  const filteredProjects = projects.filter((project) => {
-    const matchesCategory = selectedCategory === 'Todas' || project.category === selectedCategory;
-    const matchesSearch =
-      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.techs.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredProjects = useMemo(() => {
+    return projects.filter((project) => {
+      const matchesCategory = selectedCategory === 'Todas' || project.category === selectedCategory;
+      const matchesSearch =
+        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        project.techs.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
 
-    return matchesCategory && matchesSearch;
-  });
+      return matchesCategory && matchesSearch;
+    });
+  }, [projects, selectedCategory, searchQuery]);
 
   return (
     <ProjectContext.Provider

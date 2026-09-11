@@ -25,7 +25,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   if (!project) return null;
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       <div 
         className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-slate-950/80 backdrop-blur-md"
         onClick={onClose}
@@ -46,6 +46,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             <img
               src={project.imageUrl}
               alt={project.title}
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80';
+              }}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />

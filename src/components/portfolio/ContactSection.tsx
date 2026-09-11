@@ -21,7 +21,7 @@ export const ContactSection: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.message) {
@@ -31,9 +31,27 @@ export const ContactSection: React.FC = () => {
 
     setLoading(true);
 
-    // Simulate server response (Visual Feedback for IHC)
-    setTimeout(() => {
-      setLoading(false);
+    const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ID
+      ? `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`
+      : null;
+
+    try {
+      if (formspreeEndpoint) {
+        const response = await fetch(formspreeEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+          throw new Error('Falha no servidor ao enviar a mensagem.');
+        }
+      } else {
+        // Simulação com log para ambiente sem ID do Formspree configurado
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        console.log('Mensagem submetida (Modo Desenvolvimento sem VITE_FORMSPREE_ID):', formData);
+      }
+
       setSubmitted(true);
       addToast(
         'success',
@@ -41,7 +59,12 @@ export const ContactSection: React.FC = () => {
         `Obrigado ${formData.name}, sua mensagem foi recebida com sucesso.`
       );
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 1200);
+    } catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
+      addToast('error', 'Erro ao Enviar', 'Não foi possível enviar sua mensagem. Tente novamente mais tarde.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
