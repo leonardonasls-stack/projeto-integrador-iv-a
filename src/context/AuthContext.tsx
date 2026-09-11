@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { User } from '../types';
 import { useToast } from './ToastContext';
+import { StorageService } from '../services/storageService';
 
 interface AuthContextType {
   user: User;
@@ -13,6 +14,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const AUTH_STORAGE_KEY = 'dev_portfolio_auth';
 const SESSION_TTL_MS = 2 * 60 * 60 * 1000; // 2 horas de validade da sessão admin
 
 const hashInput = async (input: string): Promise<string> => {
@@ -26,17 +28,12 @@ const hashInput = async (input: string): Promise<string> => {
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { addToast } = useToast();
   const [user, setUser] = useState<User>(() => {
-    const saved = localStorage.getItem('dev_portfolio_auth');
+    const saved = StorageService.getItem<(User & { expiresAt?: number }) | null>(AUTH_STORAGE_KEY, null);
     if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (parsed.expiresAt && parsed.expiresAt > Date.now()) {
-          return parsed;
-        }
-        localStorage.removeItem('dev_portfolio_auth');
-      } catch (e) {
-        console.error('Failed to load auth:', e);
+      if (saved.expiresAt && saved.expiresAt > Date.now()) {
+        return saved;
       }
+      StorageService.removeItem(AUTH_STORAGE_KEY);
     }
     return { username: 'Convidado', role: 'guest', isLoggedIn: false };
   });
@@ -44,8 +41,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
 
   const login = async (passcode: string): Promise<boolean> => {
+    const expectedHash = import.meta.env.VITE_ADMIN_HASH;
+
+    if (!expectedHash) {
+      addToast(
+        'error',
+        'Painel Admin Indisponível',
+        'A variável de ambiente VITE_ADMIN_HASH não foi configurada neste ambiente.'
+      );
+      return false;
+    }
+
     const hashedPasscode = await hashInput(passcode);
-    const expectedHash = import.meta.env.VITE_ADMIN_HASH || '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9'; // default hash for 'admin123' if env not set
 
     if (hashedPasscode === expectedHash) {
       const adminUser: User & { expiresAt?: number } = {
@@ -55,7 +62,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         expiresAt: Date.now() + SESSION_TTL_MS
       };
       setUser(adminUser);
-      localStorage.setItem('dev_portfolio_auth', JSON.stringify(adminUser));
+      StorageService.setItem(AUTH_STORAGE_KEY, adminUser);
       setIsLoginModalOpen(false);
       addToast('success', 'Acesso Concedido!', 'Você está no modo Administrador (CRUD liberado).');
       return true;
@@ -68,7 +75,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const logout = () => {
     const guestUser: User = { username: 'Convidado', role: 'guest', isLoggedIn: false };
     setUser(guestUser);
-    localStorage.removeItem('dev_portfolio_auth');
+    StorageService.removeItem(AUTH_STORAGE_KEY);
     addToast('info', 'Sessão Encerrada', 'Você voltou para o modo de navegação pública.');
   };
 

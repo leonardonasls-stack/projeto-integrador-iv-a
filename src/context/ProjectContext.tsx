@@ -1,8 +1,9 @@
-import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, useDeferredValue } from 'react';
 import type { ReactNode } from 'react';
 import type { Project, ProjectCategory } from '../types';
 import { initialProjects } from '../data/initialProjects';
 import { useToast } from './ToastContext';
+import { StorageService } from '../services/storageService';
 
 interface ProjectContextType {
   projects: Project[];
@@ -24,29 +25,24 @@ const LOCAL_STORAGE_KEY = 'dev_portfolio_projects_v6';
 export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { addToast } = useToast();
   const [projects, setProjects] = useState<Project[]>(() => {
-    const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const saved = StorageService.getItem<Project[] | null>(LOCAL_STORAGE_KEY, null);
     if (saved) {
-      try {
-        const parsed: Project[] = JSON.parse(saved);
-        // Ensure any new initial projects (like proj-docker-bot) are merged if missing
-        const existingIds = new Set(parsed.map((p) => p.id));
-        const missingInitial = initialProjects.filter((p) => !existingIds.has(p.id));
-        if (missingInitial.length > 0) {
-          return [...missingInitial, ...parsed];
-        }
-        return parsed;
-      } catch (e) {
-        console.error('Failed to parse local projects:', e);
+      const existingIds = new Set(saved.map((p) => p.id));
+      const missingInitial = initialProjects.filter((p) => !existingIds.has(p.id));
+      if (missingInitial.length > 0) {
+        return [...missingInitial, ...saved];
       }
+      return saved;
     }
     return initialProjects;
   });
 
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'Todas'>('Todas');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const deferredSearchQuery = useDeferredValue(searchQuery);
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(projects));
+    StorageService.setItem(LOCAL_STORAGE_KEY, projects);
   }, [projects]);
 
   const addProject = (projectData: Omit<Project, 'id' | 'createdAt'>) => {
@@ -74,21 +70,22 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
 
   const resetProjects = () => {
     setProjects(initialProjects);
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    StorageService.removeItem(LOCAL_STORAGE_KEY);
     addToast('info', 'Projetos Restaurados', 'A lista de projetos foi restaurada para o estado inicial.');
   };
 
   const filteredProjects = useMemo(() => {
+    const query = deferredSearchQuery.toLowerCase();
     return projects.filter((project) => {
       const matchesCategory = selectedCategory === 'Todas' || project.category === selectedCategory;
       const matchesSearch =
-        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.techs.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
+        project.title.toLowerCase().includes(query) ||
+        project.description.toLowerCase().includes(query) ||
+        project.techs.some((t) => t.toLowerCase().includes(query));
 
       return matchesCategory && matchesSearch;
     });
-  }, [projects, selectedCategory, searchQuery]);
+  }, [projects, selectedCategory, deferredSearchQuery]);
 
   return (
     <ProjectContext.Provider

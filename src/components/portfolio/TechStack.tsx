@@ -7,7 +7,7 @@ export const TechStack: React.FC = () => {
       title: 'Frontend & UI',
       icon: <Layers className="w-5 h-5 text-indigo-400" />,
       skills: [
-        { name: 'React 18', level: 'Avançado', desc: 'SPA modular & Context API' },
+        { name: 'React 19', level: 'Avançado', desc: 'SPA modular & Context API' },
         { name: 'TypeScript', level: 'Intermediário+', desc: 'Tipagem estática segura' },
         { name: 'Tailwind CSS', level: 'Avançado', desc: 'Estilização ágil e responsiva' },
         { name: 'Vite', level: 'Avançado', desc: 'Build ultra-rápido & HMR' },

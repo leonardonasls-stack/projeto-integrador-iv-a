@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import type { ProfileData } from '../types/profile';
 import { defaultProfileData } from '../types/profile';
 import { useToast } from './ToastContext';
+import { StorageService } from '../services/storageService';
 
 interface ProfileContextType {
   profile: ProfileData;
@@ -17,24 +18,18 @@ const LOCAL_STORAGE_KEY = 'dev_portfolio_profile_v2';
 export const ProfileProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { addToast } = useToast();
   const [profile, setProfile] = useState<ProfileData>(() => {
-    const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const saved = StorageService.getItem<ProfileData | null>(LOCAL_STORAGE_KEY, null);
     if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        // Clean up any residual Java mentions in saved browser cache
-        if (parsed.heroDescription && parsed.heroDescription.includes('Java')) {
-          parsed.heroDescription = defaultProfileData.heroDescription;
-        }
-        return { ...defaultProfileData, ...parsed };
-      } catch (e) {
-        console.error('Failed to parse local profile:', e);
+      if (saved.heroDescription && saved.heroDescription.includes('Java')) {
+        saved.heroDescription = defaultProfileData.heroDescription;
       }
+      return { ...defaultProfileData, ...saved };
     }
     return defaultProfileData;
   });
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(profile));
+    StorageService.setItem(LOCAL_STORAGE_KEY, profile);
   }, [profile]);
 
   const updateProfile = (updatedData: Partial<ProfileData>) => {
@@ -47,7 +42,7 @@ export const ProfileProvider: React.FC<{ children: ReactNode }> = ({ children })
 
   const resetProfile = () => {
     setProfile(defaultProfileData);
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    StorageService.removeItem(LOCAL_STORAGE_KEY);
     addToast('info', 'Textos Padrão Restaurados', 'Os textos da home foram restaurados para a versão padrão.');
   };
 

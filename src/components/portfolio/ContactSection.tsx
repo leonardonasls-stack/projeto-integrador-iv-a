@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useToast } from '../../context/ToastContext';
 import { Mail, Send, CheckCircle2, MessageSquare, User, AtSign, FileText } from 'lucide-react';
+import { EmailService } from '../../services/emailService';
 
 export const ContactSection: React.FC = () => {
   const { addToast } = useToast();
@@ -31,27 +32,11 @@ export const ContactSection: React.FC = () => {
 
     setLoading(true);
 
-    const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ID
-      ? `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`
-      : null;
+    const result = await EmailService.sendContactMessage(formData);
 
-    try {
-      if (formspreeEndpoint) {
-        const response = await fetch(formspreeEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
+    setLoading(false);
 
-        if (!response.ok) {
-          throw new Error('Falha no servidor ao enviar a mensagem.');
-        }
-      } else {
-        // Simulação com log para ambiente sem ID do Formspree configurado
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log('Mensagem submetida (Modo Desenvolvimento sem VITE_FORMSPREE_ID):', formData);
-      }
-
+    if (result.success) {
       setSubmitted(true);
       addToast(
         'success',
@@ -59,11 +44,8 @@ export const ContactSection: React.FC = () => {
         `Obrigado ${formData.name}, sua mensagem foi recebida com sucesso.`
       );
       setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch (error) {
-      console.error('Erro ao enviar mensagem:', error);
-      addToast('error', 'Erro ao Enviar', 'Não foi possível enviar sua mensagem. Tente novamente mais tarde.');
-    } finally {
-      setLoading(false);
+    } else {
+      addToast('error', 'Erro no Formulário', result.error || 'Não foi possível enviar sua mensagem.');
     }
   };
 
