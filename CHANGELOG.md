@@ -6,6 +6,18 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ---
 
+## [Unreleased / Recent] — 2026-09-23
+
+### 📌 Commit [`1b57570`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/1b57570) — `docs: rewrite README with full project analysis`
+- **README Completo**: Reescrita completa do [`README.md`](file:///c:/Users/Leo-dev/Projeto%20Integrador%20IV-A/README.md) com análise completa do projeto. Adicionadas seções de: badge de CI, stack de ferramentas de qualidade (Vitest, axe-core, OxLint, GitHub Actions), arquitetura atualizada com todos os 6 componentes admin (`AdminTabsNav`, `ProfileFormTab`, `ProjectFormModal`, `ProjectTable`), seção de Acessibilidade (WCAG com 0 violations), variáveis de ambiente documentadas (`VITE_FORMSPREE_ID` e `VITE_ADMIN_HASH`), pipeline de CI detalhado e testes unitários Vitest.
+
+### 📌 Commit [`1b57570`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/1b57570) — `Correções de acessibilidade`
+- **Footer**: Adicionado `aria-label="Voltar para o topo da página"` ao botão de scroll-to-top e badge de validação WCAG/Nielsen em [`Footer.tsx`](file:///c:/Users/Leo-dev/Projeto%20Integrador%20IV-A/src/components/layout/Footer.tsx).
+- **CSS global**: Melhorias em [`index.css`](file:///c:/Users/Leo-dev/Projeto%20Integrador%20IV-A/src/index.css) para garantir contraste e foco visível em elementos interativos.
+- **Auditoria axe-core**: **0 violações** detectadas em `npx axe localhost:5173` (axe-core 4.13.0, Chrome headless).
+
+---
+
 ## [Unreleased / Recent] — 2026-09-07
 
 ### 📌 Commit [`9f526c8`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/9f526c8) — `feat(hero): atualiza texto de inicio com foco em Backend Python e Frontend Web`
