@@ -17,6 +17,27 @@
   }
 }
 
+/* Explicit RGB color overrides for WCAG Accessibility & axe-core compatibility */
+.bg-slate-950 { background-color: #020617 !important; }
+.bg-slate-900 { background-color: #0f172a !important; }
+.bg-slate-800 { background-color: #1e293b !important; }
+.bg-emerald-950 { background-color: #022c22 !important; }
+.text-purple-300 { color: #e9d5ff !important; }
+.text-purple-200 { color: #f3e8ff !important; }
+.text-indigo-300 { color: #c7d2fe !important; }
+.text-indigo-200 { color: #e0e7ff !important; }
+.text-blue-300 { color: #bfdbfe !important; }
+.text-blue-200 { color: #dbeafe !important; }
+.text-emerald-300 { color: #a7f3d0 !important; }
+.text-emerald-200 { color: #d1fae5 !important; }
+.text-teal-300 { color: #99f6e4 !important; }
+.text-amber-300 { color: #fde68a !important; }
+.text-amber-200 { color: #fef3c7 !important; }
+.text-slate-500 { color: #94a3b8 !important; }
+.text-slate-400 { color: #cbd5e1 !important; }
+.text-slate-300 { color: #e2e8f0 !important; }
+.text-slate-200 { color: #f1f5f9 !important; }
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
