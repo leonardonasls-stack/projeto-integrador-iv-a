@@ -11,11 +11,13 @@ export const ContactSection: React.FC = () => {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    _gotcha: ''
   });
 
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
@@ -27,25 +29,51 @@ export const ContactSection: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Honeypot check for bots
+    if (formData._gotcha) {
+      addToast('success', 'Mensagem Enviada!', 'Obrigado pelo contato.');
+      setFormData({ name: '', email: '', subject: '', message: '', _gotcha: '' });
+      return;
+    }
+
     if (!formData.name || !formData.email || !formData.message) {
       addToast('error', 'Campos Obrigatórios', 'Por favor, preencha nome, e-mail e a mensagem.');
       return;
     }
 
+    // Cooldown check (30 seconds)
+    const now = Date.now();
+    if (now - lastSubmitTime < 30000) {
+      addToast('error', 'Aguarde', 'Por favor, aguarde 30 segundos antes de enviar outra mensagem.');
+      return;
+    }
+
     setLoading(true);
-
     const result = await EmailService.sendContactMessage(formData);
-
     setLoading(false);
+
+    if (result.mailtoFallback) {
+      // Fallback for when Formspree is not configured
+      const subject = encodeURIComponent(formData.subject || `Contato do Portfólio de ${formData.name}`);
+      const body = encodeURIComponent(`Nome: ${formData.name}\nE-mail: ${formData.email}\n\nMensagem:\n${formData.message}`);
+      window.location.href = `mailto:${profile.email || 'leonardonasls@gmail.com'}?subject=${subject}&body=${body}`;
+      
+      setSubmitted(true);
+      setLastSubmitTime(now);
+      addToast('info', 'Redirecionando...', 'O formulário será enviado através do seu cliente de e-mail.');
+      setFormData({ name: '', email: '', subject: '', message: '', _gotcha: '' });
+      return;
+    }
 
     if (result.success) {
       setSubmitted(true);
+      setLastSubmitTime(now);
       addToast(
         'success',
         'Mensagem Enviada!',
         `Obrigado ${formData.name}, sua mensagem foi recebida com sucesso.`
       );
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', subject: '', message: '', _gotcha: '' });
     } else {
       addToast('error', 'Erro no Formulário', result.error || 'Não foi possível enviar sua mensagem.');
     }
@@ -162,6 +190,7 @@ export const ContactSection: React.FC = () => {
                       onChange={handleChange}
                       placeholder="Ex: Maria Santos"
                       required
+                      maxLength={80}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500"
                     />
                   </div>
@@ -180,6 +209,7 @@ export const ContactSection: React.FC = () => {
                       onChange={handleChange}
                       placeholder="seu.email@exemplo.com"
                       required
+                      maxLength={200}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500"
                     />
                   </div>
@@ -199,6 +229,7 @@ export const ContactSection: React.FC = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="Ex: Proposta de Colaboração"
+                    maxLength={120}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500"
                   />
                 </div>
@@ -217,9 +248,21 @@ export const ContactSection: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Escreva sua mensagem ou comentários sobre a aplicação..."
                     required
+                    maxLength={2000}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500 resize-none"
                   />
                 </div>
+
+                {/* Honeypot field */}
+                <input
+                  type="text"
+                  name="_gotcha"
+                  style={{ display: 'none' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={formData._gotcha}
+                  onChange={handleChange}
+                />
 
                 {/* Submit Button */}
                 <button

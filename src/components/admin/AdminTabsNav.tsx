@@ -1,9 +1,9 @@
 import React from 'react';
-import { FolderKanban, FileText } from 'lucide-react';
+import { FolderKanban, FileText, Mail } from 'lucide-react';
 
 interface AdminTabsNavProps {
-  activeTab: 'projects' | 'profile' | 'skills';
-  setActiveTab: (tab: 'projects' | 'profile' | 'skills') => void;
+  activeTab: 'projects' | 'profile' | 'skills' | 'messages';
+  setActiveTab: (tab: 'projects' | 'profile' | 'skills' | 'messages') => void;
   projectsCount: number;
 }
 
@@ -48,6 +48,18 @@ export const AdminTabsNav: React.FC<AdminTabsNavProps> = ({
       >
         <FileText className="w-4 h-4" />
         <span>Habilidades / Techs</span>
+      </button>
+
+      <button
+        onClick={() => setActiveTab('messages')}
+        className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all ${
+          activeTab === 'messages'
+            ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+            : 'bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800'
+        }`}
+      >
+        <Mail className="w-4 h-4" />
+        <span>Mensagens</span>
       </button>
     </div>
   );

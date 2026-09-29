@@ -1,4 +1,4 @@
-﻿# 🚀 Portfólio Pessoal — Leonardo Nascimento
+# 🚀 Portfólio Pessoal — Leonardo Nascimento
 
 > **Desenvolvedor de Software | Backend Python & Frontend (TypeScript/JavaScript/React)**
 > 📍 Estudante de Análise e Desenvolvimento de Sistemas no CESMAC (4º Período)
@@ -11,7 +11,7 @@
 
 ## 📌 Visão Geral
 
-Portfólio pessoal desenvolvido em **React 19 + TypeScript + Vite**, com design dark premium (glassmorphism), animações fluidas com **Framer Motion** e arquitetura modular baseada em **Context API**. A aplicação permite gerenciar e exibir projetos dinamicamente, com painel administrativo completo (CRUD) e persistência local via `localStorage`.
+Portfólio pessoal desenvolvido em **React 19 + TypeScript + Vite**, com design dark premium (glassmorphism), animações fluidas com **Framer Motion** e arquitetura modular baseada em **Context API**. A aplicação permite gerenciar e exibir projetos dinamicamente, com painel administrativo CMS integrado ao **Supabase** (PostgreSQL + Auth + Storage).
 
 Especializado em criar **APIs RESTful de alta performance** e microsserviços com **Python (FastAPI)**, além de desenvolver interfaces modernas e responsivas com **TypeScript**, **JavaScript** e **React**. Trabalho com modelagem de dados, Docker e integrações assíncronas, sempre com foco em arquitetura eficiente, código limpo e sistemas altamente escaláveis.
 
@@ -38,6 +38,7 @@ Especializado em criar **APIs RESTful de alta performance** e microsserviços co
 | @testing-library/react | Utilitários de teste para componentes React |
 | axe-core | Auditoria automatizada de acessibilidade (WCAG) |
 | GitHub Actions (CI) | Pipeline de lint, type-check e build contínuos |
+| Supabase | Banco de Dados PostgreSQL (BaaS) e gerador de seed |
 
 ---
 
@@ -81,9 +82,13 @@ src/
 │   └── ToastContext.tsx        # Sistema global de notificações por toast
 │
 ├── services/
-│   ├── storageService.ts       # Abstração segura do localStorage (com tratamento de erros)
-│   ├── storageService.test.ts  # Testes unitários Vitest para StorageService
-│   └── emailService.ts         # Integração com Formspree para envio de e-mails
+│   ├── supabaseClient.ts       # Configuração e inicialização do Supabase
+│   ├── projectService.ts       # CRUD de Projetos no Supabase
+│   ├── skillService.ts         # CRUD de Skills e Categorias no Supabase
+│   ├── settingsService.ts      # Leitura e gravação das configurações do site (Hero/Footer)
+│   ├── authService.ts          # Mock/Hash auth local ou Supabase Auth
+│   ├── emailService.ts         # Integração Formspree + log na tabela Messages
+│   └── storageService.test.ts  # Testes Vitest
 │
 ├── data/
 │   └── initialProjects.ts     # Dataset inicial de projetos reais
@@ -110,10 +115,10 @@ src/
 - **Aba Projetos**: Tabela com todos os projetos. Criação, edição e exclusão com confirmação destrutiva. Reset para dataset inicial.
 - **Aba Perfil**: Edição em tempo real do Hero, bio e formação acadêmica. Dropdown com opções de instituição (CESMAC, UFAL, IFAL, UNIT, UNIMA/Afya). Reset para padrão.
 
-### 💾 Persistência Local
-- Projetos e perfil salvos automaticamente no `localStorage` entre sessões
-- **Merge inteligente**: novos projetos do dataset inicial são incorporados sem sobrescrever dados existentes
-- `StorageService` isola o acesso ao `localStorage` com tratamento de erros de parsing e quota
+### 💾 Backend as a Service (Supabase)
+- **Supabase PostgreSQL:** Persistência em tempo real para projetos, habilidades, textos do perfil e registro de mensagens de contato.
+- **Segurança:** RLS (Row Level Security) aplicado para proteger as tabelas (apenas leitura pública, escrita exige autenticação).
+- **Seed Inteligente:** Dados base são gerados através de um script TypeScript direto para o Supabase.
 
 ---
 
@@ -183,16 +188,18 @@ npm run test     # Testes unitários com Vitest
 Crie um arquivo `.env` na raiz do projeto:
 
 ```env
-# ID do endpoint Formspree para o formulário de contato
-# Crie uma conta em https://formspree.io e copie o ID do seu formulário
+# URL e Key Pública do Supabase (Obrigatório)
+VITE_SUPABASE_URL=sua_url_aqui
+VITE_SUPABASE_ANON_KEY=sua_anon_key_aqui
+
+# ID do endpoint Formspree para o formulário de contato (Opcional)
 VITE_FORMSPREE_ID=seu_id_aqui
 
 # Hash SHA-256 da senha do painel administrativo
-# Gere com: echo -n "sua_senha" | sha256sum
 VITE_ADMIN_HASH=hash_sha256_da_senha_aqui
 ```
 
-> **Nota**: Sem `VITE_ADMIN_HASH`, o painel admin exibirá erro. Sem `VITE_FORMSPREE_ID`, o formulário opera em modo de demonstração e orienta o usuário a contatar diretamente por e-mail.
+> **Nota**: O sistema CMS depende do `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`. Sem `VITE_FORMSPREE_ID`, o formulário usa um fallback inteligente (mailto: + salva no banco).
 
 ---
 

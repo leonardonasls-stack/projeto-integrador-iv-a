@@ -12,6 +12,7 @@ import { ProjectTable } from './ProjectTable';
 import { ProjectFormModal, type ProjectFormData } from './ProjectFormModal';
 import { ProfileFormTab } from './ProfileFormTab';
 import { SkillsTab } from './SkillsTab';
+import { MessagesTab } from './MessagesTab';
 
 interface AdminDashboardModalProps {
   isOpen: boolean;
@@ -23,7 +24,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
   const { user } = useAuth();
   const { profile, updateProfile, resetProfile } = useProfile();
 
-  const [activeTab, setActiveTab] = useState<'projects' | 'profile' | 'skills'>('projects');
+  const [activeTab, setActiveTab] = useState<'projects' | 'profile' | 'skills' | 'messages'>('projects');
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
@@ -310,6 +311,11 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
           {/* TAB 3: SKILLS MANAGEMENT */}
           {activeTab === 'skills' && (
             <SkillsTab />
+          )}
+
+          {/* TAB 4: MESSAGES */}
+          {activeTab === 'messages' && (
+            <MessagesTab />
           )}
         </motion.div>
       </div>

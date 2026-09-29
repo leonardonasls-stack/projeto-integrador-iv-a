@@ -133,3 +133,4 @@ export const TechStack: React.FC = () => {
       </div>
     </section>
   );
+};

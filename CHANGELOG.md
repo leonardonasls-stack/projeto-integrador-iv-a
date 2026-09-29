@@ -6,6 +6,19 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ---
 
+## [2.0.0] — 2026-09-29
+
+### 📌 Commit `Supabase CMS Migration` — `feat: migração completa do CMS para o Supabase`
+- **Backend as a Service (BaaS):** Substituição completa do `localStorage` pelo **Supabase** (PostgreSQL + Auth).
+- **Projetos dinâmicos:** A listagem, adição, edição, exclusão e reordenação de projetos agora reflete o banco de dados em tempo real.
+- **Skills dinâmicas:** Criação da tabela de categorias e habilidades. Modificado `TechStack.tsx` para listar diretamente do banco de dados, com painel admin completo para gerenciá-las.
+- **Textos e Configurações (Profile):** A biografia, títulos, hero, e links da Home agora são salvos na nuvem via tabela `site_settings`.
+- **Formulário de Contato Inteligente:** Adição de honeypot, cooldown, limites de caracteres e integração com banco (`messages`). Adicionado Fallback via `mailto:` se Formspree estiver inativo.
+- **Mensagens no Painel Admin:** Nova aba para ler e excluir mensagens recebidas no contato.
+- **UX Privado:** Projetos sem link do GitHub recebem um selo visual dinâmico (cadeado "Repositório Privado").
+
+---
+
 ## [Unreleased / Recent] — 2026-09-23
 
 ### 📌 Commit [`1b57570`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/1b57570) — `docs: rewrite README with full project analysis`
