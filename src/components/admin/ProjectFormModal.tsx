@@ -184,7 +184,7 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300">Link Repositório GitHub</label>
+            <label className="text-xs font-semibold text-slate-300">Link Repositório GitHub (Opcional)</label>
             <input
               type="url"
               value={formData.githubUrl}

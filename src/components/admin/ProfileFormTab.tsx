@@ -162,6 +162,53 @@ export const ProfileFormTab: React.FC<ProfileFormTabProps> = ({
       </div>
 
       <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
+        <h4 className="text-sm font-bold text-violet-400 flex items-center gap-2 border-b border-slate-800 pb-2">
+          <GraduationCap className="w-4 h-4" />
+          <span>Formação Acadêmica & Instituição</span>
+        </h4>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-300">Curso / Formação *</label>
+            <input
+              type="text"
+              value={profileForm.academicTitle}
+              onChange={(e) => setProfileForm({ ...profileForm, academicTitle: e.target.value })}
+              required
+              className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+            />
+          </div>
+
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-300">Instituição *</label>
+            <select
+              value={profileForm.academicInstitution}
+              onChange={(e) => setProfileForm({ ...profileForm, academicInstitution: e.target.value })}
+              className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+            >
+              {INSTITUTION_OPTIONS.map((inst) => (
+                <option key={inst} value={inst}>
+                  {inst}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="space-y-1 sm:col-span-2">
+            <label className="text-xs font-semibold text-slate-300">Período / Status *</label>
+            <input
+              type="text"
+              value={profileForm.academicPeriod}
+              onChange={(e) => setProfileForm({ ...profileForm, academicPeriod: e.target.value })}
+              placeholder="Ex: 4º Período de 6 (2024 - 2026) ou Concluído (2023)"
+              required
+              className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
         <h4 className="text-sm font-bold text-blue-400 flex items-center gap-2 border-b border-slate-800 pb-2">
           <FileText className="w-4 h-4" />
           <span>Links e Contato</span>

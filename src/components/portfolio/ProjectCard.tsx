@@ -92,17 +92,24 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
         </button>
 
         <div className="flex items-center gap-2">
-          {project.githubUrl && (
+          {project.githubUrl ? (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              title="Código no GitHub"
+              title="GitHub"
               aria-label={`Abrir repositório GitHub do projeto ${project.title}`}
             >
               <GithubIcon className="w-4 h-4" />
             </a>
+          ) : (
+            <div 
+              className="p-2 rounded-lg bg-slate-900/50 text-slate-500 border border-slate-800/50 cursor-not-allowed flex items-center gap-1.5"
+              title="Repositório Privado"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
           )}
 
           {project.demoUrl && (

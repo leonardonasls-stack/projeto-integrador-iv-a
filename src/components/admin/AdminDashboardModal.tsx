@@ -11,6 +11,7 @@ import { AdminTabsNav } from './AdminTabsNav';
 import { ProjectTable } from './ProjectTable';
 import { ProjectFormModal, type ProjectFormData } from './ProjectFormModal';
 import { ProfileFormTab } from './ProfileFormTab';
+import { SkillsTab } from './SkillsTab';
 
 interface AdminDashboardModalProps {
   isOpen: boolean;
@@ -22,7 +23,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
   const { user } = useAuth();
   const { profile, updateProfile, resetProfile } = useProfile();
 
-  const [activeTab, setActiveTab] = useState<'projects' | 'profile'>('projects');
+  const [activeTab, setActiveTab] = useState<'projects' | 'profile' | 'skills'>('projects');
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
@@ -113,7 +114,8 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
       .filter((t) => t.length > 0);
 
     if (editingProjectId) {
-      updateProject(editingProjectId, {
+      updateProject({
+        id: editingProjectId,
         title: formData.title,
         description: formData.description,
         fullDescription: formData.fullDescription,
@@ -124,7 +126,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
         imageUrl: formData.imageUrl,
         featured: formData.featured,
         visible: formData.visible
-      });
+      } as Project);
     } else {
       addProject({
         title: formData.title,
@@ -303,6 +305,11 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
               onSave={handleSaveProfile}
               onReset={handleResetProfile}
             />
+          )}
+
+          {/* TAB 3: SKILLS MANAGEMENT */}
+          {activeTab === 'skills' && (
+            <SkillsTab />
           )}
         </motion.div>
       </div>

@@ -30,3 +30,4 @@ export interface ToastMessage {
 }
 
 export * from './profile';
+export * from './skill';

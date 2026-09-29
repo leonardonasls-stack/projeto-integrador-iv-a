@@ -3,6 +3,7 @@ import { ToastProvider } from './context/ToastContext';
 import { AuthProvider } from './context/AuthContext';
 import { ProjectProvider } from './context/ProjectContext';
 import { ProfileProvider } from './context/ProfileContext';
+import { SkillProvider } from './context/SkillContext';
 
 import { ToastContainer } from './components/ui/ToastContainer';
 import { Navbar } from './components/layout/Navbar';
@@ -52,9 +53,11 @@ export default function App() {
     <ToastProvider>
       <AuthProvider>
         <ProjectProvider>
-          <ProfileProvider>
-            <PortfolioApp />
-          </ProfileProvider>
+          <SkillProvider>
+            <ProfileProvider>
+              <PortfolioApp />
+            </ProfileProvider>
+          </SkillProvider>
         </ProjectProvider>
       </AuthProvider>
     </ToastProvider>

@@ -83,7 +83,7 @@ export const SettingsService = {
     // Remove os campos undefined para não sobrescrever com null indesejado
     Object.keys(dbData).forEach(key => (dbData as any)[key] === undefined && delete (dbData as any)[key]);
     
-    dbData.updated_at = new Date().toISOString();
+    (dbData as any).updated_at = new Date().toISOString();
 
     const { error } = await supabase
       .from('site_settings')
