@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { ProjectCategory } from '../../types';
+import { GithubService } from '../../services/githubService';
+import { GithubIcon } from '../ui/SocialIcons';
+import { Loader2 } from 'lucide-react';
+import { useToast } from '../../context/ToastContext';
 
 export interface ProjectFormData {
   title: string;
@@ -11,6 +15,7 @@ export interface ProjectFormData {
   demoUrl: string;
   imageUrl: string;
   featured: boolean;
+  visible: boolean;
 }
 
 interface ProjectFormModalProps {
@@ -28,6 +33,36 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
   onSave,
   onCancel
 }) => {
+  const { addToast } = useToast();
+  const [importUrl, setImportUrl] = useState('');
+  const [isImporting, setIsImporting] = useState(false);
+
+  const handleGithubImport = async () => {
+    if (!importUrl) {
+      addToast('error', 'URL Inválida', 'Insira uma URL do GitHub para importar.');
+      return;
+    }
+
+    setIsImporting(true);
+    try {
+      const data = await GithubService.importRepository(importUrl);
+      setFormData(prev => ({
+        ...prev,
+        title: prev.title || data.title,
+        description: prev.description || data.description,
+        githubUrl: data.githubUrl,
+        demoUrl: prev.demoUrl || data.demoUrl,
+        techsInput: prev.techsInput ? `${prev.techsInput}, ${data.techs.join(', ')}` : data.techs.join(', ')
+      }));
+      addToast('success', 'Repositório Importado', 'Os campos foram preenchidos com os dados do GitHub.');
+      setImportUrl('');
+    } catch (error: any) {
+      addToast('error', 'Erro na Importação', error.message);
+    } finally {
+      setIsImporting(false);
+    }
+  };
+
   return (
     <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 mb-6 space-y-4">
       <div className="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -42,6 +77,32 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
           Cancelar
         </button>
       </div>
+
+      {!isEditing && (
+        <div className="p-4 rounded-xl bg-slate-950/50 border border-slate-800 space-y-3">
+          <label className="text-xs font-semibold text-slate-300 flex items-center gap-2">
+            <GithubIcon className="w-4 h-4 text-slate-400" />
+            <span>Importar do GitHub (Preenchimento Automático)</span>
+          </label>
+          <div className="flex gap-2">
+            <input
+              type="url"
+              value={importUrl}
+              onChange={(e) => setImportUrl(e.target.value)}
+              placeholder="Ex: https://github.com/usuario/repositorio"
+              className="flex-1 px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+            />
+            <button
+              type="button"
+              onClick={handleGithubImport}
+              disabled={isImporting}
+              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold flex items-center gap-2 disabled:opacity-50"
+            >
+              {isImporting ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : 'Importar'}
+            </button>
+          </div>
+        </div>
+      )}
 
       <form onSubmit={onSave} className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -145,17 +206,32 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-2 pt-1">
-          <input
-            id="proj-featured"
-            type="checkbox"
-            checked={formData.featured}
-            onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-            className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-400 bg-slate-950 border-slate-800"
-          />
-          <label htmlFor="proj-featured" className="text-xs font-medium text-slate-300">
-            Marcar como Projeto em Destaque
-          </label>
+        <div className="flex items-center gap-6 pt-1">
+          <div className="flex items-center gap-2">
+            <input
+              id="proj-featured"
+              type="checkbox"
+              checked={formData.featured}
+              onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
+              className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-400 bg-slate-950 border-slate-800"
+            />
+            <label htmlFor="proj-featured" className="text-xs font-medium text-slate-300">
+              Em Destaque
+            </label>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <input
+              id="proj-visible"
+              type="checkbox"
+              checked={formData.visible !== false}
+              onChange={(e) => setFormData({ ...formData, visible: e.target.checked })}
+              className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-400 bg-slate-950 border-slate-800"
+            />
+            <label htmlFor="proj-visible" className="text-xs font-medium text-slate-300">
+              Visível na Vitrine
+            </label>
+          </div>
         </div>
 
         <div className="pt-2 flex justify-end gap-3">

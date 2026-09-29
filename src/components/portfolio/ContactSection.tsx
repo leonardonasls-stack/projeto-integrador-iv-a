@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useToast } from '../../context/ToastContext';
+import { useProfile } from '../../context/ProfileContext';
 import { Mail, Send, CheckCircle2, MessageSquare, User, AtSign, FileText } from 'lucide-react';
 import { EmailService } from '../../services/emailService';
 
 export const ContactSection: React.FC = () => {
+  const { profile } = useProfile();
   const { addToast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -60,10 +62,10 @@ export const ContactSection: React.FC = () => {
             <span>Fale Conosco</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Entre em Contato
+            {profile.contactTitle || 'Entre em Contato'}
           </h2>
           <p className="text-slate-400 text-base">
-            Tem alguma proposta, dúvida ou quer apenas trocar uma ideia? Envie uma mensagem e responderei em breve.
+            {profile.contactSubtitle || 'Tem alguma proposta, dúvida ou quer apenas trocar uma ideia? Envie uma mensagem e responderei em breve.'}
           </p>
         </div>
 
@@ -82,7 +84,7 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-white">E-mail</h4>
-                  <p className="text-slate-400">leonardonasls@gmail.com</p>
+                  <p className="text-slate-400">{profile.email || 'leonardonasls@gmail.com'}</p>
                 </div>
               </div>
 
@@ -95,15 +97,25 @@ export const ContactSection: React.FC = () => {
                   <p className="text-slate-400">
                     GitHub:{' '}
                     <a
-                      href="https://github.com/leonardonasls-stack"
+                      href={profile.githubUrl || "https://github.com/leonardonasls-stack"}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-indigo-400 hover:underline"
                     >
-                      github.com/leonardonasls-stack
+                      {profile.githubUrl ? new URL(profile.githubUrl).hostname + new URL(profile.githubUrl).pathname : 'github.com/leonardonasls-stack'}
                     </a>
                   </p>
-                  <p className="text-slate-400">LinkedIn: linkedin.com/in/leodev</p>
+                  <p className="text-slate-400">
+                    LinkedIn:{' '}
+                    <a 
+                      href={profile.linkedinUrl || "https://linkedin.com/in/leodev"} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-indigo-400 hover:underline"
+                    >
+                      {profile.linkedinUrl ? new URL(profile.linkedinUrl).hostname + new URL(profile.linkedinUrl).pathname : 'linkedin.com/in/leodev'}
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>

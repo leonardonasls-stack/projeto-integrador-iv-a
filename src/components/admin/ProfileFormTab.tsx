@@ -162,50 +162,118 @@ export const ProfileFormTab: React.FC<ProfileFormTabProps> = ({
       </div>
 
       <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
-        <h4 className="text-sm font-bold text-indigo-400 flex items-center gap-2 border-b border-slate-800 pb-2">
-          <GraduationCap className="w-4 h-4" />
-          <span>Formação Acadêmica &amp; Instituição / Faculdade</span>
+        <h4 className="text-sm font-bold text-blue-400 flex items-center gap-2 border-b border-slate-800 pb-2">
+          <FileText className="w-4 h-4" />
+          <span>Links e Contato</span>
         </h4>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300">Curso / Titulação *</label>
+            <label className="text-xs font-semibold text-slate-300">E-mail *</label>
+            <input
+              type="email"
+              value={profileForm.email || ''}
+              onChange={(e) => setProfileForm({ ...profileForm, email: e.target.value })}
+              required
+              className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-300">URL GitHub *</label>
+            <input
+              type="url"
+              value={profileForm.githubUrl || ''}
+              onChange={(e) => setProfileForm({ ...profileForm, githubUrl: e.target.value })}
+              required
+              className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-300">URL LinkedIn *</label>
+            <input
+              type="url"
+              value={profileForm.linkedinUrl || ''}
+              onChange={(e) => setProfileForm({ ...profileForm, linkedinUrl: e.target.value })}
+              required
+              className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
+        <h4 className="text-sm font-bold text-amber-400 flex items-center gap-2 border-b border-slate-800 pb-2">
+          <FileText className="w-4 h-4" />
+          <span>Títulos das Seções & Rodapé</span>
+        </h4>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-300">Título - Projetos</label>
             <input
               type="text"
-              value={profileForm.academicTitle}
-              onChange={(e) => setProfileForm({ ...profileForm, academicTitle: e.target.value })}
-              required
-              placeholder="Ex: Análise e Desenvolvimento de Sistemas"
+              value={profileForm.projectsTitle || ''}
+              onChange={(e) => setProfileForm({ ...profileForm, projectsTitle: e.target.value })}
+              className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-300">Subtítulo - Projetos</label>
+            <input
+              type="text"
+              value={profileForm.projectsSubtitle || ''}
+              onChange={(e) => setProfileForm({ ...profileForm, projectsSubtitle: e.target.value })}
+              className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+            />
+          </div>
+          
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-300">Título - Skills</label>
+            <input
+              type="text"
+              value={profileForm.skillsTitle || ''}
+              onChange={(e) => setProfileForm({ ...profileForm, skillsTitle: e.target.value })}
+              className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-300">Subtítulo - Skills</label>
+            <input
+              type="text"
+              value={profileForm.skillsSubtitle || ''}
+              onChange={(e) => setProfileForm({ ...profileForm, skillsSubtitle: e.target.value })}
               className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300">Instituição / Faculdade *</label>
-            <select
-              value={profileForm.academicInstitution || INSTITUTION_OPTIONS[0]}
-              onChange={(e) => setProfileForm({ ...profileForm, academicInstitution: e.target.value })}
-              className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
-            >
-              {INSTITUTION_OPTIONS.map((inst) => (
-                <option key={inst} value={inst}>
-                  {inst}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-300">Período / Ano *</label>
+            <label className="text-xs font-semibold text-slate-300">Título - Contato</label>
             <input
               type="text"
-              value={profileForm.academicPeriod}
-              onChange={(e) => setProfileForm({ ...profileForm, academicPeriod: e.target.value })}
-              required
-              placeholder="Ex: 4º Período (2024 - 2026)"
+              value={profileForm.contactTitle || ''}
+              onChange={(e) => setProfileForm({ ...profileForm, contactTitle: e.target.value })}
               className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
             />
           </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-300">Subtítulo - Contato</label>
+            <input
+              type="text"
+              value={profileForm.contactSubtitle || ''}
+              onChange={(e) => setProfileForm({ ...profileForm, contactSubtitle: e.target.value })}
+              className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+            />
+          </div>
+        </div>
+
+        <div className="space-y-1 pt-2">
+          <label className="text-xs font-semibold text-slate-300">Texto do Rodapé (Footer)</label>
+          <input
+            type="text"
+            value={profileForm.footerText || ''}
+            onChange={(e) => setProfileForm({ ...profileForm, footerText: e.target.value })}
+            className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:ring-2 focus:ring-emerald-400"
+          />
         </div>
       </div>
 

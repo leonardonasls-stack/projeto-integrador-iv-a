@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useProjects } from '../../context/ProjectContext';
+import { useProfile } from '../../context/ProfileContext';
 import { Code2, ShieldCheck, LogOut, Menu, X, PlusCircle, Sparkles } from 'lucide-react';
 
 interface NavbarProps {
@@ -9,6 +10,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminDashboard }) => {
   const { user, setIsLoginModalOpen, logout } = useAuth();
+  const { profile } = useProfile();
   const { resetProjects } = useProjects();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -76,10 +78,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminDashboard }) => {
           </div>
           <div className="flex flex-col">
             <span className="font-bold text-lg text-white tracking-tight leading-none group-hover:text-indigo-400 transition-colors">
-              Leonardo Nascimento
+              {profile.name || 'Leonardo Nascimento'}
             </span>
             <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase">
-              Python & FastAPI Dev
+              {profile.role || 'Python & FastAPI Dev'}
             </span>
           </div>
         </a>

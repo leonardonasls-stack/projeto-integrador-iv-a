@@ -11,7 +11,9 @@ export interface Project {
   demoUrl?: string;
   imageUrl: string;
   featured: boolean;
-  createdAt: string;
+  visible?: boolean;
+  position?: number;
+  createdAt?: string;
 }
 
 export interface User {

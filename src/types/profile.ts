@@ -13,6 +13,18 @@ export interface ProfileData {
   techPillar1Desc: string;
   techPillar2Title: string;
   techPillar2Desc: string;
+  
+  // Novos campos adicionados (Fase 2 - CMS Supabase)
+  email: string;
+  githubUrl: string;
+  linkedinUrl: string;
+  projectsTitle: string;
+  projectsSubtitle: string;
+  skillsTitle: string;
+  skillsSubtitle: string;
+  contactTitle: string;
+  contactSubtitle: string;
+  footerText: string;
 }
 
 export const INSTITUTION_OPTIONS = [
@@ -38,5 +50,16 @@ export const defaultProfileData: ProfileData = {
   techPillar1Title: 'Python & FastAPI',
   techPillar1Desc: 'Construção de APIs assíncronas de alta concorrência com Pydantic v2 e SQLAlchemy.',
   techPillar2Title: 'Interfaces & Usabilidade',
-  techPillar2Desc: 'Integração com frontends React/TypeScript mantendo excelente experiência de usuário.'
+  techPillar2Desc: 'Integração com frontends React/TypeScript mantendo excelente experiência de usuário.',
+  
+  email: 'seu.email@exemplo.com',
+  githubUrl: 'https://github.com/leonardonasls',
+  linkedinUrl: 'https://linkedin.com/in/leonardonasls',
+  projectsTitle: 'Projetos em Destaque',
+  projectsSubtitle: 'Uma seleção dos meus melhores trabalhos.',
+  skillsTitle: 'Tecnologias & Princípios de Usabilidade',
+  skillsSubtitle: 'Stack tecnológica completa combinada com boas práticas de UX.',
+  contactTitle: 'Entre em Contato',
+  contactSubtitle: 'Vamos conversar sobre projetos, vagas ou apenas trocar ideias sobre tecnologia.',
+  footerText: '© 2026 Leonardo Nascimento. Todos os direitos reservados.'
 };

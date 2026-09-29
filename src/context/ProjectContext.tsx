@@ -1,96 +1,131 @@
-import React, { createContext, useContext, useState, useEffect, useMemo, useDeferredValue } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import type { ReactNode } from 'react';
-import type { Project, ProjectCategory } from '../types';
-import { initialProjects } from '../data/initialProjects';
+import type { Project } from '../types';
 import { useToast } from './ToastContext';
-import { StorageService } from '../services/storageService';
+import { ProjectService } from '../services/projectService';
 
 interface ProjectContextType {
   projects: Project[];
-  selectedCategory: ProjectCategory | 'Todas';
-  setSelectedCategory: (category: ProjectCategory | 'Todas') => void;
+  filteredProjects: Project[];
+  isLoading: boolean;
+  selectedCategory: string;
+  setSelectedCategory: (cat: any) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  addProject: (projectData: Omit<Project, 'id' | 'createdAt'>) => void;
-  updateProject: (id: string, projectData: Partial<Project>) => void;
-  deleteProject: (id: string) => void;
+  addProject: (project: Omit<Project, 'id' | 'createdAt'>) => Promise<boolean>;
+  updateProject: (project: Project) => Promise<boolean>;
+  deleteProject: (id: string) => Promise<boolean>;
+  updateProjectPositions: (projects: Project[]) => Promise<boolean>;
   resetProjects: () => void;
-  filteredProjects: Project[];
 }
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY = 'dev_portfolio_projects_v6';
-
 export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { addToast } = useToast();
-  const [projects, setProjects] = useState<Project[]>(() => {
-    const saved = StorageService.getItem<Project[] | null>(LOCAL_STORAGE_KEY, null);
-    if (saved) {
-      const existingIds = new Set(saved.map((p) => p.id));
-      const missingInitial = initialProjects.filter((p) => !existingIds.has(p.id));
-      if (missingInitial.length > 0) {
-        return [...missingInitial, ...saved];
-      }
-      return saved;
-    }
-    return initialProjects;
-  });
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<any>('Todas');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'Todas'>('Todas');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const deferredSearchQuery = useDeferredValue(searchQuery);
-
+  // Carrega os projetos do banco
   useEffect(() => {
-    StorageService.setItem(LOCAL_STORAGE_KEY, projects);
-  }, [projects]);
-
-  const addProject = (projectData: Omit<Project, 'id' | 'createdAt'>) => {
-    const newProject: Project = {
-      ...projectData,
-      id: `proj-${crypto.randomUUID()}`,
-      createdAt: new Date().toISOString().split('T')[0]
+    const fetchProjects = async () => {
+      setIsLoading(true);
+      const data = await ProjectService.getProjects();
+      setProjects(data);
+      setIsLoading(false);
     };
-    setProjects((prev) => [newProject, ...prev]);
-    addToast('success', 'Projeto Cadastrado!', `O projeto "${newProject.title}" foi adicionado com sucesso.`);
+    fetchProjects();
+  }, []);
+
+  const addProject = async (newProject: Omit<Project, 'id' | 'createdAt'>): Promise<boolean> => {
+    // Definimos uma nova posição para o projeto se ele não tiver uma (último lugar)
+    const position = newProject.position ?? (projects.length > 0 ? Math.max(...projects.map(p => p.position || 0)) + 1 : 0);
+    
+    const created = await ProjectService.createProject({ ...newProject, position });
+    if (created) {
+      setProjects(prev => [...prev, created].sort((a, b) => (a.position || 0) - (b.position || 0)));
+      addToast('success', 'Projeto Cadastrado', `${created.title} foi adicionado à vitrine.`);
+      return true;
+    }
+    
+    addToast('error', 'Falha ao Cadastrar', 'Ocorreu um erro ao tentar salvar o projeto no banco.');
+    return false;
   };
 
-  const updateProject = (id: string, updatedFields: Partial<Project>) => {
-    setProjects((prev) =>
-      prev.map((proj) => (proj.id === id ? { ...proj, ...updatedFields } : proj))
-    );
-    addToast('info', 'Projeto Atualizado', 'As alterações do projeto foram salvas.');
+  const updateProject = async (updatedProject: Project): Promise<boolean> => {
+    const success = await ProjectService.updateProject(updatedProject);
+    if (success) {
+      setProjects(prev => prev.map((p) => (p.id === updatedProject.id ? updatedProject : p)).sort((a, b) => (a.position || 0) - (b.position || 0)));
+      addToast('success', 'Projeto Atualizado', `${updatedProject.title} foi salvo com sucesso.`);
+      return true;
+    }
+
+    addToast('error', 'Falha ao Atualizar', 'Não foi possível salvar as alterações.');
+    return false;
   };
 
-  const deleteProject = (id: string) => {
-    const projToDelete = projects.find((p) => p.id === id);
-    setProjects((prev) => prev.filter((p) => p.id !== id));
-    addToast('error', 'Projeto Removido', `O projeto "${projToDelete?.title || ''}" foi excluído.`);
+  const deleteProject = async (id: string): Promise<boolean> => {
+    const projectToDelete = projects.find((p) => p.id === id);
+    if (!projectToDelete) return false;
+
+    const success = await ProjectService.deleteProject(id);
+    if (success) {
+      setProjects(prev => prev.filter((p) => p.id !== id));
+      addToast('info', 'Projeto Excluído', `${projectToDelete.title} foi removido.`);
+      return true;
+    }
+
+    addToast('error', 'Falha ao Excluir', 'Não foi possível remover o projeto.');
+    return false;
+  };
+
+  const updateProjectPositions = async (reorderedProjects: Project[]): Promise<boolean> => {
+    // Atualiza estado local imediatamente (otimista)
+    setProjects(reorderedProjects);
+
+    // Salva no banco as posições
+    const updates = reorderedProjects.map((p, index) => ({ id: p.id, position: index }));
+    const success = await ProjectService.updatePositions(updates);
+    
+    if (success) {
+      addToast('success', 'Ordenação Salva', 'A ordem dos projetos foi atualizada.');
+      return true;
+    }
+
+    // Se falhar, poderia reverter, mas por enquanto mantemos simples
+    addToast('error', 'Falha na Ordenação', 'A nova ordem não foi salva no banco.');
+    return false;
   };
 
   const resetProjects = () => {
-    setProjects(initialProjects);
-    StorageService.removeItem(LOCAL_STORAGE_KEY);
-    addToast('info', 'Projetos Restaurados', 'A lista de projetos foi restaurada para o estado inicial.');
+    // Não fará nada na fase do Supabase, os dados devem ser apagados via banco/admin
+    addToast('info', 'Reset Desativado', 'No modo Banco de Dados, o reset deve ser feito via painel Admin (deletando itens).');
   };
 
-  const filteredProjects = useMemo(() => {
-    const query = deferredSearchQuery.toLowerCase();
-    return projects.filter((project) => {
-      const matchesCategory = selectedCategory === 'Todas' || project.category === selectedCategory;
-      const matchesSearch =
-        project.title.toLowerCase().includes(query) ||
-        project.description.toLowerCase().includes(query) ||
-        project.techs.some((t) => t.toLowerCase().includes(query));
+  const sortedProjects = useMemo(() => {
+    return [...projects].sort((a, b) => (a.position || 0) - (b.position || 0));
+  }, [projects]);
 
-      return matchesCategory && matchesSearch;
+  const filteredProjects = useMemo(() => {
+    return sortedProjects.filter(p => {
+      if (p.visible === false) return false;
+      const matchCat = selectedCategory === 'Todas' || p.category === selectedCategory;
+      const search = searchQuery.toLowerCase();
+      const matchSearch = p.title.toLowerCase().includes(search) || 
+                          p.description.toLowerCase().includes(search) || 
+                          p.techs.some(t => t.toLowerCase().includes(search));
+      return matchCat && matchSearch;
     });
-  }, [projects, selectedCategory, deferredSearchQuery]);
+  }, [sortedProjects, selectedCategory, searchQuery]);
 
   return (
     <ProjectContext.Provider
       value={{
-        projects,
+        projects: sortedProjects,
+        filteredProjects,
+        isLoading,
         selectedCategory,
         setSelectedCategory,
         searchQuery,
@@ -98,8 +133,8 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
         addProject,
         updateProject,
         deleteProject,
-        resetProjects,
-        filteredProjects
+        updateProjectPositions,
+        resetProjects
       }}
     >
       {children}

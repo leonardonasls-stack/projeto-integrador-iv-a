@@ -126,7 +126,7 @@ export const Hero: React.FC = () => {
               <div className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800">
                 <span className="text-white font-semibold">Conecte-se:</span>
                 <a
-                  href="https://github.com/leonardonasls-stack"
+                  href={profile.githubUrl || "https://github.com/leonardonasls-stack"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white transition-colors"
@@ -135,7 +135,7 @@ export const Hero: React.FC = () => {
                   <GithubIcon className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href={profile.linkedinUrl || "https://linkedin.com"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white transition-colors"

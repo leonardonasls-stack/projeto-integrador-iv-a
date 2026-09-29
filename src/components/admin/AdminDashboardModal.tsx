@@ -18,7 +18,7 @@ interface AdminDashboardModalProps {
 }
 
 export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen, onClose }) => {
-  const { projects, addProject, updateProject, deleteProject, resetProjects } = useProjects();
+  const { projects, addProject, updateProject, deleteProject, resetProjects, updateProjectPositions } = useProjects();
   const { user } = useAuth();
   const { profile, updateProfile, resetProfile } = useProfile();
 
@@ -37,7 +37,8 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
     githubUrl: '',
     demoUrl: '',
     imageUrl: '',
-    featured: false
+    featured: false,
+    visible: true
   });
 
   // Profile Form State
@@ -80,7 +81,8 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
       githubUrl: 'https://github.com/usuario/repo',
       demoUrl: 'https://demo.vercel.app',
       imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
-      featured: false
+      featured: false,
+      visible: true
     });
     setIsFormOpen(true);
   };
@@ -96,7 +98,8 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
       githubUrl: proj.githubUrl || '',
       demoUrl: proj.demoUrl || '',
       imageUrl: proj.imageUrl,
-      featured: proj.featured
+      featured: proj.featured,
+      visible: proj.visible !== false
     });
     setIsFormOpen(true);
   };
@@ -119,7 +122,8 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
         githubUrl: formData.githubUrl,
         demoUrl: formData.demoUrl || undefined,
         imageUrl: formData.imageUrl,
-        featured: formData.featured
+        featured: formData.featured,
+        visible: formData.visible
       });
     } else {
       addProject({
@@ -131,7 +135,8 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
         githubUrl: formData.githubUrl,
         demoUrl: formData.demoUrl || undefined,
         imageUrl: formData.imageUrl || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
-        featured: formData.featured
+        featured: formData.featured,
+        visible: formData.visible
       });
     }
 
@@ -151,6 +156,25 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
   const confirmDelete = (id: string) => {
     deleteProject(id);
     setDeleteConfirmId(null);
+  };
+
+  const handleMoveUp = (index: number) => {
+    if (index === 0) return;
+    const newProjects = [...projects];
+    const temp = newProjects[index - 1];
+    newProjects[index - 1] = newProjects[index];
+    newProjects[index] = temp;
+    // Call updateProjectPositions from ProjectContext
+    updateProjectPositions(newProjects);
+  };
+
+  const handleMoveDown = (index: number) => {
+    if (index === projects.length - 1) return;
+    const newProjects = [...projects];
+    const temp = newProjects[index + 1];
+    newProjects[index + 1] = newProjects[index];
+    newProjects[index] = temp;
+    updateProjectPositions(newProjects);
   };
 
   return (
@@ -254,6 +278,8 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
                 projects={projects}
                 onEdit={openEditForm}
                 onDeleteRequest={(id) => setDeleteConfirmId(id)}
+                onMoveUp={handleMoveUp}
+                onMoveDown={handleMoveDown}
               />
 
               <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2 border-t border-slate-800 pt-4">

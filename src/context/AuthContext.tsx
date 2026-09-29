@@ -1,12 +1,12 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import type { User } from '../types';
 import { useToast } from './ToastContext';
-import { StorageService } from '../services/storageService';
+import { supabase } from '../services/supabaseClient';
 
 interface AuthContextType {
   user: User;
-  login: (passcode: string) => Promise<boolean>;
+  login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   isLoginModalOpen: boolean;
   setIsLoginModalOpen: (open: boolean) => void;
@@ -14,68 +14,49 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const AUTH_STORAGE_KEY = 'dev_portfolio_auth';
-const SESSION_TTL_MS = 2 * 60 * 60 * 1000; // 2 horas de validade da sessão admin
-
-const hashInput = async (input: string): Promise<string> => {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(input);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
-};
-
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { addToast } = useToast();
-  const [user, setUser] = useState<User>(() => {
-    const saved = StorageService.getItem<(User & { expiresAt?: number }) | null>(AUTH_STORAGE_KEY, null);
-    if (saved) {
-      if (saved.expiresAt && saved.expiresAt > Date.now()) {
-        return saved;
-      }
-      StorageService.removeItem(AUTH_STORAGE_KEY);
-    }
-    return { username: 'Convidado', role: 'guest', isLoggedIn: false };
-  });
-
+  const [user, setUser] = useState<User>({ username: 'Convidado', role: 'guest', isLoggedIn: false });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
 
-  const login = async (passcode: string): Promise<boolean> => {
-    const expectedHash = import.meta.env.VITE_ADMIN_HASH;
+  useEffect(() => {
+    // Verifica sessão inicial
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        setUser({ username: 'Administrador', role: 'admin', isLoggedIn: true });
+      }
+    });
 
-    if (!expectedHash) {
-      addToast(
-        'error',
-        'Painel Admin Indisponível',
-        'A variável de ambiente VITE_ADMIN_HASH não foi configurada neste ambiente.'
-      );
+    // Escuta mudanças de auth
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        setUser({ username: 'Administrador', role: 'admin', isLoggedIn: true });
+      } else {
+        setUser({ username: 'Convidado', role: 'guest', isLoggedIn: false });
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const login = async (email: string, password: string): Promise<boolean> => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      addToast('error', 'Falha no Login', error.message || 'Credenciais inválidas.');
       return false;
     }
 
-    const hashedPasscode = await hashInput(passcode);
-
-    if (hashedPasscode === expectedHash) {
-      const adminUser: User & { expiresAt?: number } = {
-        username: 'Administrador',
-        role: 'admin',
-        isLoggedIn: true,
-        expiresAt: Date.now() + SESSION_TTL_MS
-      };
-      setUser(adminUser);
-      StorageService.setItem(AUTH_STORAGE_KEY, adminUser);
-      setIsLoginModalOpen(false);
-      addToast('success', 'Acesso Concedido!', 'Você está no modo Administrador (CRUD liberado).');
-      return true;
-    } else {
-      addToast('error', 'Senha Incorreta', 'Credenciais inválidas.');
-      return false;
-    }
+    setIsLoginModalOpen(false);
+    addToast('success', 'Acesso Concedido!', 'Você está no modo Administrador.');
+    return true;
   };
 
-  const logout = () => {
-    const guestUser: User = { username: 'Convidado', role: 'guest', isLoggedIn: false };
-    setUser(guestUser);
-    StorageService.removeItem(AUTH_STORAGE_KEY);
+  const logout = async () => {
+    await supabase.auth.signOut();
     addToast('info', 'Sessão Encerrada', 'Você voltou para o modo de navegação pública.');
   };
 
