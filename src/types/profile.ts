@@ -38,8 +38,8 @@ export const INSTITUTION_OPTIONS = [
 
 export const defaultProfileData: ProfileData = {
   name: 'Leonardo Nascimento',
-  role: 'Estudante de ADS no CESMAC & Desenvolvedor Backend Python',
-  statusBadge: 'Estudante de ADS no CESMAC | Python & FastAPI',
+  role: 'Desenvolvedor Backend Python',
+  statusBadge: 'Python & FastAPI',
   heroTitlePrefix: 'Desenvolvedor de Software',
   heroTitleHighlight: 'Backend Python & Frontend Web',
   heroDescription: 'Olá! Sou Leonardo Nascimento, estudante de Análise e Desenvolvimento de Sistemas no CESMAC. Crio APIs RESTful de alta performance e microsserviços com Python (FastAPI), além de desenvolver interfaces e aplicações web modernas e responsivas com TypeScript, JavaScript e React. Trabalho com modelagem de dados, Docker e integrações assíncronas, sempre com foco em arquitetura eficiente, código limpo e sistemas altamente escaláveis.',

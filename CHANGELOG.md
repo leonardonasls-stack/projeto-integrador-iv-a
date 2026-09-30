@@ -6,6 +6,24 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ---
 
+## [Unreleased] — 2026-09-30
+
+### 📌 Commit pendente — `docs: rewrite README v2.0 com análise completa do repomix`
+
+#### 📝 Docs
+- **README.md** reescrito completamente após análise do [`repomix-output.md`](file:///c:/Users/Leo-dev/Projeto%20Integrador%20IV-A/repomix-output.md):
+  - Versões exatas extraídas do `package.json` (React 19.2.8, TypeScript ~6.0.2, Vite ^8.2.2, Framer Motion ^13.2.0, Lucide React ^1.41.0, Vitest ^5.0.0)
+  - Arquitetura atualizada com todos os componentes reais: `CookieConsent.tsx`, `ErrorBoundary.tsx`, `SkillsTab.tsx`, `MessagesTab.tsx`
+  - Seção de **Supabase — Tabelas Utilizadas** documentando `projects`, `skill_categories`, `skills`, `site_settings`, `messages`
+  - `SkillContext.tsx` e `SkillService.ts` adicionados na documentação de contextos e serviços
+  - `storageService.ts` (wrapper seguro de localStorage) documentado na camada de serviços
+  - Testes unitários expandidos: `projectService.test.ts` e `emailService.test.ts` adicionados à tabela de testes
+  - Script `npm run seed` documentado nos scripts disponíveis
+  - Instrução de setup com `supabase/schema.sql` no SQL Editor do Supabase
+  - Rodapé atualizado para **v2.0**
+
+---
+
 ## [2.0.0] — 2026-09-29
 
 ### 📌 Commit `Supabase CMS Migration` — `feat: migração completa do CMS para o Supabase`

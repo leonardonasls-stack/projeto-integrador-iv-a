@@ -18,8 +18,8 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // --- Dados Iniciais ---
 const defaultProfileData = {
   name: 'Leonardo Nascimento',
-  role: 'Estudante de ADS no CESMAC & Desenvolvedor Backend Python',
-  status_badge: 'Estudante de ADS no CESMAC | Python & FastAPI',
+  role: 'Desenvolvedor Backend Python',
+  status_badge: 'Python & FastAPI',
   hero_title_prefix: 'Desenvolvedor de Software',
   hero_title_highlight: 'Backend Python & Frontend Web',
   hero_description: 'Olá! Sou Leonardo Nascimento, estudante de Análise e Desenvolvimento de Sistemas no CESMAC. Crio APIs RESTful de alta performance e microsserviços com Python (FastAPI), além de desenvolver interfaces e aplicações web modernas e responsivas com TypeScript, JavaScript e React. Trabalho com modelagem de dados, Docker e integrações assíncronas, sempre com foco em arquitetura eficiente, código limpo e sistemas altamente escaláveis.',
@@ -61,6 +61,7 @@ const initialProjects = [
     category: 'Backend',
     techs: ['Python', 'FastAPI', 'SQLAlchemy', 'PostgreSQL', 'Docker'],
     github_url: 'https://github.com/seu-usuario/api-financas',
+    demo_url: null,
     featured: true,
     visible: true,
     position: 1
@@ -103,7 +104,7 @@ async function seed() {
   const { error: settingsError } = await supabase
     .from('site_settings')
     .upsert({ id: 1, ...defaultProfileData });
-  
+
   if (settingsError) console.error('Erro em site_settings:', settingsError);
   else console.log('✅ site_settings inserido/atualizado.');
 
@@ -126,7 +127,7 @@ async function seed() {
       console.error(`Erro ao inserir categoria ${cat.title}:`, catError);
       continue;
     }
-    
+
     console.log(`✅ Categoria ${cat.title} inserida.`);
 
     const skillsToInsert = cat.skills.map(skill => ({

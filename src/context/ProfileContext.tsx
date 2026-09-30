@@ -16,7 +16,7 @@ interface ProfileContextType {
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY = 'dev_portfolio_profile_v3';
+const LOCAL_STORAGE_KEY = 'dev_portfolio_profile_v4';
 
 export const ProfileProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { addToast } = useToast();
