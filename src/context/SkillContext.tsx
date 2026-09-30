@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { SkillService } from '../services/skillService';
 import type { Skill, SkillCategory } from '../types';
 import { useToast } from './ToastContext';

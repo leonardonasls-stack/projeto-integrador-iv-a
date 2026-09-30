@@ -6,10 +6,10 @@ import { resolve } from 'path';
 dotenv.config({ path: resolve(process.cwd(), '.env.local') });
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
-const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY; // Para seed é melhor a Service Role Key, mas usaremos a ANON se RLS permitir, ou rodar via Admin.
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY; // Para seed usamos a Service Role Key para ignorar RLS
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error('❌ VITE_SUPABASE_URL ou VITE_SUPABASE_ANON_KEY não encontrados no .env.local');
+  console.error('❌ VITE_SUPABASE_URL ou SUPABASE_SERVICE_ROLE_KEY não encontrados no .env.local');
   process.exit(1);
 }
 

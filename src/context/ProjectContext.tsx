@@ -8,15 +8,15 @@ interface ProjectContextType {
   projects: Project[];
   filteredProjects: Project[];
   isLoading: boolean;
+  error: string | null;
   selectedCategory: string;
-  setSelectedCategory: (cat: any) => void;
+  setSelectedCategory: (cat: string) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   addProject: (project: Omit<Project, 'id' | 'createdAt'>) => Promise<boolean>;
   updateProject: (project: Project) => Promise<boolean>;
   deleteProject: (id: string) => Promise<boolean>;
   updateProjectPositions: (projects: Project[]) => Promise<boolean>;
-  resetProjects: () => void;
 }
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
@@ -25,19 +25,28 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
   const { addToast } = useToast();
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<any>('Todas');
+  const [error, setError] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('Todas');
   const [searchQuery, setSearchQuery] = useState('');
 
   // Carrega os projetos do banco
   useEffect(() => {
     const fetchProjects = async () => {
       setIsLoading(true);
-      const data = await ProjectService.getProjects();
-      setProjects(data);
-      setIsLoading(false);
+      setError(null);
+      try {
+        const data = await ProjectService.getProjects();
+        setProjects(data);
+      } catch (err: any) {
+        const msg = err.message || 'Erro ao carregar projetos';
+        setError(msg);
+        addToast('error', 'Falha no Carregamento', msg);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchProjects();
-  }, []);
+  }, [addToast]);
 
   const addProject = async (newProject: Omit<Project, 'id' | 'createdAt'>): Promise<boolean> => {
     // Definimos uma nova posição para o projeto se ele não tiver uma (último lugar)
@@ -99,11 +108,6 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
     return false;
   };
 
-  const resetProjects = () => {
-    // Não fará nada na fase do Supabase, os dados devem ser apagados via banco/admin
-    addToast('info', 'Reset Desativado', 'No modo Banco de Dados, o reset deve ser feito via painel Admin (deletando itens).');
-  };
-
   const sortedProjects = useMemo(() => {
     return [...projects].sort((a, b) => (a.position || 0) - (b.position || 0));
   }, [projects]);
@@ -126,6 +130,7 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
         projects: sortedProjects,
         filteredProjects,
         isLoading,
+        error,
         selectedCategory,
         setSelectedCategory,
         searchQuery,
@@ -133,8 +138,7 @@ export const ProjectProvider: React.FC<{ children: ReactNode }> = ({ children })
         addProject,
         updateProject,
         deleteProject,
-        updateProjectPositions,
-        resetProjects
+        updateProjectPositions
       }}
     >
       {children}

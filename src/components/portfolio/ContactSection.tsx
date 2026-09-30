@@ -3,6 +3,7 @@ import { useToast } from '../../context/ToastContext';
 import { useProfile } from '../../context/ProfileContext';
 import { Mail, Send, CheckCircle2, MessageSquare, User, AtSign, FileText } from 'lucide-react';
 import { EmailService } from '../../services/emailService';
+import { safeHostPath } from '../../utils/urlHelper';
 
 export const ContactSection: React.FC = () => {
   const { profile } = useProfile();
@@ -130,7 +131,7 @@ export const ContactSection: React.FC = () => {
                       rel="noopener noreferrer"
                       className="text-indigo-400 hover:underline"
                     >
-                      {profile.githubUrl ? new URL(profile.githubUrl).hostname + new URL(profile.githubUrl).pathname : 'github.com/leonardonasls-stack'}
+                      {profile.githubUrl ? safeHostPath(profile.githubUrl) : 'github.com/leonardonasls-stack'}
                     </a>
                   </p>
                   <p className="text-slate-400">
@@ -141,7 +142,7 @@ export const ContactSection: React.FC = () => {
                       rel="noopener noreferrer"
                       className="text-indigo-400 hover:underline"
                     >
-                      {profile.linkedinUrl ? new URL(profile.linkedinUrl).hostname + new URL(profile.linkedinUrl).pathname : 'linkedin.com/in/leodev'}
+                      {profile.linkedinUrl ? safeHostPath(profile.linkedinUrl) : 'linkedin.com/in/leodev'}
                     </a>
                   </p>
                 </div>

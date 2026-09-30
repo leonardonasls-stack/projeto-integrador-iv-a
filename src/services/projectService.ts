@@ -11,7 +11,7 @@ export const ProjectService = {
 
     if (error) {
       console.error('Erro ao buscar projetos:', error);
-      return [];
+      throw new Error('Não foi possível carregar os projetos.');
     }
     
     // Mapear snake_case para camelCase

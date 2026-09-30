@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useProjects } from '../../context/ProjectContext';
 import { useProfile } from '../../context/ProfileContext';
-import { Code2, ShieldCheck, LogOut, Menu, X, PlusCircle, Sparkles } from 'lucide-react';
+import { Code2, ShieldCheck, LogOut, Menu, X, PlusCircle } from 'lucide-react';
 
 interface NavbarProps {
   onOpenAdminDashboard: () => void;
@@ -11,7 +10,6 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminDashboard }) => {
   const { user, setIsLoginModalOpen, logout } = useAuth();
   const { profile } = useProfile();
-  const { resetProjects } = useProjects();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
@@ -140,14 +138,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminDashboard }) => {
             </button>
           )}
 
-          <button
-            onClick={resetProjects}
-            className="p-1.5 text-slate-400 hover:text-indigo-400 rounded-lg hover:bg-slate-800/60 text-[11px] transition-colors flex items-center gap-1"
-            title="Resetar dados locais de exemplo"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Reset</span>
-          </button>
         </div>
 
         {/* Mobile Menu Toggle Button */}

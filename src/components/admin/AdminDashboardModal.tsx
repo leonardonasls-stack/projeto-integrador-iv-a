@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useProfile } from '../../context/ProfileContext';
 import type { Project, ProjectCategory } from '../../types';
 import { defaultProfileData } from '../../types/profile';
-import { X, Plus, ShieldCheck, AlertTriangle, RotateCcw } from 'lucide-react';
+import { X, Plus, ShieldCheck, AlertTriangle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { AdminTabsNav } from './AdminTabsNav';
@@ -20,7 +20,7 @@ interface AdminDashboardModalProps {
 }
 
 export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen, onClose }) => {
-  const { projects, addProject, updateProject, deleteProject, resetProjects, updateProjectPositions } = useProjects();
+  const { projects, addProject, updateProject, deleteProject, updateProjectPositions } = useProjects();
   const { user } = useAuth();
   const { profile, updateProfile, resetProfile } = useProfile();
 
@@ -286,13 +286,6 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({ isOpen
               />
 
               <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2 border-t border-slate-800 pt-4">
-                <button
-                  onClick={resetProjects}
-                  className="text-slate-400 hover:text-white flex items-center gap-1"
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                  <span>Restaurar lista de projetos padrão</span>
-                </button>
                 <span>Total: <strong>{projects.length}</strong> projetos salvos localmente</span>
               </div>
             </>

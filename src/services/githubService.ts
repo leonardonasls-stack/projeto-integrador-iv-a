@@ -7,7 +7,7 @@ export const GithubService = {
       }
 
       const [, owner, repo] = match;
-      const cleanRepo = repo.replace('.git', '');
+      const cleanRepo = repo.replace(/\.git$/, '');
 
       const response = await fetch(`https://api.github.com/repos/${owner}/${cleanRepo}`);
       

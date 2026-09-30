@@ -72,7 +72,7 @@ export const SettingsService = {
 
     if (error || !data) {
       console.error('Erro ao buscar configurações:', error);
-      return defaultProfileData;
+      throw new Error('Não foi possível carregar as configurações do perfil.');
     }
     
     return mapDbToProfile(data);

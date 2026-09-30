@@ -67,7 +67,13 @@ begin
   foreach t in array array['site_settings','projects','skill_categories','skills']
   loop
     execute format('alter table %I enable row level security', t);
-    execute format('create policy "leitura publica" on %I for select using (true)', t);
+    
+    if t = 'projects' then
+      execute format('create policy "leitura publica" on %I for select using (visible or auth.uid() = ''bb22c400-e89a-4943-9073-ce81fa4703c2'')', t);
+    else
+      execute format('create policy "leitura publica" on %I for select using (true)', t);
+    end if;
+
     -- ATENÇÃO: Substitua <SEU-UUID> pelo ID do administrador criado no Supabase Auth
     execute format(
       'create policy "escrita admin" on %I for all

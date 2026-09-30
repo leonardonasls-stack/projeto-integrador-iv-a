@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSkills } from '../../context/SkillContext';
 import type { Skill, SkillCategory } from '../../types';
-import { Plus, Edit2, Trash2, ShieldCheck, ChevronUp, ChevronDown, Layers, Save, X } from 'lucide-react';
+import { Plus, Edit2, Trash2, ShieldCheck, Layers, Save } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 
 export const SkillsTab: React.FC = () => {

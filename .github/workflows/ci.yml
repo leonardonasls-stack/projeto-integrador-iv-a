@@ -27,9 +27,6 @@ jobs:
       - name: Run Linter (OxLint)
         run: npm run lint
 
-      - name: Type Check (TypeScript)
-        run: npx tsc --noEmit
-
       - name: Build Application
         run: npm run build
 

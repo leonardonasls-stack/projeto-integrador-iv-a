@@ -76,7 +76,7 @@ src/
 │       └── SocialIcons.tsx     # Ícones SVG de GitHub e LinkedIn
 │
 ├── context/
-│   ├── AuthContext.tsx         # Autenticação admin com hash SHA-256 e TTL de 2h
+│   ├── AuthContext.tsx         # Autenticação integrada ao Supabase Auth
 │   ├── ProjectContext.tsx      # CRUD + filtro/busca de projetos em localStorage
 │   ├── ProfileContext.tsx      # Dados de perfil editáveis pelo painel admin
 │   └── ToastContext.tsx        # Sistema global de notificações por toast
@@ -86,12 +86,8 @@ src/
 │   ├── projectService.ts       # CRUD de Projetos no Supabase
 │   ├── skillService.ts         # CRUD de Skills e Categorias no Supabase
 │   ├── settingsService.ts      # Leitura e gravação das configurações do site (Hero/Footer)
-│   ├── authService.ts          # Mock/Hash auth local ou Supabase Auth
 │   ├── emailService.ts         # Integração Formspree + log na tabela Messages
 │   └── storageService.test.ts  # Testes Vitest
-│
-├── data/
-│   └── initialProjects.ts     # Dataset inicial de projetos reais
 │
 └── types/
     ├── index.ts               # Tipos: Project, ProjectCategory, User, ToastMessage
@@ -111,7 +107,7 @@ src/
 - **Formulário de Contato**: Integrado ao **Formspree** via `VITE_FORMSPREE_ID`, com validação, loading e feedback via toast
 
 ### 🔐 Painel Administrativo (Área Restrita)
-- **Autenticação segura**: Hash SHA-256 da senha comparado à variável `VITE_ADMIN_HASH`. Sessão expira em **2 horas** (TTL).
+- **Autenticação segura**: Supabase Auth (E-mail/Senha). Autorização centralizada no banco de dados com RLS.
 - **Aba Projetos**: Tabela com todos os projetos. Criação, edição e exclusão com confirmação destrutiva. Reset para dataset inicial.
 - **Aba Perfil**: Edição em tempo real do Hero, bio e formação acadêmica. Dropdown com opções de instituição (CESMAC, UFAL, IFAL, UNIT, UNIMA/Afya). Reset para padrão.
 
@@ -194,9 +190,6 @@ VITE_SUPABASE_ANON_KEY=sua_anon_key_aqui
 
 # ID do endpoint Formspree para o formulário de contato (Opcional)
 VITE_FORMSPREE_ID=seu_id_aqui
-
-# Hash SHA-256 da senha do painel administrativo
-VITE_ADMIN_HASH=hash_sha256_da_senha_aqui
 ```
 
 > **Nota**: O sistema CMS depende do `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`. Sem `VITE_FORMSPREE_ID`, o formulário usa um fallback inteligente (mailto: + salva no banco).
@@ -206,8 +199,8 @@ VITE_ADMIN_HASH=hash_sha256_da_senha_aqui
 ## 🔑 Acesso ao Painel Admin
 
 1. Clique em **"Área Restrita"** na barra de navegação.
-2. Insira a senha administrativa configurada em `VITE_ADMIN_HASH`.
-3. A sessão expira automaticamente em **2 horas**.
+2. Faça login com o seu e-mail e senha cadastrados no Supabase Auth.
+3. Para dar permissão de administrador ao seu usuário, certifique-se de configurar o UUID do seu usuário (encontrado no painel do Supabase) no arquivo `supabase/schema.sql` (ou equivalente na sua migration) para ter as permissões adequadas de edição via RLS.
 
 ---
 

@@ -11,6 +11,7 @@ interface ProfileContextType {
   updateProfile: (updatedData: Partial<ProfileData>) => Promise<boolean>;
   resetProfile: () => void;
   isLoading: boolean;
+  error: string | null;
 }
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined);
@@ -20,6 +21,7 @@ const LOCAL_STORAGE_KEY = 'dev_portfolio_profile_v3';
 export const ProfileProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { addToast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [profile, setProfile] = useState<ProfileData>(() => {
     // Inicializa com o cache local (stale-while-revalidate) para não piscar a tela
     const saved = StorageService.getItem<ProfileData | null>(LOCAL_STORAGE_KEY, null);
@@ -32,19 +34,23 @@ export const ProfileProvider: React.FC<{ children: ReactNode }> = ({ children })
   useEffect(() => {
     // Busca dados atualizados do banco ao carregar
     const fetchSettings = async () => {
+      setError(null);
       try {
         const data = await SettingsService.getSettings();
         setProfile(data);
         StorageService.setItem(LOCAL_STORAGE_KEY, data);
-      } catch (error) {
-        console.error("Falha ao buscar configurações:", error);
+      } catch (err: any) {
+        console.error("Falha ao buscar configurações:", err);
+        const msg = err.message || 'Erro ao carregar configurações do perfil.';
+        setError(msg);
+        addToast('error', 'Falha no Carregamento', msg);
       } finally {
         setIsLoading(false);
       }
     };
     
     fetchSettings();
-  }, []);
+  }, [addToast]);
 
   const updateProfile = async (updatedData: Partial<ProfileData>): Promise<boolean> => {
     // Otimista: atualiza o estado local primeiro
@@ -74,7 +80,7 @@ export const ProfileProvider: React.FC<{ children: ReactNode }> = ({ children })
   };
 
   return (
-    <ProfileContext.Provider value={{ profile, updateProfile, resetProfile, isLoading }}>
+    <ProfileContext.Provider value={{ profile, updateProfile, resetProfile, isLoading, error }}>
       {children}
     </ProfileContext.Provider>
   );

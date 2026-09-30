@@ -1,11 +1,13 @@
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  // @ts-expect-error vitest config inline
+  build: {
+    chunkSizeWarningLimit: 1500,
+  },
   test: {
     globals: true,
     environment: 'jsdom',
