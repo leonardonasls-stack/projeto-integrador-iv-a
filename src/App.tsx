@@ -13,6 +13,7 @@ import { TechStack } from './components/portfolio/TechStack';
 import { ProjectGrid } from './components/portfolio/ProjectGrid';
 import { ContactSection } from './components/portfolio/ContactSection';
 import { Footer } from './components/layout/Footer';
+import { CookieConsent } from './components/ui/CookieConsent';
 
 const LoginModal = React.lazy(() => import('./components/admin/LoginModal').then(module => ({ default: module.LoginModal })));
 const AdminDashboardModal = React.lazy(() => import('./components/admin/AdminDashboardModal').then(module => ({ default: module.AdminDashboardModal })));
@@ -39,7 +40,8 @@ const PortfolioApp: React.FC = () => {
       {/* Footer */}
       <Footer />
 
-      {/* Modais */}
+      {/* Modais & Overlays */}
+      <CookieConsent />
       <React.Suspense fallback={null}>
         <LoginModal />
         <AdminDashboardModal
