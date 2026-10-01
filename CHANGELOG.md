@@ -8,19 +8,29 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ## [Unreleased] — 2026-09-30
 
-### 📌 Commit pendente — `docs: rewrite README v2.0 com análise completa do repomix`
+### 📌 Commit pendente — `docs: rewrite README v2.1 com análise completa do gitingest`
 
 #### 📝 Docs
-- **README.md** reescrito completamente após análise do [`repomix-output.md`](file:///c:/Users/Leo-dev/Projeto%20Integrador%20IV-A/repomix-output.md):
-  - Versões exatas extraídas do `package.json` (React 19.2.8, TypeScript ~6.0.2, Vite ^8.2.2, Framer Motion ^13.2.0, Lucide React ^1.41.0, Vitest ^5.0.0)
-  - Arquitetura atualizada com todos os componentes reais: `CookieConsent.tsx`, `ErrorBoundary.tsx`, `SkillsTab.tsx`, `MessagesTab.tsx`
-  - Seção de **Supabase — Tabelas Utilizadas** documentando `projects`, `skill_categories`, `skills`, `site_settings`, `messages`
-  - `SkillContext.tsx` e `SkillService.ts` adicionados na documentação de contextos e serviços
-  - `storageService.ts` (wrapper seguro de localStorage) documentado na camada de serviços
-  - Testes unitários expandidos: `projectService.test.ts` e `emailService.test.ts` adicionados à tabela de testes
-  - Script `npm run seed` documentado nos scripts disponíveis
-  - Instrução de setup com `supabase/schema.sql` no SQL Editor do Supabase
-  - Rodapé atualizado para **v2.0**
+- **README.md** reescrito completamente (v2.1) após análise profunda via `gitingest` (58 arquivos, ~57.5k tokens):
+  - Nova seção **Integrações Externas** documentando GitHub API e Formspree como serviços separados
+  - Nova seção **Padrões de Desempenho** com tabela: Stale-While-Revalidate, Atualizações Otimistas, Code-Splitting (`React.lazy`), Memoização (`useMemo`)
+  - [`githubService.ts`](file:///c:/Users/Leo-dev/Projeto%20Integrador%20IV-A/src/services/githubService.ts) adicionado na árvore de arquitetura e na documentação de serviços
+  - Documentação de `React.lazy` + `Suspense` para lazy loading dos modais admin (`LoginModal`, `AdminDashboardModal`)
+  - `ErrorBoundary` global anotado no `main.tsx` na árvore de arquitetura
+  - Variável `SUPABASE_SERVICE_ROLE_KEY` documentada nas variáveis de ambiente (obrigatória para `npm run seed`)
+  - Etapa de **Testes Unitários** (`npm run test`) adicionada à tabela do pipeline CI (já existia no workflow)
+  - Cookie Consent descrito com toggles granulares (Essenciais, Analíticos, Funcionalidade, Marketing) e `role="switch"`
+  - Detalhamento expandido do `emailService.test.ts` (fallback mailto, erros HTTP, exceções de rede)
+  - Animação de digitação sequencial do Hero documentada nas funcionalidades
+  - Ícones Lucide renderizados dinamicamente no TechStack documentados
+  - Rodapé atualizado para **v2.1**
+
+### 📌 Commit [`0264ed3`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/0264ed3) — `Ajuste de animação no hero`
+
+#### 🎨 UI/UX
+- **Hero.tsx**: Ajuste fino das animações de digitação sequencial no card de código FastAPI em [`Hero.tsx`](file:///c:/Users/Leo-dev/Projeto%20Integrador%20IV-A/src/components/portfolio/Hero.tsx):
+  - Revisão de timings e delays das `motion.div` para transições mais fluidas
+  - 68 inserções, 32 deleções no componente
 
 ---
 
