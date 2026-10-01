@@ -167,38 +167,74 @@ export const Hero: React.FC = () => {
                 </div>
 
                 <div className="font-mono text-xs text-slate-200 space-y-1.5 leading-relaxed p-4 rounded-xl border border-slate-800/80">
-                  <p>
-                    <span className="text-purple-200">from</span> <span className="text-white">fastapi</span> <span className="text-purple-200">import</span> <span className="text-indigo-200">FastAPI</span>, <span className="text-indigo-200">Depends</span>
-                  </p>
-                  <p>
-                    <span className="text-purple-200">from</span> <span className="text-white">pydantic</span> <span className="text-purple-200">import</span> <span className="text-indigo-200">BaseModel</span>
-                  </p>
-                  <p className="text-slate-300 pt-1"># API FastAPI em Python</p>
-                  <p>
-                    <span className="text-white">app</span> = <span className="text-amber-200">FastAPI</span>(title=<span className="text-emerald-300">"Portfolio API"</span>)
-                  </p>
-                  <p className="pt-1">
-                    <span className="text-purple-200">@app.get</span>(<span className="text-emerald-300">"/api/v1/developer"</span>)
-                  </p>
-                  <p>
-                    <span className="text-purple-200">async def</span> <span className="text-blue-200">get_profile</span>():
-                  </p>
-                  <p className="pl-4">
-                    <span className="text-purple-200">return</span> &#123;
-                  </p>
-                  <p className="pl-8">
-                    <span className="text-emerald-300">"name"</span>: <span className="text-emerald-300">"Leonardo Nascimento"</span>,
-                  </p>
-                  <p className="pl-8">
-                    <span className="text-emerald-300">"role"</span>: <span className="text-emerald-300">"Python & FastAPI Dev"</span>,
-                  </p>
-                  <p className="pl-8">
-                    <span className="text-emerald-300">"stack"</span>: [<span className="text-amber-200">"Python 3.12"</span>, <span className="text-amber-200">"FastAPI"</span>, <span className="text-amber-200">"PostgreSQL"</span>],
-                  </p>
-                  <p className="pl-8">
-                    <span className="text-emerald-300">"status"</span>: <span className="text-emerald-300">"200 OK - Active"</span>
-                  </p>
-                  <p className="pl-4">&#125;</p>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.2, delay: 1.0, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p>
+                      <span className="text-purple-200">from</span> <span className="text-white">fastapi</span> <span className="text-purple-200">import</span> <span className="text-indigo-200">FastAPI</span>, <span className="text-indigo-200">Depends</span>
+                    </p>
+                  </motion.div>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.0, delay: 2.2, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p>
+                      <span className="text-purple-200">from</span> <span className="text-white">pydantic</span> <span className="text-purple-200">import</span> <span className="text-indigo-200">BaseModel</span>
+                    </p>
+                  </motion.div>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 0.8, delay: 3.2, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p className="text-slate-300 pt-1"># API FastAPI em Python</p>
+                  </motion.div>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.2, delay: 4.0, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p>
+                      <span className="text-white">app</span> = <span className="text-amber-200">FastAPI</span>(title=<span className="text-emerald-300">"Portfolio API"</span>)
+                    </p>
+                  </motion.div>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.0, delay: 5.2, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p className="pt-1">
+                      <span className="text-purple-200">@app.get</span>(<span className="text-emerald-300">"/api/v1/developer"</span>)
+                    </p>
+                  </motion.div>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.0, delay: 6.2, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p>
+                      <span className="text-purple-200">async def</span> <span className="text-blue-200">get_profile</span>():
+                    </p>
+                  </motion.div>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 0.4, delay: 7.2, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p className="pl-4">
+                      <span className="text-purple-200">return</span> &#123;
+                    </p>
+                  </motion.div>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.2, delay: 7.6, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p className="pl-8">
+                      <span className="text-emerald-300">"name"</span>: <span className="text-emerald-300">"Leonardo Nascimento"</span>,
+                    </p>
+                  </motion.div>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.2, delay: 8.8, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p className="pl-8">
+                      <span className="text-emerald-300">"role"</span>: <span className="text-emerald-300">"Python & FastAPI Dev"</span>,
+                    </p>
+                  </motion.div>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.5, delay: 10.0, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p className="pl-8">
+                      <span className="text-emerald-300">"stack"</span>: [<span className="text-amber-200">"Python 3.12"</span>, <span className="text-amber-200">"FastAPI"</span>, <span className="text-amber-200">"PostgreSQL"</span>],
+                    </p>
+                  </motion.div>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.2, delay: 11.5, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p className="pl-8">
+                      <span className="text-emerald-300">"status"</span>: <span className="text-emerald-300">"200 OK - Active"</span>
+                    </p>
+                  </motion.div>
+                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 0.2, delay: 12.7, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
+                    <p className="pl-4">&#125;</p>
+                  </motion.div>
+                  <motion.div
+                     initial={{ opacity: 0 }}
+                     animate={{ opacity: 1 }}
+                     transition={{ delay: 13.0 }}
+                     className="inline-block mt-1"
+                  >
+                     <motion.div 
+                        animate={{ opacity: [1, 0] }}
+                        transition={{ repeat: Infinity, duration: 0.4, repeatType: "reverse", ease: "easeInOut" }}
+                        className="w-2.5 h-4 bg-emerald-400" 
+                     />
+                  </motion.div>
                 </div>
 
                 <div className="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
