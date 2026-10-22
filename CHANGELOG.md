@@ -4,11 +4,21 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 > **Regra de Projeto**: Toda nova funcionalidade, correção ou alteração relevante deve obrigatoriamente ser registrada neste changelog acompanhada do **código hash do commit Git** correspondente (`7 caracteres ou hash completo`).
 
+## [3.0.0] — 2026-10-22
+
+### 📌 Commit [`70fc57d`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/70fc57d) — `feat(core): consolidação da arquitetura estática v3.0, sincronização de dados e refinamentos de UI/UX`
+
+#### ⚡ Performance & Arquitetura
+- **Transição para Arquitetura Estática (Static-First)**: Remoção definitiva de dependências do Supabase/PostgreSQL e modais administrativos em favor de carregamento instantâneo via [`portfolioData.ts`](file:///c:/Users/Leo-dev/Projeto%20Integrador%20IV-A/src/data/portfolioData.ts).
+- **Sincronização Fiel de Dados**: Incorporação de 100% dos dados reais de projetos, habilidades e configurações de perfil provenientes dos dumps SQL.
+- **Higienização de Repositório**: Remoção dos arquivos transitórios de SQL (`projects_rows.sql`, `site_settings_rows.sql`, `skill_categories_rows.sql`, `skills_rows.sql`) e chaves desnecessárias de banco de dados.
+- **Resiliência de Ativos**: Limpeza de tokens efêmeros de URLs de mídias de projetos e garantia de fallbacks visuais.
+
 ---
 
-## [Unreleased] — 2026-09-30
+## [2.1.0] — 2026-09-30
 
-### 📌 Commit pendente — `docs: rewrite README v2.1 com análise completa do gitingest`
+### 📌 Commit [`a82e984`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/a82e984) — `docs: rewrite README v2.1 com análise completa do gitingest`
 
 #### 📝 Docs
 - **README.md** reescrito completamente (v2.1) após análise profunda via `gitingest` (58 arquivos, ~57.5k tokens):

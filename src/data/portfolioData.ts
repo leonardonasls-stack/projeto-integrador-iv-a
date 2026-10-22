@@ -172,7 +172,7 @@ export const portfolioProjects: Project[] = [
     techs: ['React', 'Tailwind CSS', 'vite JavaScript'],
     githubUrl: undefined,
     demoUrl: 'https://milagres-transparente.vercel.app/',
-    imageUrl: 'https://raw.githubusercontent.com/leonardonasls-stack/milagres/refs/heads/main/src/assets/images/brand/logo_principal.webp?token=GHSAT0AAAAAAEIHHI5SLFG2V2UTLNGVFZIG2V5GCWQ',
+    imageUrl: 'https://raw.githubusercontent.com/leonardonasls-stack/milagres/main/src/assets/images/brand/logo_principal.webp',
     featured: false,
     visible: true,
     position: 2,

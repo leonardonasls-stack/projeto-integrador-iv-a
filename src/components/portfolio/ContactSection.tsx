@@ -269,7 +269,7 @@ export const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold text-xs shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 transition-all disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  className="w-full min-h-[44px] py-3 px-6 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold text-xs shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 transition-all transform active:scale-[0.98] disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                 >
                   {loading ? (
                     <span>Enviando mensagem...</span>

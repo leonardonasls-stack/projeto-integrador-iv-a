@@ -80,11 +80,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
         </div>
       </div>
 
-      {/* Card Action Buttons (IHC Affordance) */}
+      {/* Card Action Buttons (IHC Affordance & Impeccable Design min-h 44px) */}
       <div className="p-6 pt-0 mt-2 flex items-center justify-between border-t border-slate-800/60 pt-4">
         <button
           onClick={() => onSelect(project)}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded px-1"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded px-2 min-h-[44px]"
           aria-label={`Ver detalhes do projeto ${project.title}`}
         >
           <Info className="w-4 h-4" />
@@ -97,7 +97,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400"
               title="GitHub"
               aria-label={`Abrir repositório GitHub do projeto ${project.title}`}
             >
@@ -105,8 +105,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
             </a>
           ) : (
             <div 
-              className="p-2 rounded-lg bg-slate-900/50 text-slate-500 border border-slate-800/50 cursor-not-allowed flex items-center gap-1.5"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-slate-900/50 text-slate-500 border border-slate-800/50 cursor-not-allowed"
               title="Repositório Privado"
+              aria-label="Repositório Privado"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
             </div>
@@ -117,7 +118,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm shadow-indigo-600/30 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm shadow-indigo-600/30 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400"
               title="Ver Demonstração Online"
               aria-label={`Abrir demonstração online do projeto ${project.title}`}
             >
