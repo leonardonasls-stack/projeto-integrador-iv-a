@@ -84,7 +84,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
       <div className="p-6 pt-0 mt-2 flex items-center justify-between border-t border-slate-800/60 pt-4">
         <button
           onClick={() => onSelect(project)}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded px-2 min-h-[44px]"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded px-2 min-h-[44px]"
           aria-label={`Ver detalhes do projeto ${project.title}`}
         >
           <Info className="w-4 h-4" />
@@ -97,7 +97,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
               title="GitHub"
               aria-label={`Abrir repositório GitHub do projeto ${project.title}`}
             >
@@ -118,7 +118,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm shadow-indigo-600/30 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-sm shadow-emerald-600/30 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
               title="Ver Demonstração Online"
               aria-label={`Abrir demonstração online do projeto ${project.title}`}
             >

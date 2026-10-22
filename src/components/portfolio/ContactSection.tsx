@@ -192,14 +192,14 @@ export const ContactSection: React.FC = () => {
                       placeholder="Ex: Maria Santos"
                       required
                       maxLength={80}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 placeholder:text-slate-500"
                     />
                   </div>
 
                   {/* Email Input */}
                   <div className="space-y-1.5">
                     <label htmlFor="contact-email" className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                      <AtSign className="w-3.5 h-3.5 text-indigo-400" />
+                      <AtSign className="w-3.5 h-3.5 text-emerald-400" />
                       <span>Seu E-mail *</span>
                     </label>
                     <input
@@ -211,7 +211,7 @@ export const ContactSection: React.FC = () => {
                       placeholder="seu.email@exemplo.com"
                       required
                       maxLength={200}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 placeholder:text-slate-500"
                     />
                   </div>
 
@@ -220,7 +220,7 @@ export const ContactSection: React.FC = () => {
                 {/* Subject */}
                 <div className="space-y-1.5">
                   <label htmlFor="contact-subject" className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                    <FileText className="w-3.5 h-3.5 text-indigo-400" />
+                    <FileText className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Assunto</span>
                   </label>
                   <input
@@ -231,14 +231,14 @@ export const ContactSection: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Ex: Proposta de Colaboração"
                     maxLength={120}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 placeholder:text-slate-500"
                   />
                 </div>
 
                 {/* Message */}
                 <div className="space-y-1.5">
                   <label htmlFor="contact-message" className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                    <MessageSquare className="w-3.5 h-3.5 text-indigo-400" />
+                    <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Sua Mensagem *</span>
                   </label>
                   <textarea
@@ -250,7 +250,7 @@ export const ContactSection: React.FC = () => {
                     placeholder="Escreva sua mensagem ou comentários sobre a aplicação..."
                     required
                     maxLength={2000}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500 resize-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 placeholder:text-slate-500 resize-none"
                   />
                 </div>
 
@@ -269,7 +269,7 @@ export const ContactSection: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full min-h-[44px] py-3 px-6 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold text-xs shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 transition-all transform active:scale-[0.98] disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  className="w-full min-h-[44px] py-3 px-6 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold text-xs shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 transition-all transform active:scale-[0.98] disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                 >
                   {loading ? (
                     <span>Enviando mensagem...</span>

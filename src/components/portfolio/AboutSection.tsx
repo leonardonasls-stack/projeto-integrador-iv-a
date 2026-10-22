@@ -21,12 +21,12 @@ export const AboutSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-300 text-xs font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">
             <User className="w-3.5 h-3.5" />
-            <span>Apresentação & Formação</span>
+            <span>Apresentação & Trajetória</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Sobre o Desenvolvedor
+            Sobre Mim
           </h2>
           <p className="text-slate-400 text-base">
             Desenvolvedor apaixonado por resolver problemas reais com código limpo, arquitetura sólida e experiências de usuário que realmente funcionam.
@@ -40,13 +40,13 @@ export const AboutSection: React.FC = () => {
           <div className="lg:col-span-7 glass-panel p-8 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-6 text-left">
             <div className="space-y-4">
               <div className="flex items-center gap-4 border-b border-slate-800 pb-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-indigo-500/20">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-emerald-500/20">
                   {initials}
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white">{profile.name}</h3>
                   <p className="text-sm text-emerald-400 font-medium">{profile.role}</p>
-                  <p className="text-xs text-slate-400">Python &amp; FastAPI Developer</p>
+                  <p className="text-xs text-slate-400">Python &amp; React Developer</p>
                 </div>
               </div>
 

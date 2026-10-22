@@ -2,30 +2,30 @@ import type { Project, SkillCategory, ProfileData } from '../types';
 
 export const portfolioProfile: ProfileData = {
   name: 'Leonardo Nascimento',
-  role: 'Desenvolvedor Backend Python',
-  statusBadge: 'Estudante de ADS no CESMAC | Python & FastAPI',
+  role: 'Desenvolvedor Full Stack | Python & React',
+  statusBadge: 'Desenvolvedor de Software | Python, FastAPI & React',
   heroTitlePrefix: 'Desenvolvedor de Software',
   heroTitleHighlight: 'Backend Python & Frontend Web',
   heroDescription:
-    'Olá! Sou Leonardo Nascimento, estudante de Análise e Desenvolvimento de Sistemas no CESMAC. Crio APIs RESTful de alta performance e microsserviços com Python (FastAPI), além de desenvolver interfaces e aplicações web modernas e responsivas com TypeScript, JavaScript e React. Trabalho com modelagem de dados, Docker e integrações assíncronas, sempre com foco em arquitetura eficiente, código limpo e sistemas altamente escaláveis.',
+    'Olá! Sou Leonardo Nascimento, desenvolvedor Full Stack e graduando em Análise e Desenvolvimento de Sistemas pelo CESMAC. Foco na criação de aplicações web modernas, eficientes e escaláveis, desenvolvendo APIs RESTful de alta performance com Python e FastAPI, além de interfaces responsivas e interativas com TypeScript e React. Priorizo arquitetura limpa, conteinerização com Docker e uma excelente experiência de usuário.',
   aboutBio:
-    'Estudante de Análise e Desenvolvimento de Sistemas no CESMAC com foco prático no ecossistema Python com FastAPI. Desenvolvo APIs RESTful de alta performance, aplicando arquitetura limpa, validação estrita de dados com Pydantic v2 e integração eficiente com soluções web.',
+    'Desenvolvedor com sólida vivência prática no ecossistema Python com FastAPI e desenvolvimento web com React e TypeScript. Graduando em Análise e Desenvolvimento de Sistemas pelo CESMAC, aplico conceitos de arquitetura limpa, validação estrita com Pydantic v2, bancos relacionais e integração full stack de ponta a ponta.',
   academicTitle: 'Análise e Desenvolvimento de Sistemas',
   academicInstitution: 'CESMAC - Centro Universitário CESMAC',
-  academicPeriod: '4º Período de (2024 - Presente)',
+  academicPeriod: '4º Período (2024 - Presente)',
   techPillar1Title: 'Python & FastAPI',
   techPillar1Desc: 'Construção de APIs assíncronas de alta concorrência com Pydantic v2 e SQLAlchemy.',
   techPillar2Title: 'Interfaces & Usabilidade',
   techPillar2Desc: 'Integração com frontends React/TypeScript mantendo excelente experiência de usuário.',
   email: 'leonardonasls@gmail.com',
-  githubUrl: 'https://github.com/leonardonasls',
-  linkedinUrl: 'https://linkedin.com/in/leonardonasls',
+  githubUrl: 'https://github.com/leonardonasls-stack',
+  linkedinUrl: 'https://www.linkedin.com/in/leonardolnascimento',
   projectsTitle: 'Projetos em Destaque',
-  projectsSubtitle: 'Uma seleção dos meus melhores trabalhos.',
-  skillsTitle: 'Tecnologias & Princípios de Usabilidade',
-  skillsSubtitle: 'Stack tecnológica completa combinada com boas práticas de UX.',
+  projectsSubtitle: 'Soluções desenvolvidas com foco em arquitetura escalável, APIs robustas e interfaces intuitivas.',
+  skillsTitle: 'Tecnologias & Ferramentas',
+  skillsSubtitle: 'Stack técnica focada em desenvolvimento ágil, performance e boas práticas de engenharia de software.',
   contactTitle: 'Entre em Contato',
-  contactSubtitle: 'Vamos conversar sobre projetos, vagas ou apenas trocar ideias sobre tecnologia.',
+  contactSubtitle: 'Vamos conversar sobre novas oportunidades, parcerias ou projetos desafiadores.',
   footerText: '© 2026 Leonardo Nascimento. Todos os direitos reservados.'
 };
 

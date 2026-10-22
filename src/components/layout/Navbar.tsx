@@ -62,18 +62,18 @@ export const Navbar: React.FC = () => {
             e.preventDefault();
             scrollTo('inicio');
           }}
-          className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded-lg p-1"
+          className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-lg p-1"
           aria-label="Ir para o início do portfólio"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
             <Code2 className="w-5 h-5" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-lg text-white tracking-tight leading-none group-hover:text-indigo-400 transition-colors">
+            <span className="font-bold text-lg text-white tracking-tight leading-none group-hover:text-emerald-400 transition-colors">
               {profile.name || 'Leonardo Nascimento'}
             </span>
             <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase">
-              {profile.role || 'Python & FastAPI Dev'}
+              {profile.role || 'Full Stack Python & React'}
             </span>
           </div>
         </a>
@@ -86,9 +86,9 @@ export const Navbar: React.FC = () => {
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
-                className={`px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 ${
+                className={`px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 ${
                   isActive
-                    ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/30 font-semibold'
+                    ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-sm shadow-emerald-500/30 font-semibold'
                     : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
                 }`}
                 aria-current={isActive ? 'page' : undefined}
@@ -114,7 +114,7 @@ export const Navbar: React.FC = () => {
         <div className="flex md:hidden items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-slate-300 hover:text-white rounded-lg bg-slate-800/80 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="p-2 text-slate-300 hover:text-white rounded-lg bg-slate-800/80 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
             aria-label={mobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
             aria-expanded={mobileMenuOpen}
           >
@@ -132,7 +132,7 @@ export const Navbar: React.FC = () => {
               onClick={() => scrollTo(link.id)}
               className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 activeSection === link.id
-                  ? 'bg-indigo-600 text-white font-semibold'
+                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold'
                   : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
               }`}
             >
