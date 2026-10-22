@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ToastProvider } from './context/ToastContext';
-import { AuthProvider } from './context/AuthContext';
 import { ProjectProvider } from './context/ProjectContext';
 import { ProfileProvider } from './context/ProfileContext';
 import { SkillProvider } from './context/SkillContext';
@@ -15,18 +14,13 @@ import { ContactSection } from './components/portfolio/ContactSection';
 import { Footer } from './components/layout/Footer';
 import { CookieConsent } from './components/ui/CookieConsent';
 
-const LoginModal = React.lazy(() => import('./components/admin/LoginModal').then(module => ({ default: module.LoginModal })));
-const AdminDashboardModal = React.lazy(() => import('./components/admin/AdminDashboardModal').then(module => ({ default: module.AdminDashboardModal })));
-
 const PortfolioApp: React.FC = () => {
-  const [isAdminDashboardOpen, setIsAdminDashboardOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-indigo-500 selection:text-white flex flex-col font-sans">
       <ToastContainer />
       
       {/* Navigation Header */}
-      <Navbar onOpenAdminDashboard={() => setIsAdminDashboardOpen(true)} />
+      <Navbar />
 
       {/* Main Sections */}
       <main className="flex-grow">
@@ -42,13 +36,6 @@ const PortfolioApp: React.FC = () => {
 
       {/* Modais & Overlays */}
       <CookieConsent />
-      <React.Suspense fallback={null}>
-        <LoginModal />
-        <AdminDashboardModal
-          isOpen={isAdminDashboardOpen}
-          onClose={() => setIsAdminDashboardOpen(false)}
-        />
-      </React.Suspense>
     </div>
   );
 };
@@ -56,15 +43,13 @@ const PortfolioApp: React.FC = () => {
 export default function App() {
   return (
     <ToastProvider>
-      <AuthProvider>
-        <ProjectProvider>
-          <SkillProvider>
-            <ProfileProvider>
-              <PortfolioApp />
-            </ProfileProvider>
-          </SkillProvider>
-        </ProjectProvider>
-      </AuthProvider>
+      <ProjectProvider>
+        <SkillProvider>
+          <ProfileProvider>
+            <PortfolioApp />
+          </ProfileProvider>
+        </SkillProvider>
+      </ProjectProvider>
     </ToastProvider>
   );
 }

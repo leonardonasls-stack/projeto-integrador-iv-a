@@ -36,7 +36,7 @@ export const Hero: React.FC = () => {
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950 border border-emerald-500/40 text-emerald-50 text-xs font-semibold backdrop-blur-md"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Disponível para Novas Oportunidades & Projetos</span>
+              <span>{profile.statusBadge || 'Disponível para Novas Oportunidades & Projetos'}</span>
             </motion.div>
 
             {/* Main Headline */}

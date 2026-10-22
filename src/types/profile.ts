@@ -14,7 +14,7 @@ export interface ProfileData {
   techPillar2Title: string;
   techPillar2Desc: string;
   
-  // Novos campos adicionados (Fase 2 - CMS Supabase)
+  // Campos de apresentação e contato
   email: string;
   githubUrl: string;
   linkedinUrl: string;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useProjects } from '../../context/ProjectContext';
+import { useProfile } from '../../context/ProfileContext';
 import type { Project, ProjectCategory } from '../../types';
 import { ProjectCard } from './ProjectCard';
 import { ProjectModal } from './ProjectModal';
@@ -7,6 +8,7 @@ import { FolderGit2, Search, Filter, Sparkles, X } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 
 export const ProjectGrid: React.FC = () => {
+  const { profile } = useProfile();
   const {
     selectedCategory,
     setSelectedCategory,
@@ -38,10 +40,10 @@ export const ProjectGrid: React.FC = () => {
             <span>Portfólio Interativo</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Projetos em Destaque
+            {profile.projectsTitle || 'Projetos em Destaque'}
           </h2>
           <p className="text-slate-400 text-base">
-            Explore as aplicações desenvolvidas. Utilize a busca ou os filtros para encontrar projetos por categoria ou tecnologias utilizadas.
+            {profile.projectsSubtitle || 'Uma seleção dos meus melhores trabalhos.'}
           </p>
         </div>
 

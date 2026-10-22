@@ -1,0 +1,1 @@
+INSERT INTO public.skill_categories (id, title, icon, color, "position") VALUES ('607d3a6f-2fb4-4ed4-beca-b5a8d8d0b178', 'Backend & Ecossistema Python', 'Cpu', 'emerald', 1), ('719b2a1d-4fab-44e2-bf17-dffa1c324f6c', 'Frontend & UI', 'Layers', 'indigo', 0);

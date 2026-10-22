@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
 import { useProfile } from '../../context/ProfileContext';
-import { Code2, ShieldCheck, LogOut, Menu, X, PlusCircle } from 'lucide-react';
+import { Code2, Menu, X, ArrowUpRight } from 'lucide-react';
 
-interface NavbarProps {
-  onOpenAdminDashboard: () => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminDashboard }) => {
-  const { user, setIsLoginModalOpen, logout } = useAuth();
+export const Navbar: React.FC = () => {
   const { profile } = useProfile();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -105,53 +99,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminDashboard }) => {
           })}
         </nav>
 
-        {/* Right Action Controls (Admin / Mode) */}
+        {/* Right Action Button (Contato Rápido) */}
         <div className="hidden lg:flex items-center gap-3">
-          {user.isLoggedIn ? (
-            <div className="flex items-center gap-2">
-              <button
-                onClick={onOpenAdminDashboard}
-                className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-600/30 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                title="Abrir Dashboard de Gerenciamento"
-              >
-                <PlusCircle className="w-4 h-4 text-emerald-400" />
-                <span>Dashboard Admin</span>
-              </button>
-
-              <button
-                onClick={logout}
-                className="p-2 text-slate-400 hover:text-rose-400 rounded-lg hover:bg-slate-800/80 transition-colors focus:outline-none focus:ring-2 focus:ring-rose-400"
-                title="Sair do modo Admin"
-                aria-label="Logout do Modo Administrador"
-              >
-                <LogOut className="w-4 h-4" />
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => setIsLoginModalOpen(true)}
-              className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              title="Área Restrita — Acesso Administrativo"
-            >
-              <ShieldCheck className="w-4 h-4 text-indigo-400" />
-              <span>Área Restrita</span>
-            </button>
-          )}
-
+          <button
+            onClick={() => scrollTo('contato')}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-600/30 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400"
+          >
+            <span>Falar Comigo</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </button>
         </div>
 
         {/* Mobile Menu Toggle Button */}
         <div className="flex md:hidden items-center gap-2">
-          {!user.isLoggedIn && (
-            <button
-              onClick={() => setIsLoginModalOpen(true)}
-              className="p-2 rounded-lg bg-slate-800 text-indigo-400 border border-slate-700"
-              aria-label="Abrir Login Admin"
-            >
-              <ShieldCheck className="w-4 h-4" />
-            </button>
-          )}
-
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 text-slate-300 hover:text-white rounded-lg bg-slate-800/80 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
@@ -179,18 +139,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminDashboard }) => {
               {link.label}
             </button>
           ))}
-          {user.isLoggedIn && (
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenAdminDashboard();
-              }}
-              className="w-full text-left px-4 py-2.5 rounded-lg text-sm font-semibold bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-2"
-            >
-              <PlusCircle className="w-4 h-4" />
-              <span>Abrir Gerenciador de Projetos</span>
-            </button>
-          )}
+          <button
+            onClick={() => scrollTo('contato')}
+            className="w-full text-left px-4 py-2.5 rounded-lg text-sm font-semibold bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 flex items-center justify-between"
+          >
+            <span>Falar Comigo</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </button>
         </div>
       )}
     </header>
