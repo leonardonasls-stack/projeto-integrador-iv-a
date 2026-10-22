@@ -17,11 +17,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3 }}
-      className="glass-card rounded-2xl overflow-hidden flex flex-col justify-between text-left group relative border border-slate-800"
+      className="bento-card rounded-3xl overflow-hidden flex flex-col justify-between text-left group relative border border-white/5 hover:border-violet-500/40"
     >
       <div>
         {/* Project Thumbnail Image with Category Badge */}
-        <div className="relative h-48 w-full overflow-hidden bg-slate-900">
+        <div className="relative h-52 w-full overflow-hidden bg-slate-950">
           <img
             src={project.imageUrl}
             alt={`Captura de tela do projeto ${project.title}`}
@@ -31,18 +31,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#030712] via-[#030712]/40 to-transparent" />
           
           {/* Category Tag */}
-          <div className="absolute top-3 left-3">
-            <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-slate-950/80 backdrop-blur-md text-indigo-300 border border-indigo-500/30 shadow-md">
+          <div className="absolute top-3.5 left-3.5">
+            <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-slate-950/80 backdrop-blur-md text-sky-300 border border-sky-500/30 shadow-md">
               {project.category}
             </span>
           </div>
 
           {/* Featured Badge */}
           {project.featured && (
-            <div className="absolute top-3 right-3">
+            <div className="absolute top-3.5 right-3.5">
               <span className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/20 backdrop-blur-md text-amber-300 border border-amber-500/40">
                 <Star className="w-3 h-3 fill-amber-300 text-amber-300" />
                 <span>Destaque</span>
@@ -54,11 +54,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
         {/* Card Content */}
         <div className="p-6 space-y-3">
           <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">
-            <Calendar className="w-3.5 h-3.5" />
+            <Calendar className="w-3.5 h-3.5 text-violet-400" />
             <span>{project.createdAt}</span>
           </div>
 
-          <h3 className="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors line-clamp-1">
+          <h3 className="text-xl font-bold text-white group-hover:text-violet-300 transition-colors line-clamp-1">
             {project.title}
           </h3>
 
@@ -71,7 +71,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
             {project.techs.map((tech, idx) => (
               <span
                 key={idx}
-                className="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-800/80 text-slate-300 border border-slate-700/60"
+                className="px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-medium bg-slate-900/80 text-violet-300 border border-white/5"
               >
                 {tech}
               </span>
@@ -80,11 +80,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
         </div>
       </div>
 
-      {/* Card Action Buttons (IHC Affordance & Impeccable Design min-h 44px) */}
-      <div className="p-6 pt-0 mt-2 flex items-center justify-between border-t border-slate-800/60 pt-4">
+      {/* Card Action Buttons */}
+      <div className="px-6 pb-6 pt-4 mt-2 flex items-center justify-between border-t border-white/5">
         <button
           onClick={() => onSelect(project)}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded px-2 min-h-[44px]"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-violet-400 hover:text-violet-300 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-400 rounded px-2 min-h-11"
           aria-label={`Ver detalhes do projeto ${project.title}`}
         >
           <Info className="w-4 h-4" />
@@ -97,7 +97,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
+              className="min-w-10 min-h-10 flex items-center justify-center rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-400"
               title="GitHub"
               aria-label={`Abrir repositório GitHub do projeto ${project.title}`}
             >
@@ -105,7 +105,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
             </a>
           ) : (
             <div 
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-slate-900/50 text-slate-500 border border-slate-800/50 cursor-not-allowed"
+              className="min-w-10 min-h-10 flex items-center justify-center rounded-xl bg-slate-900/40 text-slate-600 border border-white/5 cursor-not-allowed"
               title="Repositório Privado"
               aria-label="Repositório Privado"
             >
@@ -118,11 +118,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-sm shadow-emerald-600/30 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
+              className="min-w-10 min-h-10 px-3 flex items-center justify-center rounded-xl bg-linear-to-r from-violet-600 to-sky-500 hover:from-violet-500 hover:to-sky-400 text-white shadow-md shadow-violet-600/30 transition-all focus:outline-none focus:ring-2 focus:ring-violet-400 text-xs font-semibold gap-1.5"
               title="Ver Demonstração Online"
               aria-label={`Abrir demonstração online do projeto ${project.title}`}
             >
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Demo</span>
             </a>
           )}
         </div>

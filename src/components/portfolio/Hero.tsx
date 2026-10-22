@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Mail, Download, Sparkles, CheckCircle2, Layout, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Mail, CheckCircle2, Layout, ShieldCheck } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../ui/SocialIcons';
 import { motion } from 'framer-motion';
 import { useProfile } from '../../context/ProfileContext';
@@ -17,120 +17,68 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section id="inicio" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#090d16]">
-      {/* Background Decorative Gradients */}
-      <div aria-hidden="true" className="absolute top-1/4 right-0 w-[400px] h-[300px] bg-indigo-600/5 blur-[120px] rounded-full pointer-events-none" />
-      <div aria-hidden="true" className="absolute top-1/3 right-10 w-[300px] h-[300px] bg-purple-600/5 blur-[100px] rounded-full pointer-events-none" />
+    <section id="inicio" className="relative pt-32 pb-20 md:pt-40 md:pb-24 overflow-hidden">
+      {/* Background Cyber Glow Gradients */}
+      <div aria-hidden="true" className="absolute top-1/4 left-1/2 -translate-x-1/2 w-175 h-87.5 bg-linear-to-r from-violet-600/15 via-indigo-600/10 to-sky-500/15 blur-[140px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        {/* Bento Grid Container */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
 
-          {/* Main Text Content (7 columns) */}
-          <div className="lg:col-span-7 space-y-6 text-left">
-
-            {/* Status Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950 border border-emerald-500/40 text-emerald-50 text-xs font-semibold backdrop-blur-md"
-            >
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{profile.statusBadge || 'Disponível para Novas Oportunidades & Projetos'}</span>
-            </motion.div>
-
-            {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]"
-            >
-              {profile.heroTitlePrefix || 'Desenvolvedor de Software'}{' '}
-              <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">
-                {profile.heroTitleHighlight || 'Backend Python & Frontend Web'}
-              </span>
-            </motion.h1>
-
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg text-slate-100 max-w-2xl leading-relaxed font-normal"
-            >
-              {profile.heroDescription}
-            </motion.p>
-
-            {/* Highlights / Badges */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap gap-3 pt-2 text-sm text-white font-medium"
-            >
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800">
-                <CheckCircle2 className="w-4 h-4 text-emerald-300" aria-hidden="true" />
-                <span className="text-white">APIs RESTful (Async/Await)</span>
+          {/* Bento Tile 1: Main Presentation & Headline (8 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="md:col-span-12 lg:col-span-7 bento-card p-8 md:p-10 rounded-3xl flex flex-col justify-between text-left relative"
+          >
+            <div className="space-y-6">
+              {/* Status Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-950/60 border border-violet-500/30 text-violet-200 text-xs font-semibold backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse shadow-sm shadow-sky-400" />
+                <span>{profile.statusBadge || 'Desenvolvedor Full Stack | Python & React'}</span>
               </div>
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800">
-                <Layout className="w-4 h-4 text-teal-300" aria-hidden="true" />
-                <span className="text-white">Validação com Pydantic v2</span>
-              </div>
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800">
-                <ShieldCheck className="w-4 h-4 text-indigo-300" aria-hidden="true" />
-                <span className="text-white">Arquitetura Limpa & Swagger</span>
-              </div>
-            </motion.div>
 
-            {/* Call to Actions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-4 pt-4"
-            >
+              {/* Headline */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+                {profile.heroTitlePrefix || 'Desenvolvedor de Software'}{' '}
+                <span className="bg-linear-to-r from-violet-400 via-indigo-300 to-sky-400 bg-clip-text text-transparent">
+                  {profile.heroTitleHighlight || 'Backend Python & Frontend Web'}
+                </span>
+              </h1>
+
+              {/* Bio Description */}
+              <p className="text-base sm:text-lg text-slate-300 max-w-xl leading-relaxed font-normal">
+                {profile.heroDescription}
+              </p>
+            </div>
+
+            {/* Action Buttons & Socials */}
+            <div className="pt-8 flex flex-wrap items-center gap-4 border-t border-white/5 mt-6">
               <button
                 onClick={scrollToProjetos}
-                className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-semibold text-sm shadow-lg shadow-emerald-600/20 flex items-center gap-2 group transition-all transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-2xl bg-linear-to-r from-violet-600 via-indigo-600 to-sky-500 hover:from-violet-500 hover:to-sky-400 text-white font-semibold text-xs tracking-wide shadow-lg shadow-violet-600/30 flex items-center gap-2 group transition-all transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-violet-400"
               >
                 <span>Explorar Projetos</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button
                 onClick={scrollToContato}
-                className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 hover:from-slate-800 hover:to-slate-900 text-white font-semibold text-sm border border-slate-700 transition-colors flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-xs border border-white/10 transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-violet-400"
               >
-                <Mail className="w-4 h-4 text-emerald-300" aria-hidden="true" />
+                <Mail className="w-4 h-4 text-sky-400" />
                 <span>Entrar em Contato</span>
               </button>
 
-              <button
-                onClick={() => alert('Em breve! O currículo completo estará disponível para download.')}
-                className="p-3.5 rounded-xl bg-slate-950 text-slate-100 hover:text-white border border-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                title="Baixar Currículo (PDF)"
-                aria-label="Baixar Currículo em formato PDF"
-              >
-                <Download className="w-4 h-4" aria-hidden="true" />
-              </button>
-            </motion.div>
-
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="inline-flex items-center gap-4 pt-4 text-xs"
-            >
-              <div className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800">
-                <span className="text-white font-semibold">Conecte-se:</span>
+              <div className="flex items-center gap-2 ml-auto">
                 <a
                   href={profile.githubUrl || "https://github.com/leonardonasls-stack"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white transition-colors"
-                  aria-label="Perfil no GitHub"
+                  className="p-3 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/10 transition-colors"
+                  aria-label="GitHub"
                 >
                   <GithubIcon className="w-4 h-4" />
                 </a>
@@ -138,117 +86,126 @@ export const Hero: React.FC = () => {
                   href={profile.linkedinUrl || "https://linkedin.com"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white transition-colors"
-                  aria-label="Perfil no LinkedIn"
+                  className="p-3 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/10 transition-colors"
+                  aria-label="LinkedIn"
                 >
                   <LinkedinIcon className="w-4 h-4" />
                 </a>
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
 
-          </div>
-
-          {/* Hero Visual Display (5 columns) */}
-          <div className="lg:col-span-5 relative">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative mx-auto max-w-sm lg:max-w-none"
-            >
-              <div style={{ backgroundColor: '#020617' }} className="p-6 rounded-2xl border border-slate-800 shadow-2xl space-y-4 text-left relative overflow-hidden">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-rose-500" />
-                    <div className="w-3 h-3 rounded-full bg-amber-500" />
-                    <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                  </div>
-                  <span className="text-xs font-mono text-emerald-300 font-semibold">main_api.py</span>
+          {/* Bento Tile 2: Live API Terminal (5 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="md:col-span-12 lg:col-span-5 bento-card p-6 rounded-3xl flex flex-col justify-between text-left font-mono relative overflow-hidden"
+          >
+            {/* Terminal Header */}
+            <div>
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-rose-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
                 </div>
-
-                <div className="font-mono text-xs text-slate-200 space-y-1.5 leading-relaxed p-4 rounded-xl border border-slate-800/80">
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.2, delay: 1.0, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p>
-                      <span className="text-purple-200">from</span> <span className="text-white">fastapi</span> <span className="text-purple-200">import</span> <span className="text-indigo-200">FastAPI</span>, <span className="text-indigo-200">Depends</span>
-                    </p>
-                  </motion.div>
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.0, delay: 2.2, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p>
-                      <span className="text-purple-200">from</span> <span className="text-white">pydantic</span> <span className="text-purple-200">import</span> <span className="text-indigo-200">BaseModel</span>
-                    </p>
-                  </motion.div>
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 0.8, delay: 3.2, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p className="text-slate-300 pt-1"># API FastAPI em Python</p>
-                  </motion.div>
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.2, delay: 4.0, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p>
-                      <span className="text-white">app</span> = <span className="text-amber-200">FastAPI</span>(title=<span className="text-emerald-300">"Portfolio API"</span>)
-                    </p>
-                  </motion.div>
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.0, delay: 5.2, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p className="pt-1">
-                      <span className="text-purple-200">@app.get</span>(<span className="text-emerald-300">"/api/v1/developer"</span>)
-                    </p>
-                  </motion.div>
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.0, delay: 6.2, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p>
-                      <span className="text-purple-200">async def</span> <span className="text-blue-200">get_profile</span>():
-                    </p>
-                  </motion.div>
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 0.4, delay: 7.2, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p className="pl-4">
-                      <span className="text-purple-200">return</span> &#123;
-                    </p>
-                  </motion.div>
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.2, delay: 7.6, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p className="pl-8">
-                      <span className="text-emerald-300">"name"</span>: <span className="text-emerald-300">"Leonardo Nascimento"</span>,
-                    </p>
-                  </motion.div>
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.2, delay: 8.8, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p className="pl-8">
-                      <span className="text-emerald-300">"role"</span>: <span className="text-emerald-300">"Python & FastAPI Dev"</span>,
-                    </p>
-                  </motion.div>
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.5, delay: 10.0, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p className="pl-8">
-                      <span className="text-emerald-300">"stack"</span>: [<span className="text-amber-200">"Python 3.12"</span>, <span className="text-amber-200">"FastAPI"</span>, <span className="text-amber-200">"PostgreSQL"</span>],
-                    </p>
-                  </motion.div>
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 1.2, delay: 11.5, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p className="pl-8">
-                      <span className="text-emerald-300">"status"</span>: <span className="text-emerald-300">"200 OK - Active"</span>
-                    </p>
-                  </motion.div>
-                  <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ duration: 0.2, delay: 12.7, ease: "linear" }} className="overflow-hidden whitespace-nowrap">
-                    <p className="pl-4">&#125;</p>
-                  </motion.div>
-                  <motion.div
-                     initial={{ opacity: 0 }}
-                     animate={{ opacity: 1 }}
-                     transition={{ delay: 13.0 }}
-                     className="inline-block mt-1"
-                  >
-                     <motion.div 
-                        animate={{ opacity: [1, 0] }}
-                        transition={{ repeat: Infinity, duration: 0.4, repeatType: "reverse", ease: "easeInOut" }}
-                        className="w-2.5 h-4 bg-emerald-400" 
-                     />
-                  </motion.div>
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-emerald-300" aria-hidden="true" />
-                    <span>Focus: <strong className="text-white">FastAPI / Python</strong></span>
-                  </div>
-                  <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-semibold border border-emerald-800">
-                    Open to Work
-                  </span>
+                <div className="flex items-center gap-2 text-[11px] text-slate-400">
+                  <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
+                  <span>api_server.py</span>
                 </div>
               </div>
-            </motion.div>
-          </div>
+
+              {/* Code Snippet */}
+              <div className="space-y-2 text-xs text-slate-300 leading-relaxed overflow-x-auto">
+                <p>
+                  <span className="text-violet-400">from</span> <span className="text-white">fastapi</span> <span className="text-violet-400">import</span> <span className="text-sky-300">FastAPI</span>
+                </p>
+                <p>
+                  <span className="text-violet-400">from</span> <span className="text-white">pydantic</span> <span className="text-violet-400">import</span> <span className="text-sky-300">BaseModel</span>
+                </p>
+                <p className="text-slate-500 pt-1"># Inicialização da API assíncrona</p>
+                <p>
+                  <span className="text-sky-300">app</span> = <span className="text-amber-300">FastAPI</span>(title=<span className="text-emerald-400">"Portfolio API"</span>, version=<span className="text-emerald-400">"2.0"</span>)
+                </p>
+                <p className="pt-2">
+                  <span className="text-violet-400">@app.get</span>(<span className="text-emerald-400">"/api/v1/developer"</span>)
+                </p>
+                <p>
+                  <span className="text-violet-400">async def</span> <span className="text-sky-400">get_profile</span>():
+                </p>
+                <p className="pl-4">
+                  <span className="text-violet-400">return</span> &#123;
+                </p>
+                <p className="pl-8 text-slate-200">
+                  <span className="text-sky-300">"developer"</span>: <span className="text-emerald-400">"Leonardo Nascimento"</span>,
+                </p>
+                <p className="pl-8 text-slate-200">
+                  <span className="text-sky-300">"focus"</span>: [<span className="text-amber-300">"FastAPI"</span>, <span className="text-amber-300">"React 19"</span>, <span className="text-amber-300">"Docker"</span>],
+                </p>
+                <p className="pl-8 text-slate-200">
+                  <span className="text-sky-300">"status"</span>: <span className="text-emerald-400">"200 OK · Available"</span>
+                </p>
+                <p className="pl-4">&#125;</p>
+              </div>
+            </div>
+
+            {/* Terminal Footer Status */}
+            <div className="pt-4 mt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+              <span className="text-slate-400">Uvicorn running on <span className="text-sky-400">0.0.0.0:8000</span></span>
+              <span className="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800 text-[10px]">
+                Async Ready
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Bento Tile 3: Key Pillar 1 - FastAPI & Async Architecture (4 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="md:col-span-4 bento-card p-6 rounded-3xl text-left space-y-3"
+          >
+            <div className="w-10 h-10 rounded-2xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center text-violet-400">
+              <CheckCircle2 className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white">APIs RESTful de Alta Performance</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Desenvolvimento de rotas assíncronas com FastAPI, schemas tipados com Pydantic v2 e persistência relacional com SQLAlchemy.
+            </p>
+          </motion.div>
+
+          {/* Bento Tile 4: Key Pillar 2 - Modern Frontend (4 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="md:col-span-4 bento-card p-6 rounded-3xl text-left space-y-3"
+          >
+            <div className="w-10 h-10 rounded-2xl bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-sky-400">
+              <Layout className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white">Interfaces Reativas &amp; Design System</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Criação de SPAs modernas com React 19, TypeScript rigoroso, estilização com Tailwind CSS e animações com Framer Motion.
+            </p>
+          </motion.div>
+
+          {/* Bento Tile 5: Key Pillar 3 - Clean Architecture (4 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="md:col-span-4 bento-card p-6 rounded-3xl text-left space-y-3"
+          >
+            <div className="w-10 h-10 rounded-2xl bg-fuchsia-500/20 border border-fuchsia-500/30 flex items-center justify-center text-fuchsia-400">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white">Qualidade &amp; Arquitetura Limpa</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Aplicações estruturadas, microsserviços conteinerizados com Docker e documentação Swagger/OpenAPI automatizada.
+            </p>
+          </motion.div>
 
         </div>
       </div>

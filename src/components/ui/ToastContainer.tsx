@@ -8,7 +8,7 @@ export const ToastContainer: React.FC = () => {
 
   return (
     <div 
-      className="fixed bottom-5 right-5 z-[100] flex flex-col gap-3 max-w-md w-full px-4 pointer-events-none"
+      className="fixed bottom-5 right-5 z-100 flex flex-col gap-3 max-w-md w-full px-4 pointer-events-none"
       aria-live="polite"
       aria-atomic="true"
     >

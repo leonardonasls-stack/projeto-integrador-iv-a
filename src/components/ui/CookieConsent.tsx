@@ -7,7 +7,7 @@ const Toggle: React.FC<{ checked: boolean; onChange?: (checked: boolean) => void
     aria-checked={checked}
     disabled={disabled}
     onClick={() => !disabled && onChange && onChange(!checked)}
-    className={`relative inline-flex h-5 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+    className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
       checked ? 'bg-indigo-500' : 'bg-slate-700'
     } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
   >
@@ -76,10 +76,10 @@ export const CookieConsent: React.FC = () => {
   return (
     <>
       {isVisible && (
-        <div className="fixed bottom-6 left-6 z-50 w-full max-w-[360px] bg-slate-950/70 backdrop-blur-md border border-slate-800/50 rounded-2xl shadow-2xl animate-fade-in-up overflow-hidden">
+        <div className="fixed bottom-6 left-6 z-50 w-full max-w-90 bg-slate-950/70 backdrop-blur-md border border-slate-800/50 rounded-2xl shadow-2xl animate-fade-in-up overflow-hidden">
           <div className="p-5">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-full bg-indigo-500/10 flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-full bg-indigo-500/10 flex items-center justify-center shrink-0">
                 <svg className="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -125,7 +125,7 @@ export const CookieConsent: React.FC = () => {
       )}
 
       {isModalOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
+        <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
           <div 
             className="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col animate-scale-in overflow-hidden"
             role="dialog"

@@ -30,25 +30,28 @@ export const ProjectGrid: React.FC = () => {
   ];
 
   return (
-    <section id="projetos" className="py-20 bg-slate-950 relative border-t border-slate-900">
+    <section id="projetos" className="py-24 relative overflow-hidden">
+      {/* Background Glow */}
+      <div aria-hidden="true" className="absolute top-1/3 left-10 w-125 h-87.5 bg-sky-500/10 blur-[140px] rounded-full pointer-events-none -z-10" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">
-            <FolderGit2 className="w-3.5 h-3.5" />
-            <span>Portfólio Interativo</span>
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-950/60 border border-violet-500/30 text-violet-300 text-xs font-semibold">
+            <FolderGit2 className="w-3.5 h-3.5 text-sky-400" />
+            <span>Showcase de Engenharia</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             {profile.projectsTitle || 'Projetos em Destaque'}
           </h2>
-          <p className="text-slate-400 text-base">
-            {profile.projectsSubtitle || 'Uma seleção dos meus melhores trabalhos.'}
+          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+            {profile.projectsSubtitle || 'Aplicações completas, APIs RESTful e interfaces desenvolvidas com foco em performance, arquitetura escalável e experiência do usuário.'}
           </p>
         </div>
 
         {/* Search & Filter Controls Bar */}
-        <div className="glass-panel p-4 rounded-2xl border border-slate-800 mb-10 space-y-4 md:space-y-0 md:flex md:items-center md:justify-between gap-4">
+        <div className="bento-card p-3 rounded-2xl mb-12 space-y-3 md:space-y-0 md:flex md:items-center md:justify-between gap-4">
           
           {/* Search Input */}
           <div className="relative flex-1 max-w-md">
@@ -57,8 +60,8 @@ export const ProjectGrid: React.FC = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar por nome, descrição ou tecnologia (ex: React)..."
-              className="w-full pl-10 pr-9 py-2 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-500 transition-all"
+              placeholder="Buscar por tecnologia, nome ou arquitetura (ex: FastAPI, Docker)..."
+              className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-slate-900/60 border border-white/5 text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all font-mono"
               aria-label="Campo de busca de projetos"
             />
             {searchQuery && (
@@ -74,17 +77,17 @@ export const ProjectGrid: React.FC = () => {
 
           {/* Category Pills */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
-            <Filter className="w-4 h-4 text-slate-500 shrink-0 ml-1 hidden sm:block" />
+            <Filter className="w-3.5 h-3.5 text-slate-400 shrink-0 ml-1 hidden sm:block" />
             {categories.map((cat) => {
               const isSelected = selectedCategory === cat;
               return (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400 ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all focus:outline-none focus:ring-2 focus:ring-violet-400 ${
                     isSelected
-                      ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/30'
-                      : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-slate-800'
+                      ? 'bg-linear-to-r from-violet-600 via-indigo-600 to-sky-500 text-white shadow-md shadow-violet-600/30'
+                      : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-white/5'
                   }`}
                 >
                   {cat}
@@ -96,9 +99,9 @@ export const ProjectGrid: React.FC = () => {
         </div>
 
         {/* Status Counter */}
-        <div className="flex items-center justify-between text-xs text-slate-400 mb-6 px-1">
+        <div className="flex items-center justify-between text-xs text-slate-400 mb-8 px-1 font-mono">
           <span>
-            Exibindo <strong>{filteredProjects.length}</strong> de <strong>{projects.length}</strong> projetos
+            Exibindo <strong className="text-violet-300">{filteredProjects.length}</strong> de <strong className="text-white">{projects.length}</strong> projetos
           </span>
           {(selectedCategory !== 'Todas' || searchQuery) && (
             <button
@@ -106,7 +109,7 @@ export const ProjectGrid: React.FC = () => {
                 setSelectedCategory('Todas');
                 setSearchQuery('');
               }}
-              className="text-indigo-400 hover:underline flex items-center gap-1"
+              className="text-sky-400 hover:underline flex items-center gap-1"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>Limpar filtros</span>

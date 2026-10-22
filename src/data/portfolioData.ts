@@ -2,8 +2,8 @@ import type { Project, SkillCategory, ProfileData } from '../types';
 
 export const portfolioProfile: ProfileData = {
   name: 'Leonardo Nascimento',
-  role: 'Desenvolvedor Full Stack | Python & React',
-  statusBadge: 'Desenvolvedor de Software | Python, FastAPI & React',
+  role: 'Desenvolvedor Full Stack | Python',
+  statusBadge: 'Desenvolvedor de Software | Python, FastAPI',
   heroTitlePrefix: 'Desenvolvedor de Software',
   heroTitleHighlight: 'Backend Python & Frontend Web',
   heroDescription:

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Code2, ArrowUp, ShieldCheck } from 'lucide-react';
+import { ArrowUp, ShieldCheck } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../ui/SocialIcons';
 import { useProfile } from '../../context/ProfileContext';
+import { Logo } from '../ui/Logo';
 
 export const Footer: React.FC = () => {
   const { profile } = useProfile();
@@ -10,53 +11,50 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-900 py-12 text-left relative">
+    <footer className="border-t border-white/5 py-12 text-left relative bg-[#02050c]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-b border-slate-900 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-b border-white/5 pb-8">
           
           {/* Brand Info (6 cols) */}
           <div className="md:col-span-6 space-y-3">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
-                <Code2 className="w-4 h-4" />
-              </div>
-              <span className="font-bold text-white text-base">Leonardo Nascimento</span>
+            <div className="flex items-center">
+              <Logo />
             </div>
-            <p className="text-xs text-slate-300 max-w-md leading-relaxed">
-              Portfólio pessoal de <strong className="text-white">Leonardo Nascimento</strong> — Desenvolvedor backend especializado em <strong className="text-white">Python</strong> e <strong className="text-white">FastAPI</strong>. Aberto a oportunidades e colaborações.
+            <p className="text-xs text-slate-400 max-w-md leading-relaxed font-sans">
+              Engenharia de Software &amp; Desenvolvimento Full Stack com foco prático em <strong className="text-violet-300">Python (FastAPI)</strong> e <strong className="text-sky-300">React (TypeScript)</strong>.
             </p>
           </div>
 
           {/* Nav & Action (6 cols) */}
           <div className="md:col-span-6 flex flex-col sm:flex-row items-start sm:items-center justify-between md:justify-end gap-4">
-            <div className="flex items-center gap-3 text-xs text-slate-300">
+            <div className="flex items-center gap-3 text-xs font-mono text-slate-300">
               <a
                 href={profile.githubUrl || "https://github.com/leonardonasls-stack"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors flex items-center gap-1.5 p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200"
+                className="hover:text-white transition-colors flex items-center gap-1.5 p-2 rounded-xl bg-slate-900/80 border border-white/10 text-slate-200"
               >
-                <GithubIcon className="w-4 h-4 text-indigo-300" />
+                <GithubIcon className="w-4 h-4 text-violet-400" />
                 <span>GitHub</span>
               </a>
               <a
-                href={profile.linkedinUrl || "https://linkedin.com/in/leodev"}
+                href={profile.linkedinUrl || "https://linkedin.com"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors flex items-center gap-1.5 p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200"
+                className="hover:text-white transition-colors flex items-center gap-1.5 p-2 rounded-xl bg-slate-900/80 border border-white/10 text-slate-200"
               >
-                <LinkedinIcon className="w-4 h-4 text-indigo-300" />
+                <LinkedinIcon className="w-4 h-4 text-sky-400" />
                 <span>LinkedIn</span>
               </a>
             </div>
 
             <button
               onClick={scrollToTop}
-              className="p-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-800 transition-colors flex items-center gap-2 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="p-2.5 px-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white border border-white/10 transition-colors flex items-center gap-2 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-violet-400 font-mono"
               title="Voltar ao topo da página"
               aria-label="Voltar para o topo da página"
             >
-              <ArrowUp className="w-4 h-4" />
+              <ArrowUp className="w-3.5 h-3.5 text-violet-400" />
               <span>Topo</span>
             </button>
           </div>
@@ -64,12 +62,12 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Footer Bottom Bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-300">
-          <p>{profile.footerText || '© 2026 Leonardo Nascimento. Desenvolvido com React, TypeScript e Tailwind CSS.'}</p>
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-slate-500">
+          <p>{profile.footerText || '© 2026 Leonardo Nascimento · Construído com React 19, TypeScript, Tailwind CSS e Framer Motion.'}</p>
 
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-300" />
-            <span>Validação de Acessibilidade & Usabilidade (WCAG / Nielsen)</span>
+            <ShieldCheck className="w-3.5 h-3.5 text-sky-400" />
+            <span>Design System &amp; Arquitetura Bento Grid</span>
           </div>
         </div>
       </div>

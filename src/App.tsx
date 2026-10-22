@@ -23,7 +23,7 @@ const PortfolioApp: React.FC = () => {
       <Navbar />
 
       {/* Main Sections */}
-      <main className="flex-grow">
+      <main className="grow">
         <Hero />
         <AboutSection />
         <TechStack />
