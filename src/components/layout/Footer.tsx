@@ -2,7 +2,6 @@ import React from 'react';
 import { ArrowUp, ShieldCheck } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../ui/SocialIcons';
 import { useProfile } from '../../context/ProfileContext';
-import { Logo } from '../ui/Logo';
 
 export const Footer: React.FC = () => {
   const { profile } = useProfile();
@@ -18,7 +17,7 @@ export const Footer: React.FC = () => {
           {/* Brand Info (6 cols) */}
           <div className="md:col-span-6 space-y-3">
             <div className="flex items-center">
-              <Logo />
+              <img src="/icons.svg" alt="Leonardo Nascimento" className="h-10 w-auto" />
             </div>
             <p className="text-xs text-slate-400 max-w-md leading-relaxed font-sans">
               Engenharia de Software &amp; Desenvolvimento Full Stack com foco prático em <strong className="text-violet-300">Python (FastAPI)</strong> e <strong className="text-sky-300">React (TypeScript)</strong>.

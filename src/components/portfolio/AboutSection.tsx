@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { User, GraduationCap, Award, Check, Code, Eye, ChevronDown, HelpCircle } from 'lucide-react';
 import { useProfile } from '../../context/ProfileContext';
-import { Logo } from '../ui/Logo';
 
 export const AboutSection: React.FC = () => {
   const { profile } = useProfile();
@@ -37,10 +36,10 @@ export const AboutSection: React.FC = () => {
               <div className="flex items-center justify-between border-b border-white/5 pb-4">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-2xl bg-linear-to-tr from-violet-950/90 via-slate-900 to-slate-900 border border-violet-500/30 flex items-center justify-center p-2.5 shadow-lg shadow-violet-500/20">
-                    <Logo variant="symbol" className="w-9 h-9" />
+                    <img src="/favicon.svg" alt="Símbolo Leonardo Nascimento" className="w-9 h-9" />
                   </div>
                   <div>
-                    <h3 className="text-xl md:text-2xl font-bold font-mono text-white tracking-tight">[leo nascimento]</h3>
+                    <h3 className="text-xl md:text-2xl font-bold font-mono text-white tracking-tight">[Leo nascimento]</h3>
                     <p className="text-xs font-mono text-sky-400 font-semibold mt-0.5">desenvolvimento de sistemas</p>
                     <p className="text-[11px] text-slate-400 font-mono">Maceió, AL · Brasil</p>
                   </div>

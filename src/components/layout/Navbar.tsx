@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
-import { Logo } from '../ui/Logo';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -65,7 +64,7 @@ export const Navbar: React.FC = () => {
             className="flex items-center group focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-xl p-1 transition-transform hover:opacity-95"
             aria-label="Ir para o início do portfólio"
           >
-            <Logo />
+            <img src="/icons.svg" alt="Leonardo Nascimento" className="h-11 sm:h-12 w-auto" />
           </a>
 
           {/* Desktop Navigation Links */}
