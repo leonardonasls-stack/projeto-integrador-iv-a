@@ -4,6 +4,7 @@ import { useProfile } from '../../context/ProfileContext';
 import { Mail, Send, CheckCircle2, MessageSquare, User, AtSign, FileText } from 'lucide-react';
 import { EmailService } from '../../services/emailService';
 import { safeHostPath } from '../../utils/urlHelper';
+import { WhatsappIcon } from '../ui/SocialIcons';
 
 export const ContactSection: React.FC = () => {
   const { profile } = useProfile();
@@ -150,6 +151,27 @@ export const ContactSection: React.FC = () => {
                       </a>
                     </p>
                   </div>
+                </div>
+
+                <div className="flex items-center justify-between gap-3.5 p-4 rounded-2xl bg-slate-900/60 border border-white/5">
+                  <div className="flex items-center gap-3.5">
+                    <div className="p-2.5 rounded-xl bg-emerald-950 text-emerald-400">
+                      <WhatsappIcon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white">WhatsApp</h4>
+                      <p className="text-slate-400 text-xs font-sans mt-0.5">Atendimento direto</p>
+                    </div>
+                  </div>
+                  <a
+                    href={`https://wa.me/5582999974649?text=${encodeURIComponent('Olá Leonardo! Vim através do seu portfólio e gostaria de conversar.')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/30 text-xs font-sans font-semibold transition-colors shrink-0"
+                    aria-label="Iniciar conversa via WhatsApp"
+                  >
+                    Conversar
+                  </a>
                 </div>
               </div>
             </div>
