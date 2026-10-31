@@ -1,147 +1,124 @@
-# 🚀 Portfólio Pessoal — Leonardo Nascimento
+<div align="center">
+  <img src="./public/icons.svg" alt="Leonardo Nascimento — Desenvolvimento de Sistemas" width="320" />
 
-> **Desenvolvedor de Software | Backend Python & FastAPI · Frontend TypeScript/React**
-> 📍 Estudante de Análise e Desenvolvimento de Sistemas — CESMAC (4º Período)
-> 🔗 [github.com/leonardonasls-stack/projeto-integrador-iv-a](https://github.com/leonardonasls-stack/projeto-integrador-iv-a)
-> 📧 leonardonasls@gmail.com
+  <h1>Portfólio Pessoal — Leonardo Nascimento</h1>
 
-![CI — Integration & Build Check](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/actions/workflows/ci.yml/badge.svg)
+  <p>
+    <strong>Desenvolvedor de Software | Backend Python &amp; FastAPI · Frontend TypeScript &amp; React</strong><br />
+    Graduando em Análise e Desenvolvimento de Sistemas — CESMAC (4º Período)
+  </p>
+
+  <p>
+    <a href="https://github.com/leonardonasls-stack/projeto-integrador-iv-a/actions/workflows/ci.yml">
+      <img src="https://github.com/leonardonasls-stack/projeto-integrador-iv-a/actions/workflows/ci.yml/badge.svg" alt="CI — Integration & Build Check" />
+    </a>
+  </p>
+</div>
 
 ---
 
-## 📌 Visão Geral
+## Visão Geral
 
-Portfólio pessoal moderno desenvolvido em **React 19 + TypeScript + Vite**, com design dark refinado (glassmorphism), animações fluidas com **Framer Motion** e arquitetura estática de alta performance (**Static-First**).
+Aplicação web de portfólio pessoal desenvolvida em **React 19**, **TypeScript** e **Vite**, estilizada com **Tailwind CSS v4** e animações em **Framer Motion**.
 
-A versão **3.1** consolida uma arquitetura focada em velocidade máxima, confiabilidade, carregamento instantâneo e gestão transparente de privacidade e cookies, com dados centralizados em [`src/data/portfolioData.ts`](./src/data/portfolioData.ts) e total independência de serviços de banco de dados externos.
+> [!NOTE]
+> **Arquitetura Static-First (v3.1):** Todos os dados de perfil, habilidades e projetos são gerenciados de forma centralizada e tipada em [`src/data/portfolioData.ts`](./src/data/portfolioData.ts), garantindo carregamento instantâneo e zero dependência de bancos de dados externos em tempo de execução.
 
 ---
 
-## 🛠️ Stack Tecnológica
+## Stack Tecnológica
 
-### Frontend & Core
+### Aplicação Principal
 | Tecnologia | Versão | Papel |
 |---|---|---|
-| React | ^19.2.8 | SPA com componentização modular e renderização ultra-rápida |
-| TypeScript | ~6.0.2 | Tipagem estática rigorosa em todo o projeto |
-| Vite | ^8.2.2 | Build otimizado e HMR instantâneo |
-| Tailwind CSS | ^4.3.3 | Estilização utilitária e responsiva |
-| Framer Motion | ^13.2.0 | Microinterações e animações físicas fluidas |
-| Lucide React | ^1.41.0 | Biblioteca de ícones SVG de alta nitidez |
-| Inter (Fontsource) | ^5.3.0 | Tipografia auto-hospedada |
+| React | `^19.2.8` | Construção da interface modular (SPA) e gerenciamento de estado via Context API |
+| TypeScript | `~6.0.2` | Tipagem estática estrita em componentes, contextos e serviços |
+| Vite | `^8.2.2` | Bundler de produção e servidor de desenvolvimento com HMR |
+| Tailwind CSS | `^4.3.3` | Sistema de estilização utilitária, responsiva e tema dark |
+| Framer Motion | `^13.2.0` | Transições e animações declarativas |
+| Lucide React | `^1.41.0` | Biblioteca de ícones vetoriais |
+| Inter (`@fontsource/inter`) | `^5.3.0` | Tipografia auto-hospedada sem requisições externas para fontes |
 
-### Integrações Externas
-| Serviço | Papel |
+### Qualidade, Testes e Integrações
+| Ferramenta / Serviço | Papel |
 |---|---|
-| Formspree | Envio de mensagens do formulário de contato (com fallback nativo `mailto:`) |
-
-### Ferramentas de Qualidade
-| Ferramenta | Papel |
-|---|---|
-| OxLint ^1.79.0 | Linting de alta performance (substituto do ESLint) |
-| TypeScript strict | Tipagem segura em todo o codebase |
-| Vitest ^5.0.0 + happy-dom | Testes unitários com ambiente DOM simulado |
-| @testing-library/react | Utilitários de teste para componentes React |
-| GitHub Actions (CI) | Pipeline de lint, build e testes contínuos |
+| OxLint (`^1.79.0`) | Linter estático de alta velocidade |
+| Vitest (`^5.0.0`) + `happy-dom` | Execução de testes unitários com simulação leve de DOM |
+| `@testing-library/react` | Utilitários de teste voltados ao comportamento de componentes |
+| GitHub Actions | Pipeline de integração contínua (lint, build e testes) |
+| Formspree | Processamento do formulário de contato com fallback automático para `mailto:` |
 
 ---
 
-## 🗂️ Arquitetura do Projeto
+## Estrutura do Projeto
 
-```
-├── .lgpd/                         # Documentação de auditoria de privacidade, mapeamento e política de cookies
-│   ├── STATUS.md                  # Status consolidado da auditoria
+```text
+├── .lgpd/                         # Documentação de privacidade, mapeamento de dados e política de cookies
+│   ├── STATUS.md                  # Estado consolidado da auditoria
 │   ├── discovery.md               # Levantamento técnico de fluxos e armazenamento local
 │   ├── gaps.md                    # Análise de lacunas e plano de remediação
-│   ├── data-map.md                # Inventário das atividades de tratamento de dados
-│   ├── legal-basis.md             # Fundamentação das bases legais por atividade
+│   ├── data-map.md                # Inventário das atividades de tratamento
+│   ├── legal-basis.md             # Fundamentação das bases legais
 │   └── policies/
-│       └── privacy-policy-v1.0-draft.md # Política de Cookies documentada
+│       └── privacy-policy-v1.0-draft.md
 │
+├── public/                        # Ativos públicos estáticos (favicon.svg, icons.svg)
 └── src/
-    ├── App.tsx                    # Orquestrador com providers e estrutura principal
-    ├── main.tsx                   # Entry point do React (com ErrorBoundary global)
-    │
+    ├── App.tsx                    # Composição de providers e layout principal
+    ├── main.tsx                   # Ponto de entrada com ErrorBoundary global
     ├── components/
     │   ├── layout/
     │   │   ├── Navbar.tsx         # Navegação fixa com scroll-spy e menu mobile responsivo
-    │   │   └── Footer.tsx         # Rodapé com links sociais, scroll-to-top e atalho para Preferências de Cookies
-    │   │
+    │   │   └── Footer.tsx         # Rodapé com links sociais, retorno ao topo e Preferências de Cookies
     │   ├── portfolio/
-    │   │   ├── Hero.tsx           # Seção inicial: headline dinâmico, card de código FastAPI animado, CTAs
-    │   │   ├── AboutSection.tsx   # Bio, pilares técnicos e formação acadêmica (CESMAC)
-    │   │   ├── TechStack.tsx      # Skills organizadas por categorias + princípios de IHC/UX
-    │   │   ├── ProjectGrid.tsx    # Grid responsivo com busca em tempo real e filtros por categoria
-    │   │   ├── ProjectCard.tsx    # Card de projeto com animação Framer Motion e tags de tecnologia
-    │   │   ├── ProjectModal.tsx   # Modal de detalhes: stack completa, links GitHub/Demo e acessibilidade
-    │   │   └── ContactSection.tsx # Formulário Formspree + honeypot + cooldown + fallback mailto:
-    │   │
+    │   │   ├── Hero.tsx           # Seção principal com card de código FastAPI animado e CTAs
+    │   │   ├── AboutSection.tsx   # Biografia, pilares técnicos e formação acadêmica
+    │   │   ├── TechStack.tsx      # Habilidades agrupadas por categoria e diretrizes de IHC/UX
+    │   │   ├── ProjectGrid.tsx    # Listagem de projetos com busca textual e filtro por categoria
+    │   │   ├── ProjectCard.tsx    # Card individual de projeto
+    │   │   ├── ProjectModal.tsx   # Modal detalhado com descrição completa e links externos
+    │   │   └── ContactSection.tsx # Formulário de contato com honeypot, cooldown e fallback mailto:
     │   └── ui/
-    │       ├── ToastContainer.tsx # Sistema de notificações por toasts
-    │       ├── SocialIcons.tsx    # Ícones SVG inline otimizados
-    │       ├── CookieConsent.tsx  # Banner e modal de Política de Cookies (opt-in por padrão e gestão granular)
-    │       └── ErrorBoundary.tsx  # Boundary de erros React para recuperação suave
-    │
-    ├── context/
-    │   ├── ProjectContext.tsx     # Filtro, busca e gestão de projetos
-    │   ├── ProfileContext.tsx     # Dados de perfil, biografia e textos da home
-    │   ├── SkillContext.tsx       # Gestão de habilidades e categorias
-    │   └── ToastContext.tsx       # Sistema global de notificações por toast
-    │
+    │       ├── CookieConsent.tsx  # Banner e modal de Política e Preferências de Cookies
+    │       ├── ErrorBoundary.tsx  # Captura e tratamento de erros de renderização
+    │       ├── SocialIcons.tsx    # Ícones SVG otimizados (GitHub, LinkedIn)
+    │       └── ToastContainer.tsx # Exibição de notificações temporárias (toasts)
+    ├── context/                   # Contextos React (Profile, Project, Skill, Toast)
     ├── data/
-    │   └── portfolioData.ts       # Fonte única da verdade: perfil, skills, categorias e projetos
-    │
+    │   └── portfolioData.ts       # Fonte única de dados do portfólio
     ├── services/
-    │   ├── emailService.ts        # Integração Formspree + fallback inteligente para mailto:
-    │   ├── storageService.ts      # Wrapper seguro para localStorage (erros e quotas)
-    │   ├── emailService.test.ts   # Testes Vitest — envio e resiliência a falhas de rede
-    │   └── storageService.test.ts # Testes Vitest — persistência segura
-    │
-    ├── types/
-    │   ├── index.ts               # Project, ProjectCategory, ToastMessage
-    │   ├── profile.ts             # ProfileData e padrões de perfil
-    │   └── skill.ts               # Skill, SkillCategory, SkillLevel
-    │
+    │   ├── emailService.ts        # Cliente HTTP Formspree e fallback mailto:
+    │   ├── emailService.test.ts   # Testes unitários do serviço de e-mail
+    │   ├── storageService.ts      # Abstração segura para leitura e escrita no localStorage
+    │   └── storageService.test.ts # Testes unitários do serviço de armazenamento
+    ├── types/                     # Contratos e interfaces TypeScript
     └── utils/
-        └── urlHelper.ts           # Validação e sanitização segura de URLs
+        └── urlHelper.ts           # Sanitização e formatação segura de URLs
 ```
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades Principais
 
-### 🖥️ Experiência do Portfólio
-- **Hero Interativo**: Headline em destaque, card de código FastAPI com animação sequencial, badges de arquitetura (APIs RESTful, Pydantic v2, Arquitetura Limpa) e CTAs de rolagem suave.
-- **Sobre Mim**: Bio técnica completa, pilares de usabilidade/backend e histórico acadêmico no CESMAC.
-- **Stack & Habilidades**: Categorias organizadas (Frontend, Backend & Python) com indicadores visuais de proficiência e princípios de IHC aplicados.
-- **Vitrine de Projetos**: Grid responsivo com filtros por categoria (Frontend, Fullstack, Backend, Mobile, IHC/UX) e busca por palavras-chave em tempo real.
-- **Modal de Detalhes**: Apresentação da arquitetura do projeto, links para GitHub e demonstração online, ou indicador de repositório privado com navegação via teclado (`ESC`).
-- **Formulário de Contato**: Integrado ao Formspree com validação de formato, proteção honeypot contra bots, cooldown de envio e fallback automático para cliente de e-mail local.
-- **Gestão e Política de Cookies**: Banner e modal com explicação clara das categorias (**Necessários / Essenciais**, **Desempenho e Analíticos**, **Funcionalidade** e **Publicidade e Marketing**), categorias opcionais desmarcadas por padrão (*opt-in*), persistência versionada via `StorageService` e reabertura a qualquer momento pelo botão **"Preferências de Cookies"** no rodapé.
+- **Apresentação e Stack Técnica**: Seção Hero com simulação interativa de endpoint FastAPI, seção Sobre Mim com histórico acadêmico no CESMAC e visualização de competências técnicas divididas entre Frontend e Backend Python.
+- **Catálogo de Projetos com Busca e Filtro**: Filtragem instantânea por categoria (`Frontend`, `Fullstack`, `Backend`, `Mobile`) combinada à busca por título, descrição ou tecnologia, além de modal de detalhes acessível via teclado (`ESC`).
+- **Formulário de Contato Resiliente**: Proteção anti-spam via campo *honeypot* (`_gotcha`), intervalo mínimo entre envios (*cooldown* de 30 segundos) e envio direto via Formspree ou cliente de e-mail padrão.
+- **Gestão Transparente de Cookies**: Categorias opcionais (**Desempenho e Analíticos**, **Funcionalidade**, **Publicidade e Marketing**) desmarcadas por padrão (*opt-in*), persistência versionada em `localStorage` (`cookieConsent`) e reabertura a qualquer momento pelo rodapé.
+- **Acessibilidade**: Navegação completa por teclado (`Tab`, `Shift+Tab`, `ESC`, `Enter`), semântica ARIA (`role="dialog"`, `role="switch"`, `aria-modal`) e alto contraste visual.
 
 ---
 
-## ♿ Acessibilidade (WCAG / Nielsen)
-
-- **0 violações** detectadas na auditoria de acessibilidade.
-- Navegação completa por teclado (`Tab`, `Shift+Tab`, `ESC`, `Enter`).
-- Atributos `aria-label`, `aria-modal`, `role="dialog"` e `role="switch"` para compatibilidade total com leitores de tela.
-- Notificações de formulário e status com áreas acessíveis.
-- Alto contraste e foco visível garantidos.
-
----
-
-## 🚀 Como Executar Localmente
+## Como Executar Localmente
 
 ### Pré-requisitos
-- **Node.js** ≥ 20
-- **npm** ≥ 10
+- **Node.js** >= 20
+- **npm** >= 10
 
 ```bash
 # 1. Clonar o repositório
 git clone https://github.com/leonardonasls-stack/projeto-integrador-iv-a.git
 
-# 2. Entrar na pasta do projeto
+# 2. Acessar o diretório do projeto
 cd projeto-integrador-iv-a
 
 # 3. Instalar as dependências
@@ -151,70 +128,51 @@ npm install
 npm run dev
 ```
 
-Acesse `http://localhost:5173/` no navegador.
+A aplicação ficará disponível em `http://localhost:5173/`.
 
 ### Scripts Disponíveis
 
-```bash
-npm run dev      # Servidor de desenvolvimento com HMR
-npm run build    # Build de produção (tsc -b && vite build)
-npm run preview  # Preview do build de produção
-npm run lint     # Linting de alta velocidade com OxLint
-npm run test     # Testes unitários com Vitest
-```
+| Script | Descrição |
+|---|---|
+| `npm run dev` | Inicia o servidor de desenvolvimento Vite com HMR |
+| `npm run build` | Compila TypeScript (`tsc -b`) e gera o bundle de produção em `dist/` |
+| `npm run preview` | Serve localmente o build de produção gerado em `dist/` |
+| `npm run lint` | Executa análise estática de código com OxLint |
+| `npm run test` | Executa a suíte de testes unitários com Vitest |
 
 ---
 
-## 🔧 Variáveis de Ambiente
+## Variáveis de Ambiente
 
-Crie um arquivo `.env.local` na raiz do projeto (opcional):
+Crie um arquivo `.env.local` na raiz do projeto caso deseje configurar o envio direto via Formspree:
 
 ```env
-# ID do endpoint Formspree para o formulário de contato (Opcional)
-# Se omitido, o formulário direciona automaticamente via cliente de e-mail (mailto:)
-VITE_FORMSPREE_ID=""
+VITE_FORMSPREE_ID="seu_id_formspree"
 ```
 
+> [!TIP]
+> A variável `VITE_FORMSPREE_ID` é opcional. Se não for definida, o formulário de contato utiliza automaticamente o fallback nativo `mailto:`, abrindo o cliente de e-mail padrão do usuário com os dados preenchidos.
+
 ---
 
-## 🔄 Pipeline de CI (GitHub Actions)
+## Integração Contínua e Testes
 
-O workflow `.github/workflows/ci.yml` executa automaticamente em todo push ou pull request para `main`:
+O pipeline `.github/workflows/ci.yml` valida automaticamente cada `push` ou `pull_request` na branch `main` executando em sequência:
 
-| Etapa | Comando |
+1. Instalação limpa de dependências (`npm ci`)
+2. Verificação de lint (`npm run lint`)
+3. Verificação de tipos e build de produção (`npm run build`)
+4. Execução dos testes unitários (`npm run test`)
+
+| Suíte de Teste | Cobertura |
 |---|---|
-| Checkout do repositório | `actions/checkout@v4` |
-| Setup Node.js 20 | `actions/setup-node@v4` |
-| Instalar dependências | `npm ci` |
-| Linting (OxLint) | `npm run lint` |
-| Build de produção | `npm run build` |
-| Testes Unitários (Vitest) | `npm run test` |
+| [`storageService.test.ts`](./src/services/storageService.test.ts) | Leitura com fallback seguro, escrita serializada em JSON e remoção de chaves no `localStorage` |
+| [`emailService.test.ts`](./src/services/emailService.test.ts) | Submissão HTTP ao Formspree, acionamento de fallback `mailto:` e tratamento de erros de rede |
 
 ---
 
-## 🧪 Testes
-
-Testes unitários com **Vitest** + **happy-dom**:
-
-```bash
-npm run test
-```
-
-| Arquivo de Teste | Casos Cobertos |
-|---|---|
-| `storageService.test.ts` | Fallback para chave inexistente, escrita/leitura e remoção segura do localStorage |
-| `emailService.test.ts` | Envio via Formspree, fallback `mailto:` quando ID ausente, tratamento de erros HTTP e exceções de rede |
-
----
-
-## 📬 Contato
+## Contato
 
 - **GitHub**: [github.com/leonardonasls-stack](https://github.com/leonardonasls-stack)
 - **LinkedIn**: [linkedin.com/in/leonardolnascimento](https://www.linkedin.com/in/leonardolnascimento)
-- **E-mail**: leonardonasls@gmail.com
-
----
-
-<div align="center">
-  <sub>v3.1 — Desenvolvido com React 19, TypeScript 6, Vite 8, Tailwind CSS v4 e Framer Motion</sub>
-</div>
+- **E-mail**: [leonardonasls@gmail.com](mailto:leonardonasls@gmail.com)
