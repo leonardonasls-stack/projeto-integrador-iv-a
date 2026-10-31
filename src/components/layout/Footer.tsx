@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUp, ShieldCheck } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../ui/SocialIcons';
+import { openCookieSettings } from '../ui/CookieConsent';
 import { useProfile } from '../../context/ProfileContext';
 
 export const Footer: React.FC = () => {
@@ -64,9 +65,16 @@ export const Footer: React.FC = () => {
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-slate-500">
           <p>{profile.footerText || '© 2026 Leonardo Nascimento · Construído com React 19, TypeScript, Tailwind CSS e Framer Motion.'}</p>
 
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-3.5 h-3.5 text-sky-400" />
-            <span>Design System &amp; Arquitetura Bento Grid</span>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <button
+              type="button"
+              onClick={openCookieSettings}
+              className="flex items-center gap-1.5 text-slate-400 hover:text-indigo-300 underline underline-offset-4 transition-colors cursor-pointer"
+              title="Gerenciar preferências de cookies"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
+              <span>Preferências de Cookies</span>
+            </button>
           </div>
         </div>
       </div>

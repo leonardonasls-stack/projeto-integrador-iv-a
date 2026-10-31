@@ -1,13 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import { StorageService } from '../../services/storageService';
 
-const Toggle: React.FC<{ checked: boolean; onChange?: (checked: boolean) => void; disabled?: boolean }> = ({ checked, onChange, disabled = false }) => (
+export const COOKIE_CONSENT_KEY = 'cookieConsent';
+export const COOKIE_POLICY_VERSION = '2.0';
+export const OPEN_COOKIE_MODAL_EVENT = 'open-cookie-settings';
+
+export interface CookiePreferences {
+  essential: boolean;
+  analytics: boolean;
+  functional: boolean;
+  marketing: boolean;
+  version: string;
+  timestamp: string;
+}
+
+export const openCookieSettings = (): void => {
+  window.dispatchEvent(new CustomEvent(OPEN_COOKIE_MODAL_EVENT));
+};
+
+const Toggle: React.FC<{ checked: boolean; onChange?: (checked: boolean) => void; disabled?: boolean; label: string }> = ({
+  checked,
+  onChange,
+  disabled = false,
+  label,
+}) => (
   <button
     type="button"
     role="switch"
     aria-checked={checked}
+    aria-label={label}
     disabled={disabled}
     onClick={() => !disabled && onChange && onChange(!checked)}
-    className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+    className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-400 ${
       checked ? 'bg-indigo-500' : 'bg-slate-700'
     } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
   >
@@ -24,59 +48,81 @@ export const CookieConsent: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [preferences, setPreferences] = useState({
-    analytics: true,
-    functional: true,
+    analytics: false,
+    functional: false,
     marketing: false,
   });
 
   useEffect(() => {
-    const consent = localStorage.getItem('cookieConsent');
-    if (!consent) {
-      const timer = setTimeout(() => setIsVisible(true), 1000);
+    const stored = StorageService.getItem<Partial<CookiePreferences> | string | null>(COOKIE_CONSENT_KEY, null);
+
+    if (!stored || typeof stored !== 'object' || stored.version !== COOKIE_POLICY_VERSION) {
+      setPreferences({
+        analytics: false,
+        functional: false,
+        marketing: false,
+      });
+      const timer = setTimeout(() => setIsVisible(true), 800);
       return () => clearTimeout(timer);
-    } else {
-      try {
-        const parsed = JSON.parse(consent);
-        if (parsed && typeof parsed === 'object') {
-          setPreferences({
-            analytics: !!parsed.analytics,
-            functional: !!parsed.functional,
-            marketing: !!parsed.marketing,
-          });
-        }
-      } catch (e) {
-        if (consent === 'all') {
-          setPreferences({ analytics: true, functional: true, marketing: true });
-        } else if (consent === 'essential') {
-          setPreferences({ analytics: false, functional: false, marketing: false });
-        }
-      }
     }
+
+    setPreferences({
+      analytics: Boolean(stored.analytics),
+      functional: Boolean(stored.functional),
+      marketing: Boolean(stored.marketing),
+    });
   }, []);
 
-  const savePreferences = (prefs: any) => {
-    localStorage.setItem('cookieConsent', JSON.stringify(prefs));
+  useEffect(() => {
+    const handleOpenSettings = () => {
+      setIsModalOpen(true);
+    };
+
+    window.addEventListener(OPEN_COOKIE_MODAL_EVENT, handleOpenSettings);
+    return () => window.removeEventListener(OPEN_COOKIE_MODAL_EVENT, handleOpenSettings);
+  }, []);
+
+  const savePreferences = (prefs: { analytics: boolean; functional: boolean; marketing: boolean }) => {
+    const record: CookiePreferences = {
+      essential: true,
+      analytics: Boolean(prefs.analytics),
+      functional: Boolean(prefs.functional),
+      marketing: Boolean(prefs.marketing),
+      version: COOKIE_POLICY_VERSION,
+      timestamp: new Date().toISOString(),
+    };
+
+    StorageService.setItem(COOKIE_CONSENT_KEY, record);
     setPreferences({
-      analytics: prefs.analytics,
-      functional: prefs.functional,
-      marketing: prefs.marketing,
+      analytics: record.analytics,
+      functional: record.functional,
+      marketing: record.marketing,
     });
     setIsVisible(false);
     setIsModalOpen(false);
   };
 
-  const handleAcceptAll = () => savePreferences({ essential: true, analytics: true, functional: true, marketing: true });
-  const handleAcceptEssential = () => savePreferences({ essential: true, analytics: false, functional: false, marketing: false });
-  const handleSaveCustom = () => savePreferences({ essential: true, ...preferences });
+  const handleAcceptAll = () =>
+    savePreferences({ analytics: true, functional: true, marketing: true });
+
+  const handleAcceptEssential = () =>
+    savePreferences({ analytics: false, functional: false, marketing: false });
+
+  const handleSaveCustom = () =>
+    savePreferences({ ...preferences });
 
   const togglePreference = (key: keyof typeof preferences) => {
-    setPreferences(prev => ({ ...prev, [key]: !prev[key] }));
+    setPreferences((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   return (
     <>
       {isVisible && (
-        <div className="fixed bottom-6 left-6 z-50 w-full max-w-90 bg-slate-950/70 backdrop-blur-md border border-slate-800/50 rounded-2xl shadow-2xl animate-fade-in-up overflow-hidden">
+        <div
+          role="region"
+          aria-label="Aviso de Cookies"
+          className="fixed bottom-6 left-6 z-50 w-[calc(100%-3rem)] max-w-90 bg-slate-950/85 backdrop-blur-md border border-slate-800/70 rounded-2xl shadow-2xl animate-fade-in-up overflow-hidden"
+        >
           <div className="p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 rounded-full bg-indigo-500/10 flex items-center justify-center shrink-0">
@@ -86,12 +132,13 @@ export const CookieConsent: React.FC = () => {
               </div>
               <h3 className="text-white font-semibold text-base">Sua Privacidade</h3>
             </div>
-            
+
             <p className="text-slate-400 text-sm mb-4 leading-relaxed">
-              Utilizamos cookies para melhorar sua experiência. Você pode escolher quais cookies deseja aceitar ou configurar em nossa{' '}
-              <button 
+              Utilizamos cookies para melhorar sua experiência de navegação. Você pode escolher quais categorias deseja ativar em nossa{' '}
+              <button
+                type="button"
                 onClick={() => setIsModalOpen(true)}
-                className="text-indigo-400 hover:text-indigo-300 font-medium hover:underline transition-colors"
+                className="text-indigo-400 hover:text-indigo-300 font-medium hover:underline transition-colors cursor-pointer"
               >
                 Política de Cookies
               </button>
@@ -100,21 +147,24 @@ export const CookieConsent: React.FC = () => {
 
             <div className="flex flex-col gap-2">
               <button
+                type="button"
                 onClick={handleAcceptAll}
-                className="w-full px-4 py-2.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors shadow-sm"
+                className="w-full px-4 py-2.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors shadow-sm cursor-pointer"
               >
                 Aceitar Todos
               </button>
               <div className="flex gap-2">
                 <button
+                  type="button"
                   onClick={handleAcceptEssential}
-                  className="w-full px-4 py-2.5 text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-lg transition-colors"
+                  className="w-full px-4 py-2.5 text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-lg transition-colors cursor-pointer"
                 >
                   Essenciais
                 </button>
                 <button
+                  type="button"
                   onClick={() => setIsModalOpen(true)}
-                  className="w-full px-4 py-2.5 text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-lg transition-colors"
+                  className="w-full px-4 py-2.5 text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-lg transition-colors cursor-pointer"
                 >
                   Opções
                 </button>
@@ -126,16 +176,21 @@ export const CookieConsent: React.FC = () => {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
-          <div 
+          <div
             className="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col animate-scale-in overflow-hidden"
             role="dialog"
             aria-modal="true"
+            aria-labelledby="cookie-policy-modal-title"
           >
+            {/* Header */}
             <div className="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/50">
-              <h2 className="text-xl font-bold text-white">Política e Preferências de Cookies</h2>
-              <button 
+              <h2 id="cookie-policy-modal-title" className="text-xl font-bold text-white">
+                Política e Preferências de Cookies
+              </h2>
+              <button
+                type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="text-slate-400 hover:text-white transition-colors rounded-full p-1 hover:bg-slate-800"
+                className="text-slate-400 hover:text-white transition-colors rounded-full p-1 hover:bg-slate-800 cursor-pointer"
                 aria-label="Fechar"
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -143,94 +198,105 @@ export const CookieConsent: React.FC = () => {
                 </svg>
               </button>
             </div>
-            
-            <div className="p-6 overflow-y-auto custom-scrollbar text-slate-300 text-sm space-y-5">
+
+            {/* Body */}
+            <div className="p-6 overflow-y-auto custom-scrollbar text-slate-300 text-sm space-y-4">
               <div>
-                <h3 className="text-lg font-semibold text-white mb-2">O que são cookies?</h3>
-                <p className="text-slate-400">
-                  Cookies são pequenos arquivos de texto salvos no seu navegador quando você visita um site. Eles servem para fazer o site funcionar corretamente e de forma mais segura, além de proporcionar uma experiência melhor e personalizada para você.
+                <h3 className="text-base font-semibold text-white mb-1.5">O que são cookies?</h3>
+                <p className="text-slate-400 leading-relaxed">
+                  Cookies e armazenamento local são pequenos arquivos salvos no seu navegador quando você visita um site. Eles servem para manter o site funcionando corretamente, lembrar suas escolhas e ajudar a entender como a página é utilizada.
                 </p>
               </div>
-              
+
+              {/* 1. Necessários */}
               <div className="bg-slate-800/30 p-4 rounded-xl border border-slate-700/50">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
+                  <h3 className="text-base font-semibold text-white flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-indigo-500" />
                     Necessários / Essenciais
                   </h3>
-                  <Toggle checked={true} disabled={true} />
+                  <Toggle checked={true} disabled={true} label="Cookies Essenciais (Sempre ativos)" />
                 </div>
-                <p className="text-slate-400">
-                  Fundamentais para o site funcionar (ex: login, carrinho de compras, segurança). Não exigem consentimento prévio, pois sem eles o site não pode operar.
+                <p className="text-slate-400 leading-relaxed">
+                  Indispensáveis para o funcionamento básico e segurança do portfólio. Incluem o registro local (<code>cookieConsent</code>) que salva suas preferências de cookies no navegador para não exibir o aviso a cada visita, além da proteção contra envios automáticos no formulário de contato.
                 </p>
               </div>
 
+              {/* 2. Analíticos */}
               <div className="bg-slate-800/30 p-4 rounded-xl border border-slate-700/50">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                    Desempenho / Analíticos
+                  <h3 className="text-base font-semibold text-white flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    Desempenho e Analíticos
                   </h3>
-                  <Toggle checked={preferences.analytics} onChange={() => togglePreference('analytics')} />
+                  <Toggle
+                    checked={preferences.analytics}
+                    onChange={() => togglePreference('analytics')}
+                    label="Cookies de Desempenho e Analíticos"
+                  />
                 </div>
-                <p className="text-slate-400">
-                  Medem visitas e erros para melhorar o site (ex: Google Analytics). Eles nos ajudam a saber quais páginas são mais e menos populares e como você navega pelo site.
+                <p className="text-slate-400 leading-relaxed">
+                  Ajudam a entender como os visitantes interagem com o portfólio, medindo de forma agregada as seções mais visitadas, o tempo de navegação e eventuais erros técnicos para melhorar a performance da página.
                 </p>
               </div>
 
+              {/* 3. Funcionalidade */}
               <div className="bg-slate-800/30 p-4 rounded-xl border border-slate-700/50">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                  <h3 className="text-base font-semibold text-white flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-blue-500" />
                     Funcionalidade
                   </h3>
-                  <Toggle checked={preferences.functional} onChange={() => togglePreference('functional')} />
+                  <Toggle
+                    checked={preferences.functional}
+                    onChange={() => togglePreference('functional')}
+                    label="Cookies de Funcionalidade"
+                  />
                 </div>
-                <p className="text-slate-400">
-                  Lembram suas preferências (ex: idioma, região, tema escolhido), para que você não precise configurá-las a cada visita ao site.
+                <p className="text-slate-400 leading-relaxed">
+                  Permitem que o site lembre escolhas opcionais de navegação e interface (como filtros de projetos ou preferências visuais) para proporcionar uma experiência personalizada.
                 </p>
               </div>
 
+              {/* 4. Marketing */}
               <div className="bg-slate-800/30 p-4 rounded-xl border border-slate-700/50">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-pink-500"></div>
-                    Publicidade / Marketing
+                  <h3 className="text-base font-semibold text-white flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-pink-500" />
+                    Publicidade e Marketing
                   </h3>
-                  <Toggle checked={preferences.marketing} onChange={() => togglePreference('marketing')} />
+                  <Toggle
+                    checked={preferences.marketing}
+                    onChange={() => togglePreference('marketing')}
+                    label="Cookies de Publicidade e Marketing"
+                  />
                 </div>
-                <p className="text-slate-400">
-                  Rastreiam hábitos de navegação para mostrar anúncios direcionados e relevantes aos seus interesses, limitando a quantidade de vezes que você vê um anúncio.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-amber-500"></div>
-                  Cookies de Terceiros e Seus Direitos
-                </h3>
-                <p className="text-slate-400">
-                  Informamos que algumas ferramentas externas (como Facebook, Google, etc.) também podem coletar dados através do nosso site. Você pode alterar sua preferência a qualquer momento alterando as chaves acima. Se optar por usar apenas cookies essenciais, funcionalidades que dependem de terceiros podem não funcionar conforme o esperado.
+                <p className="text-slate-400 leading-relaxed">
+                  Utilizados para medir o alcance de campanhas e exibir conteúdos relevantes ao seu perfil profissional. Atualmente este portfólio não exibe anúncios de terceiros, mantendo esta opção desativada por padrão.
                 </p>
               </div>
             </div>
-            
-            <div className="p-4 border-t border-slate-800 bg-slate-900/80 flex flex-col sm:flex-row justify-end gap-3">
+
+            {/* Footer */}
+            <div className="p-4 border-t border-slate-800 bg-slate-900/80 flex flex-col sm:flex-row justify-end gap-2.5">
               <button
-                onClick={() => setIsModalOpen(false)}
-                className="px-6 py-2.5 text-sm font-medium bg-transparent hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg transition-colors border border-transparent hover:border-slate-700"
+                type="button"
+                onClick={handleAcceptEssential}
+                className="px-4 py-2.5 text-sm font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg transition-colors border border-slate-700 cursor-pointer"
               >
-                Cancelar
+                Apenas Essenciais
               </button>
               <button
+                type="button"
                 onClick={handleAcceptAll}
-                className="px-6 py-2.5 text-sm font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg transition-colors border border-slate-700"
+                className="px-4 py-2.5 text-sm font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg transition-colors border border-slate-700 cursor-pointer"
               >
                 Aceitar Todos
               </button>
               <button
+                type="button"
                 onClick={handleSaveCustom}
-                className="px-6 py-2.5 text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors shadow-sm"
+                className="px-5 py-2.5 text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors shadow-sm cursor-pointer"
               >
                 Salvar Preferências
               </button>
