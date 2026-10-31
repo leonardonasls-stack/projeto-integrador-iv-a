@@ -6,10 +6,10 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ## [3.1.0] — 2026-10-30
 
-### 📌 Commit [`ad77e3b`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/ad77e3b) — `docs(readme): atualiza documentacao para v3.1 com estrutura .lgpd, cookies e links`
+### 📌 Commit [`4766945`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/4766945) e [`ad77e3b`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/ad77e3b) — `docs(readme): aplica padroes da skill create-readme com logo, GFM admonitions e cabecalhos limpos`
 
 #### 📝 Documentação
-- **README v3.1**: Atualização de [`README.md`](file:///d:/projetos/projeto-integrador-iv-a/README.md) incluindo a pasta `.lgpd/` na árvore de arquitetura, detalhamento do novo fluxo de Política e Preferências de Cookies (*opt-in* por padrão e atalho no rodapé), remoção de referências antigas de seed do Supabase, correção de links relativos e sincronização da URL oficial do LinkedIn.
+- **README v3.1 (Padrão `create-readme`)**: Revisão completa de [`README.md`](file:///d:/projetos/projeto-integrador-iv-a/README.md) aplicando as diretrizes da skill `create-readme`: inclusão do logo oficial (`./public/icons.svg`) no cabeçalho, uso de blocos de alerta GFM (`> [!NOTE]` e `> [!TIP]`), remoção de excesso de emojis nos títulos, inclusão da pasta `.lgpd/` e `public/` na estrutura do projeto e detalhamento do novo fluxo de Política e Preferências de Cookies.
 
 ### 📌 Commit [`71920cd`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/71920cd) — `content(profile): ajusta texto de apresentacao na secao Hero`
 
