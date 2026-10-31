@@ -13,7 +13,7 @@
 
 Portfólio pessoal moderno desenvolvido em **React 19 + TypeScript + Vite**, com design dark refinado (glassmorphism), animações fluidas com **Framer Motion** e arquitetura estática de alta performance (**Static-First**).
 
-A versão **3.0** consolidou uma arquitetura focada em velocidade máxima, confiabilidade e carregamento instantâneo, com gestão centralizada de dados em [`portfolioData.ts`](file:///c:/Users/Leo-dev/Projeto%20Integrador%20IV-A/src/data/portfolioData.ts), preservando total independência de serviços de banco de dados externos.
+A versão **3.1** consolida uma arquitetura focada em velocidade máxima, confiabilidade, carregamento instantâneo e gestão transparente de privacidade e cookies, com dados centralizados em [`src/data/portfolioData.ts`](./src/data/portfolioData.ts) e total independência de serviços de banco de dados externos.
 
 ---
 
@@ -42,61 +42,68 @@ A versão **3.0** consolidou uma arquitetura focada em velocidade máxima, confi
 | TypeScript strict | Tipagem segura em todo o codebase |
 | Vitest ^5.0.0 + happy-dom | Testes unitários com ambiente DOM simulado |
 | @testing-library/react | Utilitários de teste para componentes React |
-| axe-core | Auditoria automatizada de acessibilidade (WCAG) |
 | GitHub Actions (CI) | Pipeline de lint, build e testes contínuos |
-| tsx ^4.23.15 | Executor TypeScript para o script de seed do Supabase |
 
 ---
 
 ## 🗂️ Arquitetura do Projeto
 
 ```
-src/
-├── App.tsx                    # Orquestrador com providers e estrutura principal
-├── main.tsx                   # Entry point do React (com ErrorBoundary global)
+├── .lgpd/                         # Documentação de auditoria de privacidade, mapeamento e política de cookies
+│   ├── STATUS.md                  # Status consolidado da auditoria
+│   ├── discovery.md               # Levantamento técnico de fluxos e armazenamento local
+│   ├── gaps.md                    # Análise de lacunas e plano de remediação
+│   ├── data-map.md                # Inventário das atividades de tratamento de dados
+│   ├── legal-basis.md             # Fundamentação das bases legais por atividade
+│   └── policies/
+│       └── privacy-policy-v1.0-draft.md # Política de Cookies documentada
 │
-├── components/
-│   ├── layout/
-│   │   ├── Navbar.tsx         # Navegação fixa com scroll-spy e menu mobile responsivo
-│   │   └── Footer.tsx         # Rodapé com links sociais, scroll-to-top e badge WCAG
-│   │
-│   ├── portfolio/
-│   │   ├── Hero.tsx           # Seção inicial: headline dinâmico, card de código FastAPI animado, CTAs
-│   │   ├── AboutSection.tsx   # Bio, pilares técnicos e formação acadêmica (CESMAC)
-│   │   ├── TechStack.tsx      # Skills organizadas por categorias + princípios de IHC/UX
-│   │   ├── ProjectGrid.tsx    # Grid responsivo com busca em tempo real e filtros por categoria
-│   │   ├── ProjectCard.tsx    # Card de projeto com animação Framer Motion e tags de tecnologia
-│   │   ├── ProjectModal.tsx   # Modal de detalhes: stack completa, links GitHub/Demo e acessibilidade
-│   │   └── ContactSection.tsx # Formulário Formspree + honeypot + cooldown + fallback mailto:
-│   │
-│   └── ui/
-│       ├── ToastContainer.tsx # Sistema de notificações por toasts
-│       ├── SocialIcons.tsx    # Ícones SVG inline otimizados
-│       ├── CookieConsent.tsx  # Banner LGPD com preferências granulares e modal de política
-│       └── ErrorBoundary.tsx  # Boundary de erros React para recuperação suave
-│
-├── context/
-│   ├── ProjectContext.tsx     # Filtro, busca e gestão de projetos
-│   ├── ProfileContext.tsx     # Dados de perfil, biografia e textos da home
-│   ├── SkillContext.tsx       # Gestão de habilidades e categorias
-│   └── ToastContext.tsx       # Sistema global de notificações por toast
-│
-├── data/
-│   └── portfolioData.ts       # Fonte única da verdade: perfil, skills, categorias e projetos
-│
-├── services/
-│   ├── emailService.ts        # Integração Formspree + fallback inteligente para mailto:
-│   ├── storageService.ts      # Wrapper seguro para localStorage (erros e quotas)
-│   ├── emailService.test.ts   # Testes Vitest — envio e resiliência a falhas de rede
-│   └── storageService.test.ts # Testes Vitest — persistência segura
-│
-├── types/
-│   ├── index.ts               # Project, ProjectCategory, ToastMessage
-│   ├── profile.ts             # ProfileData e padrões de perfil
-│   └── skill.ts               # Skill, SkillCategory, SkillLevel
-│
-└── utils/
-    └── urlHelper.ts           # Validação e sanitização segura de URLs
+└── src/
+    ├── App.tsx                    # Orquestrador com providers e estrutura principal
+    ├── main.tsx                   # Entry point do React (com ErrorBoundary global)
+    │
+    ├── components/
+    │   ├── layout/
+    │   │   ├── Navbar.tsx         # Navegação fixa com scroll-spy e menu mobile responsivo
+    │   │   └── Footer.tsx         # Rodapé com links sociais, scroll-to-top e atalho para Preferências de Cookies
+    │   │
+    │   ├── portfolio/
+    │   │   ├── Hero.tsx           # Seção inicial: headline dinâmico, card de código FastAPI animado, CTAs
+    │   │   ├── AboutSection.tsx   # Bio, pilares técnicos e formação acadêmica (CESMAC)
+    │   │   ├── TechStack.tsx      # Skills organizadas por categorias + princípios de IHC/UX
+    │   │   ├── ProjectGrid.tsx    # Grid responsivo com busca em tempo real e filtros por categoria
+    │   │   ├── ProjectCard.tsx    # Card de projeto com animação Framer Motion e tags de tecnologia
+    │   │   ├── ProjectModal.tsx   # Modal de detalhes: stack completa, links GitHub/Demo e acessibilidade
+    │   │   └── ContactSection.tsx # Formulário Formspree + honeypot + cooldown + fallback mailto:
+    │   │
+    │   └── ui/
+    │       ├── ToastContainer.tsx # Sistema de notificações por toasts
+    │       ├── SocialIcons.tsx    # Ícones SVG inline otimizados
+    │       ├── CookieConsent.tsx  # Banner e modal de Política de Cookies (opt-in por padrão e gestão granular)
+    │       └── ErrorBoundary.tsx  # Boundary de erros React para recuperação suave
+    │
+    ├── context/
+    │   ├── ProjectContext.tsx     # Filtro, busca e gestão de projetos
+    │   ├── ProfileContext.tsx     # Dados de perfil, biografia e textos da home
+    │   ├── SkillContext.tsx       # Gestão de habilidades e categorias
+    │   └── ToastContext.tsx       # Sistema global de notificações por toast
+    │
+    ├── data/
+    │   └── portfolioData.ts       # Fonte única da verdade: perfil, skills, categorias e projetos
+    │
+    ├── services/
+    │   ├── emailService.ts        # Integração Formspree + fallback inteligente para mailto:
+    │   ├── storageService.ts      # Wrapper seguro para localStorage (erros e quotas)
+    │   ├── emailService.test.ts   # Testes Vitest — envio e resiliência a falhas de rede
+    │   └── storageService.test.ts # Testes Vitest — persistência segura
+    │
+    ├── types/
+    │   ├── index.ts               # Project, ProjectCategory, ToastMessage
+    │   ├── profile.ts             # ProfileData e padrões de perfil
+    │   └── skill.ts               # Skill, SkillCategory, SkillLevel
+    │
+    └── utils/
+        └── urlHelper.ts           # Validação e sanitização segura de URLs
 ```
 
 ---
@@ -110,15 +117,15 @@ src/
 - **Vitrine de Projetos**: Grid responsivo com filtros por categoria (Frontend, Fullstack, Backend, Mobile, IHC/UX) e busca por palavras-chave em tempo real.
 - **Modal de Detalhes**: Apresentação da arquitetura do projeto, links para GitHub e demonstração online, ou indicador de repositório privado com navegação via teclado (`ESC`).
 - **Formulário de Contato**: Integrado ao Formspree com validação de formato, proteção honeypot contra bots, cooldown de envio e fallback automático para cliente de e-mail local.
-- **Privacidade & Cookies (LGPD)**: Banner com consentimento granular e modal explicativo de políticas.
+- **Gestão e Política de Cookies**: Banner e modal com explicação clara das categorias (**Necessários / Essenciais**, **Desempenho e Analíticos**, **Funcionalidade** e **Publicidade e Marketing**), categorias opcionais desmarcadas por padrão (*opt-in*), persistência versionada via `StorageService` e reabertura a qualquer momento pelo botão **"Preferências de Cookies"** no rodapé.
 
 ---
 
 ## ♿ Acessibilidade (WCAG / Nielsen)
 
-- **0 violações** detectadas na auditoria automatizada com **axe-core**.
+- **0 violações** detectadas na auditoria de acessibilidade.
 - Navegação completa por teclado (`Tab`, `Shift+Tab`, `ESC`, `Enter`).
-- Atributos `aria-label`, `aria-modal` e `role="dialog"` para compatibilidade total com leitores de tela.
+- Atributos `aria-label`, `aria-modal`, `role="dialog"` e `role="switch"` para compatibilidade total com leitores de tela.
 - Notificações de formulário e status com áreas acessíveis.
 - Alto contraste e foco visível garantidos.
 
@@ -203,11 +210,11 @@ npm run test
 ## 📬 Contato
 
 - **GitHub**: [github.com/leonardonasls-stack](https://github.com/leonardonasls-stack)
-- **LinkedIn**: [linkedin.com/in/leonardonasls](https://linkedin.com/in/leonardonasls)
+- **LinkedIn**: [linkedin.com/in/leonardolnascimento](https://www.linkedin.com/in/leonardolnascimento)
 - **E-mail**: leonardonasls@gmail.com
 
 ---
 
 <div align="center">
-  <sub>v3.0 — Desenvolvido com React 19, TypeScript 6, Vite 8, Tailwind CSS v4 e Framer Motion</sub>
+  <sub>v3.1 — Desenvolvido com React 19, TypeScript 6, Vite 8, Tailwind CSS v4 e Framer Motion</sub>
 </div>
