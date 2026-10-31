@@ -4,6 +4,28 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 > **Regra de Projeto**: Toda nova funcionalidade, correção ou alteração relevante deve obrigatoriamente ser registrada neste changelog acompanhada do **código hash do commit Git** correspondente (`7 caracteres ou hash completo`).
 
+## [3.1.0] — 2026-10-30
+
+### 📌 Commit [`71920cd`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/71920cd) — `content(profile): ajusta texto de apresentacao na secao Hero`
+
+#### ✏️ Conteúdo
+- **Apresentação do Perfil**: Ajuste no texto de `heroDescription` em [`portfolioData.ts`](file:///d:/projetos/projeto-integrador-iv-a/src/data/portfolioData.ts) para tornar a apresentação inicial mais direta e concisa.
+
+### 📌 Commit [`daa3507`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/daa3507) — `feat(cookies): atualiza modal de politica de cookies, opt-in por padrao e atalho no rodape`
+
+#### 🍪 Privacidade & Experiência do Usuário (UI/UX)
+- **Opt-in por Padrão**: Categorias opcionais de cookies (`analytics`, `functional`, `marketing`) em [`CookieConsent.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/ui/CookieConsent.tsx) agora iniciam desmarcadas (`false`) por padrão.
+- **Política de Cookies Limpa e Objetiva**: Reescrita das descrições no modal para explicar de forma direta o papel de cada categoria de cookie (**Necessários / Essenciais**, **Desempenho e Analíticos**, **Funcionalidade** e **Publicidade e Marketing**) e o uso da chave `cookieConsent` no `localStorage` via [`StorageService`](file:///d:/projetos/projeto-integrador-iv-a/src/services/storageService.ts), com controle de versão (`v2.0`) e `timestamp`.
+- **Botão de Rejeição Rápida no Modal**: Inclusão da opção **"Apenas Essenciais"** diretamente no rodapé do modal de preferências.
+- **Reabertura Facilitada no Rodapé**: Adição do botão **"Preferências de Cookies"** em [`Footer.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/layout/Footer.tsx) conectado ao evento global `openCookieSettings()` para permitir revisar ou alterar escolhas a qualquer momento.
+
+### 📌 Commit [`0e4194b`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/0e4194b) — `docs(lgpd): adiciona auditoria de privacidade, mapeamento de dados e politica de cookies`
+
+#### 🛡️ Governança & Documentação (`.lgpd/`)
+- **Auditoria e Inventário de Privacidade**: Inclusão dos artefatos de auditoria em `.lgpd/`, contemplando levantamento técnico ([`discovery.md`](file:///d:/projetos/projeto-integrador-iv-a/.lgpd/discovery.md)), análise de lacunas ([`gaps.md`](file:///d:/projetos/projeto-integrador-iv-a/.lgpd/gaps.md)), mapeamento de dados ([`data-map.md`](file:///d:/projetos/projeto-integrador-iv-a/.lgpd/data-map.md)), bases legais ([`legal-basis.md`](file:///d:/projetos/projeto-integrador-iv-a/.lgpd/legal-basis.md)), status do pipeline ([`STATUS.md`](file:///d:/projetos/projeto-integrador-iv-a/.lgpd/STATUS.md)) e documento da política de cookies ([`privacy-policy-v1.0-draft.md`](file:///d:/projetos/projeto-integrador-iv-a/.lgpd/policies/privacy-policy-v1.0-draft.md)).
+
+---
+
 ## [3.0.0] — 2026-10-22
 
 ### 📌 Commit [`70fc57d`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/70fc57d) — `feat(core): consolidação da arquitetura estática v3.0, sincronização de dados e refinamentos de UI/UX`
