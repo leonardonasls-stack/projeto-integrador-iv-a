@@ -6,6 +6,11 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ## [3.1.0] — 2026-10-30
 
+### 📌 Commit [`2925989`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/2925989) — `feat(contact): adiciona botao de direcionamento para WhatsApp com mensagem personalizada`
+
+#### 💬 Contato & Canais Diretos
+- **Direcionamento via WhatsApp**: Inclusão do ícone `WhatsappIcon` em [`SocialIcons.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/ui/SocialIcons.tsx) e do cartão de atendimento direto em [`ContactSection.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/portfolio/ContactSection.tsx) com botão **"Conversar"** (sem exibir o número na tela) e mensagem pré-preenchida identificando a origem do contato pelo portfólio.
+
 ### 📌 Commit [`4766945`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/4766945) e [`ad77e3b`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/ad77e3b) — `docs(readme): aplica padroes da skill create-readme com logo, GFM admonitions e cabecalhos limpos`
 
 #### 📝 Documentação
