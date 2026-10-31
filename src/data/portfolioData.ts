@@ -7,7 +7,7 @@ export const portfolioProfile: ProfileData = {
   heroTitlePrefix: 'Desenvolvedor de Software',
   heroTitleHighlight: 'Backend Python & Frontend Web',
   heroDescription:
-    'Olá! Sou Leonardo Nascimento, desenvolvedor Full Stack e graduando em Análise e Desenvolvimento de Sistemas pelo CESMAC. Foco na criação de aplicações web modernas, eficientes e escaláveis, desenvolvendo APIs RESTful de alta performance com Python e FastAPI, além de interfaces responsivas e interativas com TypeScript e React. Priorizo arquitetura limpa, conteinerização com Docker e uma excelente experiência de usuário.',
+    'Olá! Sou Leonardo Nascimento, graduando em Análise e Desenvolvimento de Sistemas pelo CESMAC. Foco na criação de aplicações web modernas, eficientes e escaláveis, desenvolvendo APIs RESTful de alta performance com Python e FastAPI, além de interfaces responsivas e interativas com TypeScript e React. Priorizo arquitetura limpa, conteinerização com Docker e uma excelente experiência de usuário.',
   aboutBio:
     'Desenvolvedor com sólida vivência prática no ecossistema Python com FastAPI e desenvolvimento web com React e TypeScript. Graduando em Análise e Desenvolvimento de Sistemas pelo CESMAC, aplico conceitos de arquitetura limpa, validação estrita com Pydantic v2, bancos relacionais e integração full stack de ponta a ponta.',
   academicTitle: 'Análise e Desenvolvimento de Sistemas',
