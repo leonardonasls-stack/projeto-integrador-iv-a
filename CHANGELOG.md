@@ -6,6 +6,11 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ## [3.1.0] — 2026-10-30
 
+### 📌 Commit [`ad77e3b`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/ad77e3b) — `docs(readme): atualiza documentacao para v3.1 com estrutura .lgpd, cookies e links`
+
+#### 📝 Documentação
+- **README v3.1**: Atualização de [`README.md`](file:///d:/projetos/projeto-integrador-iv-a/README.md) incluindo a pasta `.lgpd/` na árvore de arquitetura, detalhamento do novo fluxo de Política e Preferências de Cookies (*opt-in* por padrão e atalho no rodapé), remoção de referências antigas de seed do Supabase, correção de links relativos e sincronização da URL oficial do LinkedIn.
+
 ### 📌 Commit [`71920cd`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/71920cd) — `content(profile): ajusta texto de apresentacao na secao Hero`
 
 #### ✏️ Conteúdo
