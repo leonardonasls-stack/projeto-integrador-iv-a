@@ -172,7 +172,7 @@ export const portfolioProjects: Project[] = [
     techs: ['React', 'Tailwind CSS', 'TypeScript', 'Vite'],
     githubUrl: undefined,
     demoUrl: 'https://quadriciclomilagres.com',
-    imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/quadriciclo-milagres.jpg',
     featured: false,
     visible: true,
     position: 2,
