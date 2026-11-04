@@ -6,6 +6,11 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ## [3.1.0] — 2026-10-30
 
+### 📌 Commit [`0387999`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/0387999) — `feat(portfolio): atualiza projeto para Quadriciclo Milagres Adventure com referencia ao site`
+
+#### 🚀 Projetos & Portfólio
+- **Referência Quadriciclo Milagres Adventure**: Atualização do projeto em [`portfolioData.ts`](file:///d:/projetos/projeto-integrador-iv-a/src/data/portfolioData.ts), referenciando o site de passeios ecológicos e turismo de aventura [`https://quadriciclomilagres.com`](https://quadriciclomilagres.com), detalhando as rotas de quadriciclo (Rota Milagres, Mirante do Cruzeiro, Carro Quebrado), diretrizes de segurança e canal direto de reservas.
+
 ### 📌 Commit [`2925989`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/2925989) — `feat(contact): adiciona botao de direcionamento para WhatsApp com mensagem personalizada`
 
 #### 💬 Contato & Canais Diretos
