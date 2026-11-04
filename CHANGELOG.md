@@ -6,6 +6,11 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ## [3.1.0] — 2026-10-30
 
+### 📌 Commit [`540cc1a`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/540cc1a) — `feat(portfolio): adiciona imagem oficial da Quadriciclo Milagres Adventure`
+
+#### 🖼️ Mídia & Ativos Visuais
+- **Identidade Visual do Projeto**: Inclusão da imagem oficial [`public/quadriciclo-milagres.jpg`](file:///d:/projetos/projeto-integrador-iv-a/public/quadriciclo-milagres.jpg) destacando o quadriciclo e o logotipo da *Quadriciclo Milagres Adventure* nos cards e modal de detalhes do portfólio.
+
 ### 📌 Commit [`0387999`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/0387999) — `feat(portfolio): atualiza projeto para Quadriciclo Milagres Adventure com referencia ao site`
 
 #### 🚀 Projetos & Portfólio
