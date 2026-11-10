@@ -179,6 +179,22 @@ export const portfolioProjects: Project[] = [
     createdAt: '2026'
   },
   {
+    id: '8f4c12a0-9b3e-4d71-82c4-5a19f0e3b712',
+    title: 'Milagres Transparente',
+    description: 'Site oficial da agência de turismo e receptivo Milagres Transparente em São Miguel dos Milagres, AL.',
+    fullDescription:
+      'O Milagres Transparente é a plataforma web oficial desenvolvida para a agência de turismo homônima situada em São Miguel dos Milagres, Alagoas, cobrindo experiências pela Rota Ecológica dos Milagres, Maragogi e Maceió.\n\nA aplicação apresenta os roteiros turísticos (passeios de jangada às piscinas naturais, buggy, quadriciclo e mergulho), mídias reais de clientes e converte o tráfego de visitantes em atendimentos imediatos via WhatsApp, com mensagens personalizadas pré-preenchidas para cada passeio.',
+    category: 'Frontend',
+    techs: ['React', 'Tailwind CSS', 'JavaScript', 'Vite'],
+    githubUrl: undefined,
+    demoUrl: 'https://www.milagrestransparente.com',
+    imageUrl: '/milagres-transparente-logo.webp',
+    featured: false,
+    visible: true,
+    position: 3,
+    createdAt: '2026'
+  },
+  {
     id: 'da38e0c9-639c-4c51-97ef-c232e3ace23b',
     title: 'Console-Telegram-Bot',
     description: 'Bot para gerenciar container no docker e Tunel ngrok',
@@ -190,7 +206,7 @@ export const portfolioProjects: Project[] = [
     imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
     featured: false,
     visible: true,
-    position: 3,
+    position: 4,
     createdAt: '2026'
   },
   {

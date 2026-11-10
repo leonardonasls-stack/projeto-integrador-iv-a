@@ -49,7 +49,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               onError={(e) => {
                 (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80';
               }}
-              className="w-full h-full object-cover"
+              className={`w-full h-full ${project.imageUrl.includes('logo') ? 'object-contain p-6' : 'object-cover'}`}
             />
             <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/40 to-transparent" />
 
