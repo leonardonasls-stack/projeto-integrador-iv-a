@@ -6,6 +6,16 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ## [3.1.0] — 2026-10-30
 
+### 📌 Commit [`254c3c8`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/254c3c8) — `feat(portfolio): atualiza projeto Milagres Transparente com dominio oficial e logo na capa`
+
+#### 🚀 Projetos & Portfólio
+- **Milagres Transparente**: Atualização do projeto em [`portfolioData.ts`](file:///d:/projetos/projeto-integrador-iv-a/src/data/portfolioData.ts) apontando para o domínio oficial [`https://www.milagrestransparente.com`](https://www.milagrestransparente.com), inclusão da logo oficial em [`public/milagres-transparente-logo.webp`](file:///d:/projetos/projeto-integrador-iv-a/public/milagres-transparente-logo.webp) como imagem de capa e ajuste de enquadramento (`object-contain`) para logos em [`ProjectCard.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/portfolio/ProjectCard.tsx) e [`ProjectModal.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/portfolio/ProjectModal.tsx).
+
+### 📌 Commit [`c9de2d2`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/c9de2d2) — `chore(git): adiciona pasta .agents ao .gitignore e remove do rastreamento`
+
+#### ⚙️ Configuração de Repositório
+- **Gitignore**: Inclusão da pasta `.agents/` em [`.gitignore`](file:///d:/projetos/projeto-integrador-iv-a/.gitignore) e remoção do índice de rastreamento do Git.
+
 ### 📌 Commit [`540cc1a`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/540cc1a) — `feat(portfolio): adiciona imagem oficial da Quadriciclo Milagres Adventure`
 
 #### 🖼️ Mídia & Ativos Visuais
