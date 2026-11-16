@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { WhatsappIcon } from '../ui/SocialIcons';
 
 export const Navbar: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
       const sections = ['inicio', 'sobre', 'habilidades', 'projetos', 'contato'];
-      const scrollPosition = window.scrollY + 120;
+      const scrollPosition = window.scrollY + 140;
 
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
@@ -26,14 +25,14 @@ export const Navbar: React.FC = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
     { id: 'inicio', label: 'Início' },
-    { id: 'sobre', label: 'Sobre Mim' },
-    { id: 'habilidades', label: 'Habilidades' },
+    { id: 'sobre', label: 'Sobre' },
+    { id: 'habilidades', label: 'Stack' },
     { id: 'projetos', label: 'Projetos' },
     { id: 'contato', label: 'Contato' },
   ];
@@ -47,13 +46,9 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? 'py-3' : 'py-5'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="glass-panel px-4 py-2.5 rounded-2xl border border-white/10 shadow-2xl shadow-black/80 flex items-center justify-between backdrop-blur-xl">
+    <header className="fixed top-4 left-0 right-0 z-40 px-4 pointer-events-none">
+      <div className="max-w-fit mx-auto pointer-events-auto">
+        <div className="bg-surface/85 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 shadow-2xl shadow-black/60 flex items-center gap-3 sm:gap-5">
           {/* Brand Logo */}
           <a
             href="#inicio"
@@ -61,86 +56,83 @@ export const Navbar: React.FC = () => {
               e.preventDefault();
               scrollTo('inicio');
             }}
-            className="flex items-center group focus:outline-none focus:ring-2 focus:ring-violet-400 rounded-xl p-1 transition-transform hover:opacity-95"
+            className="pl-2 pr-1 py-0.5 rounded-full hover:opacity-90 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 flex items-center"
             aria-label="Ir para o início do portfólio"
           >
-            <img src="/icons.svg" alt="Leonardo Nascimento" className="h-11 sm:h-12 w-auto" />
+            <img src="/icons.svg" alt="Leonardo Nascimento" className="h-9 sm:h-10 w-auto" />
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-slate-950/60 p-1 rounded-xl border border-white/5">
+          {/* Desktop Floating Pill Navigation */}
+          <nav className="hidden md:flex items-center gap-0.5" aria-label="Navegação principal">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <button
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
-                  className={`px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400 ${
-                    isActive
-                      ? 'bg-linear-to-r from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-600/30 font-semibold'
-                      : 'text-slate-400 hover:text-white hover:bg-white/5'
+                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
+                    isActive ? 'text-canvas font-semibold' : 'text-gray-400 hover:text-white'
                   }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
-                  {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      className="absolute inset-0 bg-emerald-400 rounded-full z-0"
+                    />
+                  )}
+                  <span className="relative z-10">{link.label}</span>
                 </button>
               );
             })}
           </nav>
 
-          {/* Right Action Button */}
-          <div className="hidden lg:flex items-center gap-3">
-            <button
-              onClick={() => scrollTo('contato')}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-linear-to-r from-violet-600/20 to-sky-500/20 text-sky-200 border border-violet-500/30 hover:border-violet-400 hover:text-white transition-all focus:outline-none focus:ring-2 focus:ring-violet-400"
-            >
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Disponível para Projetos</span>
-              <ArrowUpRight className="w-3.5 h-3.5 ml-1 text-sky-400" />
-            </button>
-          </div>
+          {/* WhatsApp CTA */}
+          <a
+            href={`https://wa.me/5582999974649?text=${encodeURIComponent('Olá Leonardo! Vim através do seu portfólio e gostaria de conversar.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center justify-center p-2.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/25 hover:bg-emerald-500/20 hover:border-emerald-400/50 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+            aria-label="Conversar no WhatsApp"
+            title="WhatsApp"
+          >
+            <WhatsappIcon className="w-5 h-5 text-emerald-400" />
+          </a>
 
-          {/* Mobile Menu Toggle Button */}
-          <div className="flex md:hidden items-center gap-2">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-300 hover:text-white rounded-lg bg-slate-900 border border-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-400"
-              aria-label={mobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-1.5 text-gray-300 hover:text-white rounded-full hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+            aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+          </button>
         </div>
+
+        {/* Mobile Dropdown */}
+        {mobileMenuOpen && (
+          <div className="mt-2 md:hidden bg-surface/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-2xl flex flex-col gap-1">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => scrollTo(link.id)}
+                  className={`w-full text-left px-4 py-2 text-xs font-medium rounded-xl transition-colors ${
+                    isActive
+                      ? 'bg-emerald-500/15 text-emerald-300 font-semibold'
+                      : 'text-gray-300 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
-
-      {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div className="max-w-7xl mx-auto px-4 mt-2 md:hidden">
-          <div className="glass-panel border border-white/10 rounded-2xl p-3 space-y-1.5 shadow-2xl">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollTo(link.id)}
-                className={`w-full text-left px-3.5 py-2 rounded-xl text-xs font-medium transition-colors ${
-                  activeSection === link.id
-                    ? 'bg-linear-to-r from-violet-600 to-indigo-600 text-white font-semibold'
-                    : 'text-slate-300 hover:bg-white/5 hover:text-white'
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
-            <button
-              onClick={() => scrollTo('contato')}
-              className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-semibold bg-violet-600/20 text-violet-200 border border-violet-500/30 flex items-center justify-between"
-            >
-              <span>Falar Comigo</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      )}
     </header>
   );
 };
