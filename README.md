@@ -12,6 +12,9 @@
     <a href="https://github.com/leonardonasls-stack/projeto-integrador-iv-a/actions/workflows/ci.yml">
       <img src="https://github.com/leonardonasls-stack/projeto-integrador-iv-a/actions/workflows/ci.yml/badge.svg" alt="CI — Integration & Build Check" />
     </a>
+    <a href="https://leonascimentodev-sooty.vercel.app/">
+      <img src="https://img.shields.io/badge/demo-online-10b981" alt="Demo Online" />
+    </a>
   </p>
 </div>
 
@@ -19,10 +22,10 @@
 
 ## Visão Geral
 
-Aplicação web de portfólio pessoal desenvolvida em **React 19**, **TypeScript** e **Vite**, estilizada com **Tailwind CSS v4** e animações em **Framer Motion**.
+Aplicação web de portfólio pessoal desenvolvida em **React 19**, **TypeScript** e **Vite**, com sistema de design editorial **Terminal Emerald** construído sobre **Tailwind CSS v4** e **Framer Motion**.
 
 > [!NOTE]
-> **Arquitetura Static-First (v3.1):** Todos os dados de perfil, habilidades e projetos são gerenciados de forma centralizada e tipada em [`src/data/portfolioData.ts`](./src/data/portfolioData.ts), garantindo carregamento instantâneo e zero dependência de bancos de dados externos em tempo de execução.
+> **Arquitetura Static-First & Design System Terminal Emerald (v4.0):** Todos os dados de perfil, competências e projetos são mantidos de forma centralizada e tipada em [`src/data/portfolioData.ts`](./src/data/portfolioData.ts), combinando carregamento instantâneo sem dependências externas de banco de dados a uma interface editorial de alto contraste (`#090b0e`, `#11151c`, `#10b981`, `#06b6d4`).
 
 ---
 
@@ -34,19 +37,18 @@ Aplicação web de portfólio pessoal desenvolvida em **React 19**, **TypeScript
 | React | `^19.2.8` | Construção da interface modular (SPA) e gerenciamento de estado via Context API |
 | TypeScript | `~6.0.2` | Tipagem estática estrita em componentes, contextos e serviços |
 | Vite | `^8.2.2` | Bundler de produção e servidor de desenvolvimento com HMR |
-| Tailwind CSS | `^4.3.3` | Sistema de estilização utilitária, responsiva e tema dark |
-| Framer Motion | `^13.2.0` | Transições e animações declarativas |
+| Tailwind CSS | `^4.3.3` | Tokens semânticos via `@theme` (paleta *Terminal Emerald*) e layout responsivo |
+| Framer Motion | `^13.2.0` | Animações declarativas, transições de layout (`layoutId`) e suporte a `reducedMotion` |
 | Lucide React | `^1.41.0` | Biblioteca de ícones vetoriais |
 | Inter (`@fontsource/inter`) | `^5.3.0` | Tipografia auto-hospedada sem requisições externas para fontes |
 
-### Qualidade, Testes e Integrações
-| Ferramenta / Serviço | Papel |
+### Qualidade e Testes
+| Ferramenta | Papel |
 |---|---|
 | OxLint (`^1.79.0`) | Linter estático de alta velocidade |
 | Vitest (`^5.0.0`) + `happy-dom` | Execução de testes unitários com simulação leve de DOM |
 | `@testing-library/react` | Utilitários de teste voltados ao comportamento de componentes |
 | GitHub Actions | Pipeline de integração contínua (lint, build e testes) |
-| Formspree | Processamento do formulário de contato com fallback automático para `mailto:` |
 
 ---
 
@@ -62,32 +64,33 @@ Aplicação web de portfólio pessoal desenvolvida em **React 19**, **TypeScript
 │   └── policies/
 │       └── privacy-policy-v1.0-draft.md
 │
-├── public/                        # Ativos públicos estáticos (favicon.svg, icons.svg)
+├── public/                        # Ativos estáticos, logos de projetos e imagem Open Graph (og-image.jpg)
 └── src/
-    ├── App.tsx                    # Composição de providers e layout principal
+    ├── App.tsx                    # Composição de providers, MotionConfig e layout principal
+    ├── index.css                  # Definição de tokens @theme (Terminal Emerald) e utilitários globais
     ├── main.tsx                   # Ponto de entrada com ErrorBoundary global
     ├── components/
     │   ├── layout/
-    │   │   ├── Navbar.tsx         # Navegação fixa com scroll-spy e menu mobile responsivo
-    │   │   └── Footer.tsx         # Rodapé com links sociais, retorno ao topo e Preferências de Cookies
+    │   │   ├── Navbar.tsx         # Floating pill dock com indicador animado (layoutId) e atalho WhatsApp
+    │   │   └── Footer.tsx         # Rodapé minimalista com links sociais, retorno ao topo e Preferências de Cookies
     │   ├── portfolio/
-    │   │   ├── Hero.tsx           # Seção principal com card de código FastAPI animado e CTAs
-    │   │   ├── AboutSection.tsx   # Biografia, pilares técnicos e formação acadêmica
-    │   │   ├── TechStack.tsx      # Habilidades agrupadas por categoria e diretrizes de IHC/UX
-    │   │   ├── ProjectGrid.tsx    # Listagem de projetos com busca textual e filtro por categoria
-    │   │   ├── ProjectCard.tsx    # Card individual de projeto
-    │   │   ├── ProjectModal.tsx   # Modal detalhado com descrição completa e links externos
-    │   │   └── ContactSection.tsx # Formulário de contato com honeypot, cooldown e fallback mailto:
+    │   │   ├── Hero.tsx           # Layout editorial assimétrico com card de código FastAPI (api_server.py)
+    │   │   ├── AboutSection.tsx   # Biografia técnica, pilares de engenharia e timeline acadêmica vertical
+    │   │   ├── TechStack.tsx      # Grade arquitetural em 2 colunas de competências Frontend e Backend Python
+    │   │   ├── ProjectGrid.tsx    # Catálogo de projetos com busca textual e filtro por categoria
+    │   │   ├── ProjectCard.tsx    # Card editorial de projeto com suporte a capas e logotipos
+    │   │   ├── ProjectModal.tsx   # Modal detalhado com descrição completa, stack e links externos
+    │   │   └── ContactSection.tsx # Seção editorial em 2 colunas com cópia rápida de e-mail e canais diretos
     │   └── ui/
-    │       ├── CookieConsent.tsx  # Banner e modal de Política e Preferências de Cookies
+    │       ├── CookieConsent.tsx  # Banner e modal de Política e Preferências de Cookies (opt-in por padrão)
     │       ├── ErrorBoundary.tsx  # Captura e tratamento de erros de renderização
-    │       ├── SocialIcons.tsx    # Ícones SVG otimizados (GitHub, LinkedIn)
+    │       ├── SocialIcons.tsx    # Ícones SVG otimizados (GitHub, LinkedIn, WhatsApp)
     │       └── ToastContainer.tsx # Exibição de notificações temporárias (toasts)
     ├── context/                   # Contextos React (Profile, Project, Skill, Toast)
     ├── data/
-    │   └── portfolioData.ts       # Fonte única de dados do portfólio
+    │   └── portfolioData.ts       # Fonte única de dados do portfólio (perfil, stack e projetos)
     ├── services/
-    │   ├── emailService.ts        # Cliente HTTP Formspree e fallback mailto:
+    │   ├── emailService.ts        # Serviço de envio e fallback para mailto:
     │   ├── emailService.test.ts   # Testes unitários do serviço de e-mail
     │   ├── storageService.ts      # Abstração segura para leitura e escrita no localStorage
     │   └── storageService.test.ts # Testes unitários do serviço de armazenamento
@@ -100,11 +103,12 @@ Aplicação web de portfólio pessoal desenvolvida em **React 19**, **TypeScript
 
 ## Funcionalidades Principais
 
-- **Apresentação e Stack Técnica**: Seção Hero com simulação interativa de endpoint FastAPI, seção Sobre Mim com histórico acadêmico no CESMAC e visualização de competências técnicas divididas entre Frontend e Backend Python.
-- **Catálogo de Projetos com Busca e Filtro**: Filtragem instantânea por categoria (`Frontend`, `Fullstack`, `Backend`, `Mobile`) combinada à busca por título, descrição ou tecnologia, além de modal de detalhes acessível via teclado (`ESC`).
-- **Formulário de Contato Resiliente**: Proteção anti-spam via campo *honeypot* (`_gotcha`), intervalo mínimo entre envios (*cooldown* de 30 segundos) e envio direto via Formspree ou cliente de e-mail padrão.
+- **Design Editorial Terminal Emerald**: Interface construída com tokens semânticos (`canvas`, `surface`, `emerald`, `cyan`), navegação flutuante (*floating pill dock*) e seção Hero com simulação de servidor FastAPI (`api_server.py`).
+- **Sobre Mim & Competências Arquiteturais**: Apresentação com timeline vertical da graduação em Análise e Desenvolvimento de Sistemas (CESMAC) e grade técnica dividida entre ecossistema Python/FastAPI e Frontend React/TypeScript.
+- **Vitrine de Projetos em Produção**: Listagem com busca em tempo real e filtro por categoria (`Frontend`, `Fullstack`, `Backend`, `Mobile`), destacando sistemas SaaS multi-tenant (**LLSystem OS**, **LLSystem PDV**) e plataformas web em produção (**Milagres Transparente**, **Quadriciclo Milagres Adventure**).
+- **Canais Diretos de Contato**: Layout em duas colunas com disparo direto de e-mail, cópia instantânea de endereço para a área de transferência (com feedback via *toast*) e redirecionamento para WhatsApp com mensagem contextualizada.
 - **Gestão Transparente de Cookies**: Categorias opcionais (**Desempenho e Analíticos**, **Funcionalidade**, **Publicidade e Marketing**) desmarcadas por padrão (*opt-in*), persistência versionada em `localStorage` (`cookieConsent`) e reabertura a qualquer momento pelo rodapé.
-- **Acessibilidade**: Navegação completa por teclado (`Tab`, `Shift+Tab`, `ESC`, `Enter`), semântica ARIA (`role="dialog"`, `role="switch"`, `aria-modal`) e alto contraste visual.
+- **Acessibilidade & SEO**: Respeito automático à preferência de movimento reduzido do sistema operacional (`<MotionConfig reducedMotion="user">`), navegação por teclado (`Tab`, `ESC`, `Enter`), atributos ARIA e meta tags Open Graph / Twitter Cards configuradas com `og-image.jpg`.
 
 ---
 
@@ -142,19 +146,6 @@ A aplicação ficará disponível em `http://localhost:5173/`.
 
 ---
 
-## Variáveis de Ambiente
-
-Crie um arquivo `.env.local` na raiz do projeto caso deseje configurar o envio direto via Formspree:
-
-```env
-VITE_FORMSPREE_ID="seu_id_formspree"
-```
-
-> [!TIP]
-> A variável `VITE_FORMSPREE_ID` é opcional. Se não for definida, o formulário de contato utiliza automaticamente o fallback nativo `mailto:`, abrindo o cliente de e-mail padrão do usuário com os dados preenchidos.
-
----
-
 ## Integração Contínua e Testes
 
 O pipeline `.github/workflows/ci.yml` valida automaticamente cada `push` ou `pull_request` na branch `main` executando em sequência:
@@ -167,12 +158,13 @@ O pipeline `.github/workflows/ci.yml` valida automaticamente cada `push` ou `pul
 | Suíte de Teste | Cobertura |
 |---|---|
 | [`storageService.test.ts`](./src/services/storageService.test.ts) | Leitura com fallback seguro, escrita serializada em JSON e remoção de chaves no `localStorage` |
-| [`emailService.test.ts`](./src/services/emailService.test.ts) | Submissão HTTP ao Formspree, acionamento de fallback `mailto:` e tratamento de erros de rede |
+| [`emailService.test.ts`](./src/services/emailService.test.ts) | Submissão HTTP, acionamento de fallback `mailto:` e tratamento de erros de rede |
 
 ---
 
 ## Contato
 
+- **Portfólio Online**: [leonascimentodev-sooty.vercel.app](https://leonascimentodev-sooty.vercel.app/)
 - **GitHub**: [github.com/leonardonasls-stack](https://github.com/leonardonasls-stack)
 - **LinkedIn**: [linkedin.com/in/leonardolnascimento](https://www.linkedin.com/in/leonardolnascimento)
 - **E-mail**: [leonardonasls@gmail.com](mailto:leonardonasls@gmail.com)
