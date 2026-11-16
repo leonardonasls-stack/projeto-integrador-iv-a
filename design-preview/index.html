@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview de Paletas — Refatoração do Portfólio</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="container">
+    <!-- Barra de alternância de tema global -->
+    <header class="topbar">
+      <div class="topbar-title">
+        <strong>design-preview/</strong> &middot; Teste o tema global da página:
+      </div>
+      <div class="theme-switcher" role="group" aria-label="Selecionar paleta">
+        <button class="theme-btn" type="button" data-set-theme="emerald" aria-pressed="true">
+          <span class="swatch" style="background:#10b981"></span>
+          Terminal Emerald
+        </button>
+        <button class="theme-btn" type="button" data-set-theme="cobalt" aria-pressed="false">
+          <span class="swatch" style="background:#3b82f6"></span>
+          Blueprint Cobalt
+        </button>
+        <button class="theme-btn" type="button" data-set-theme="coral" aria-pressed="false">
+          <span class="swatch" style="background:#f97316"></span>
+          Silicon Coral
+        </button>
+      </div>
+    </header>
+
+    <!-- Simulação do Hero com a paleta ativa -->
+    <section class="hero">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        Disponível para novos projetos
+      </div>
+      <h1>Engenharia de software com foco em sistemas escaláveis.</h1>
+      <p>
+        Exemplo de como a tipografia, o contraste e os botões se comportam com a paleta selecionada acima.
+        Alterne entre os três temas no topo para comparar a leitura em tempo real.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" type="button">Ver projetos</button>
+        <button class="btn-secondary" type="button">Entrar em contato</button>
+      </div>
+    </section>
+
+    <!-- Comparação lado a lado das 3 paletas -->
+    <section aria-labelledby="compare-heading">
+      <p id="compare-heading" class="section-label">Comparação direta</p>
+      <div class="palettes-grid">
+        <!-- Paleta 1 -->
+        <article class="palette-card palette-card--emerald">
+          <div class="palette-header">
+            <div>
+              <h2 class="palette-name">Terminal Emerald</h2>
+              <p class="palette-desc">Infraestrutura, CLI &amp; Precisão</p>
+            </div>
+            <div class="color-dots" aria-hidden="true">
+              <span class="color-dot" style="background:#090b0e" title="#090b0e"></span>
+              <span class="color-dot" style="background:#10b981" title="#10b981"></span>
+              <span class="color-dot" style="background:#06b6d4" title="#06b6d4"></span>
+            </div>
+          </div>
+          <div class="mini-preview">
+            <div class="mini-preview-tag">API Gateway &middot; TypeScript</div>
+            <div class="mini-preview-title">Serviço de Observabilidade</div>
+            <p class="mini-preview-text">Pipeline de logs em tempo real com baixa latência.</p>
+            <div class="mini-preview-footer">
+              <span class="mini-pill">99.98% uptime</span>
+              <span class="mini-cta">Case study &rarr;</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paleta 2 -->
+        <article class="palette-card palette-card--cobalt">
+          <div class="palette-header">
+            <div>
+              <h2 class="palette-name">Blueprint Cobalt</h2>
+              <p class="palette-desc">Arquitetura &amp; Sistemas Corporativos</p>
+            </div>
+            <div class="color-dots" aria-hidden="true">
+              <span class="color-dot" style="background:#07090f" title="#07090f"></span>
+              <span class="color-dot" style="background:#3b82f6" title="#3b82f6"></span>
+              <span class="color-dot" style="background:#f59e0b" title="#f59e0b"></span>
+            </div>
+          </div>
+          <div class="mini-preview">
+            <div class="mini-preview-tag">Microserviços &middot; Node.js</div>
+            <div class="mini-preview-title">Motor de Regras Fiscais</div>
+            <p class="mini-preview-text">Arquitetura orientada a eventos com alta cobertura de testes.</p>
+            <div class="mini-preview-footer">
+              <span class="mini-pill">v2.4.0</span>
+              <span class="mini-cta">Case study &rarr;</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paleta 3 -->
+        <article class="palette-card palette-card--coral">
+          <div class="palette-header">
+            <div>
+              <h2 class="palette-name">Silicon Coral</h2>
+              <p class="palette-desc">Produto, Full-Stack &amp; Design Eng.</p>
+            </div>
+            <div class="color-dots" aria-hidden="true">
+              <span class="color-dot" style="background:#0a0a0a" title="#0a0a0a"></span>
+              <span class="color-dot" style="background:#f97316" title="#f97316"></span>
+              <span class="color-dot" style="background:#e4e4e7" title="#e4e4e7"></span>
+            </div>
+          </div>
+          <div class="mini-preview">
+            <div class="mini-preview-tag">Design System &middot; React 19</div>
+            <div class="mini-preview-title">Plataforma Analítica</div>
+            <p class="mini-preview-text">Interface de alto contraste com foco em velocidade.</p>
+            <div class="mini-preview-footer">
+              <span class="mini-pill">Core Web Vitals 100</span>
+              <span class="mini-cta">Case study &rarr;</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('[data-set-theme]');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-set-theme');
+        if (theme === 'emerald') {
+          document.documentElement.removeAttribute('data-theme');
+        } else {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      });
+    });
+  </script>
+</body>
+</html>
