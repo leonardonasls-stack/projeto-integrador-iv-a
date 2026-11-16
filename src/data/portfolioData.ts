@@ -147,22 +147,6 @@ export const portfolioProjects: Project[] = [
     createdAt: '2026'
   },
   {
-    id: 'ce6cc9c1-1256-4ce0-9887-dff53f951ab5',
-    title: 'Gerador-de-OS-e-recibo',
-    description:
-      'O Gerador de OS é uma aplicação web progressiva (PWA) voltada para prestadores de serviço, técnicos e pequenas empresas que precisam emitir Ordens de Serviço profissionais de forma rápida e organizada.',
-    fullDescription: '',
-    category: 'Fullstack',
-    techs: ['React', 'Tailwind CSS', 'JavaScript'],
-    githubUrl: 'https://github.com/leonardonasls-stack/Gerador-de-OS-e-recibo',
-    demoUrl: 'https://gerador-de-os-e-recibo.vercel.app',
-    imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
-    featured: false,
-    visible: true,
-    position: 1,
-    createdAt: '2026'
-  },
-  {
     id: '079dccac-c9cb-4e2e-9502-c497cbc918b7',
     title: 'Quadriciclo Milagres Adventure',
     description: 'Site oficial e plataforma de turismo de aventura da Quadriciclo Milagres Adventure.',
@@ -195,33 +179,18 @@ export const portfolioProjects: Project[] = [
     createdAt: '2026'
   },
   {
-    id: 'da38e0c9-639c-4c51-97ef-c232e3ace23b',
-    title: 'Console-Telegram-Bot',
-    description: 'Bot para gerenciar container no docker e Tunel ngrok',
-    fullDescription: '',
-    category: 'Backend',
-    techs: ['React', 'Tailwind CSS', 'Python'],
-    githubUrl: 'https://github.com/leonardonasls-stack/Console-Telegram-Bot',
-    demoUrl: undefined,
-    imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
-    featured: false,
-    visible: true,
-    position: 4,
-    createdAt: '2026'
-  },
-  {
     id: '3562f4be-c35e-4047-9a84-655c308987a0',
-    title: 'LLSystem v3 — Sistema de Ordens de Serviço & Gestão Multi-Tenant',
+    title: 'LLSystem OS — Plataforma SaaS Multi-Tenant',
     description:
-      ' Sistema completo de gerenciamento de assistência técnica e gestão multi-tenant com API REST assíncrona, frontend web, integração com WhatsApp, geração de PDFs, armazenamento de fotos e controle financeiro.',
+      'Plataforma SaaS multi-tenant para gestão integrada de ordens de serviço, clientes, patrimônio e financeiro de assistências técnicas, com API FastAPI, PostgreSQL 16, MinIO (S3) e SPA em Vue 3.',
     fullDescription:
-      'O LLSystem v3 é uma plataforma moderna para gestão de Ordens de Serviço (OS) e empresas licenciadas (Multi-Tenant). O sistema gerencia todo o ciclo de vida operacional de uma assistência técnica — da abertura ao pagamento —, oferece suporte a múltiplos tenants isolados, notificações automáticas via WhatsApp, portal de acompanhamento para clientes e console global para o Superadmin.',
-    category: 'Frontend',
-    techs: ['FastAPI + Python 3.12 (async)', 'MySQL 8.0 via SQLAlchemy 2.0 + aiomysql', 'HTML5 / TailwindCSS / Vanilla JS servido via FastAPI/Jinja2'],
+      'O LLSystem OS implementa uma arquitetura Shared Database com isolamento lógico estrito por tenant_id no PostgreSQL 16 e prefixos isolados no MinIO (S3). Dividido em Console Master SaaS (planos, MRR, franquia e impersonate) e Unidade Operacional Tenant (OS, Kanban, clientes PF/PJ, patrimônio, financeiro, laudos/recibos em PDF via WeasyPrint e Portal Público com NPS). Conta com autenticação JWT + refresh token HttpOnly com token_version, validação de uploads por magic bytes, design system dark/light (WCAG 2.1 AA) e suítes de testes assíncronos com pytest.',
+    category: 'Fullstack',
+    techs: ['FastAPI', 'Python 3.12', 'PostgreSQL 16', 'Vue 3', 'Tailwind CSS', 'MinIO (S3)', 'Docker'],
     githubUrl: undefined,
     demoUrl: undefined,
     imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
-    featured: false,
+    featured: true,
     visible: true,
     position: 5,
     createdAt: '2026'
