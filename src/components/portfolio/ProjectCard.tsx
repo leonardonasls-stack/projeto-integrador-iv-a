@@ -17,11 +17,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3 }}
-      className="bento-card rounded-3xl overflow-hidden flex flex-col justify-between text-left group relative border border-white/5 hover:border-violet-500/40"
+      className="bento-card rounded-3xl overflow-hidden flex flex-col justify-between text-left group relative border border-white/5 hover:border-emerald-500/40"
     >
       <div>
         {/* Project Thumbnail Image with Category Badge */}
-        <div className="relative h-52 w-full overflow-hidden bg-slate-950">
+        <div className="relative h-52 w-full overflow-hidden bg-canvas">
           <img
             src={project.imageUrl}
             alt={`Captura de tela do projeto ${project.title}`}
@@ -35,7 +35,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
           
           {/* Category Tag */}
           <div className="absolute top-3.5 left-3.5">
-            <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-slate-950/80 backdrop-blur-md text-sky-300 border border-sky-500/30 shadow-md">
+            <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-canvas/80 backdrop-blur-md text-cyan-300 border border-cyan-500/30 shadow-md">
               {project.category}
             </span>
           </div>
@@ -53,16 +53,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
 
         {/* Card Content */}
         <div className="p-6 space-y-3">
-          <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">
-            <Calendar className="w-3.5 h-3.5 text-violet-400" />
+          <div className="flex items-center gap-2 text-xs text-gray-400 font-mono">
+            <Calendar className="w-3.5 h-3.5 text-emerald-400" />
             <span>{project.createdAt}</span>
           </div>
 
-          <h3 className="text-xl font-bold text-white group-hover:text-violet-300 transition-colors line-clamp-1">
+          <h3 className="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors line-clamp-1">
             {project.title}
           </h3>
 
-          <p className="text-slate-300 text-xs leading-relaxed line-clamp-2">
+          <p className="text-gray-300 text-xs leading-relaxed line-clamp-2">
             {project.description}
           </p>
 
@@ -71,7 +71,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
             {project.techs.map((tech, idx) => (
               <span
                 key={idx}
-                className="px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-medium bg-slate-900/80 text-violet-300 border border-white/5"
+                className="px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-medium bg-surface/80 text-emerald-300 border border-white/5"
               >
                 {tech}
               </span>
@@ -84,7 +84,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
       <div className="px-6 pb-6 pt-4 mt-2 flex items-center justify-between border-t border-white/5">
         <button
           onClick={() => onSelect(project)}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-violet-400 hover:text-violet-300 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-400 rounded px-2 min-h-11"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded px-2 min-h-11"
           aria-label={`Ver detalhes do projeto ${project.title}`}
         >
           <Info className="w-4 h-4" />
@@ -97,7 +97,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="min-w-10 min-h-10 flex items-center justify-center rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-400"
+              className="min-w-10 min-h-10 flex items-center justify-center rounded-xl bg-surface/80 hover:bg-surface-elevated text-gray-300 hover:text-white border border-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
               title="GitHub"
               aria-label={`Abrir repositório GitHub do projeto ${project.title}`}
             >
@@ -105,7 +105,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
             </a>
           ) : (
             <div 
-              className="min-w-10 min-h-10 flex items-center justify-center rounded-xl bg-slate-900/40 text-slate-600 border border-white/5 cursor-not-allowed"
+              className="min-w-10 min-h-10 flex items-center justify-center rounded-xl bg-surface/40 text-gray-600 border border-white/5 cursor-not-allowed"
               title="Repositório Privado"
               aria-label="Repositório Privado"
             >
@@ -118,7 +118,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="min-w-10 min-h-10 px-3 flex items-center justify-center rounded-xl bg-linear-to-r from-violet-600 to-sky-500 hover:from-violet-500 hover:to-sky-400 text-white shadow-md shadow-violet-600/30 transition-all focus:outline-none focus:ring-2 focus:ring-violet-400 text-xs font-semibold gap-1.5"
+              className="min-w-10 min-h-10 px-3 flex items-center justify-center rounded-xl bg-linear-to-r from-emerald-600 to-cyan-500 hover:from-emerald-500 hover:to-cyan-400 text-white shadow-md shadow-emerald-600/30 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400 text-xs font-semibold gap-1.5"
               title="Ver Demonstração Online"
               aria-label={`Abrir demonstração online do projeto ${project.title}`}
             >

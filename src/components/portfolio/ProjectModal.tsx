@@ -27,7 +27,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   return (
     <AnimatePresence mode="wait">
       <div 
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-slate-950/80 backdrop-blur-md"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-canvas/80 backdrop-blur-md"
         onClick={onClose}
         role="dialog"
         aria-modal="true"
@@ -39,10 +39,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.2 }}
           onClick={(e) => e.stopPropagation()}
-          className="glass-panel w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-2xl border border-slate-800 shadow-2xl text-left relative my-8"
+          className="glass-panel w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-2xl border border-white/10 shadow-2xl text-left relative my-8"
         >
           {/* Modal Header Media */}
-          <div className="relative h-64 w-full bg-slate-900">
+          <div className="relative h-64 w-full bg-surface">
             <img
               src={project.imageUrl}
               alt={project.title}
@@ -56,17 +56,17 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2 rounded-full bg-slate-950/80 text-slate-300 hover:text-white border border-slate-700 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors"
+              className="absolute top-4 right-4 p-2 rounded-full bg-canvas/80 text-gray-300 hover:text-white border border-white/15 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-teal-400 transition-colors"
               aria-label="Fechar detalhes do projeto"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="absolute bottom-4 left-6 right-6 flex flex-wrap items-center justify-between gap-2">
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-teal-600 text-white shadow-md">
                 {project.category}
               </span>
-              <div className="flex items-center gap-2 text-xs text-slate-300 font-mono bg-slate-950/70 px-3 py-1 rounded-full border border-slate-800">
+              <div className="flex items-center gap-2 text-xs text-gray-300 font-mono bg-canvas/70 px-3 py-1 rounded-full border border-white/10">
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Criado em: {project.createdAt}</span>
               </div>
@@ -79,22 +79,22 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               <h3 id="modal-project-title" className="text-2xl sm:text-3xl font-extrabold text-white">
                 {project.title}
               </h3>
-              <p className="text-slate-300 text-sm mt-2 leading-relaxed">
+              <p className="text-gray-300 text-sm mt-2 leading-relaxed">
                 {project.fullDescription || project.description}
               </p>
             </div>
 
             {/* Technologies */}
             <div className="space-y-2">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <Tag className="w-3.5 h-3.5 text-indigo-400" />
+              <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                <Tag className="w-3.5 h-3.5 text-teal-400" />
                 <span>Tecnologias & Ferramentas</span>
               </h4>
               <div className="flex flex-wrap gap-2">
                 {project.techs.map((tech, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1 rounded-lg text-xs font-medium bg-slate-900 text-indigo-300 border border-slate-800"
+                    className="px-3 py-1 rounded-lg text-xs font-medium bg-surface text-teal-300 border border-white/10"
                   >
                     {tech}
                   </span>
@@ -103,31 +103,31 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </div>
 
             {/* UX/Usabilidade applied to this project */}
-            <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+            <div className="p-4 rounded-xl bg-surface/60 border border-white/10 space-y-2">
               <div className="flex items-center gap-2 text-xs font-bold text-emerald-400">
                 <Shield className="w-4 h-4" />
                 <span>Boas Práticas de UX & Usabilidade</span>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-gray-400 leading-relaxed">
                 Este projeto atende aos requisitos de responsividade, hierarquia visual de tipografia, leitores de tela e estados de feedback imediato ao usuário.
               </p>
             </div>
 
             {/* Modal Actions */}
-            <div className="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+            <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 {project.githubUrl ? (
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    className="px-4 py-2.5 rounded-xl bg-surface hover:bg-surface-elevated text-gray-200 border border-white/15 text-xs font-semibold flex items-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
                   >
                     <GithubIcon className="w-4 h-4" />
                     <span>Ver Repositório GitHub</span>
                   </a>
                 ) : (
-                  <div className="px-4 py-2.5 rounded-xl bg-slate-900/50 text-slate-500 border border-slate-800/50 text-xs font-semibold flex items-center gap-2 cursor-not-allowed">
+                  <div className="px-4 py-2.5 rounded-xl bg-surface/50 text-gray-500 border border-white/10/50 text-xs font-semibold flex items-center gap-2 cursor-not-allowed">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                     <span>Repositório Privado</span>
                   </div>
@@ -147,7 +147,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
               <button
                 onClick={onClose}
-                className="px-4 py-2.5 rounded-xl text-slate-400 hover:text-white text-xs font-medium transition-colors"
+                className="px-4 py-2.5 rounded-xl text-gray-400 hover:text-white text-xs font-medium transition-colors"
               >
                 Fechar janela
               </button>
