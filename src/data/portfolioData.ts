@@ -133,7 +133,7 @@ export const portfolioSkillCategories: SkillCategory[] = [
 export const portfolioProjects: Project[] = [
   {
     id: 'd2b24c51-fd20-46da-9a39-0549be502820',
-    title: 'billy-assistente-financeiro',
+    title: 'billy - Assistente financeiro',
     description: 'Aplicativo de gestão financeira com React Native e Expo.',
     fullDescription: '',
     category: 'Mobile',
@@ -169,7 +169,7 @@ export const portfolioProjects: Project[] = [
     fullDescription:
       'O Milagres Transparente é a plataforma web oficial desenvolvida para a agência de turismo homônima situada em São Miguel dos Milagres, Alagoas, cobrindo experiências pela Rota Ecológica dos Milagres, Maragogi e Maceió.\n\nA aplicação apresenta os roteiros turísticos (passeios de jangada às piscinas naturais, buggy, quadriciclo e mergulho), mídias reais de clientes e converte o tráfego de visitantes em atendimentos imediatos via WhatsApp, com mensagens personalizadas pré-preenchidas para cada passeio.',
     category: 'Frontend',
-    techs: ['React', 'Tailwind CSS', 'JavaScript', 'Vite'],
+    techs: ['Tailwind CSS', 'JavaScript', 'Vue'],
     githubUrl: undefined,
     demoUrl: 'https://www.milagrestransparente.com',
     imageUrl: '/milagres-transparente-logo.webp',
