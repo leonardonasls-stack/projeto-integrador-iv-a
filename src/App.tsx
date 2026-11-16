@@ -1,4 +1,5 @@
 import React from 'react';
+import { MotionConfig } from 'framer-motion';
 import { ToastProvider } from './context/ToastContext';
 import { ProjectProvider } from './context/ProjectContext';
 import { ProfileProvider } from './context/ProfileContext';
@@ -16,7 +17,7 @@ import { CookieConsent } from './components/ui/CookieConsent';
 
 const PortfolioApp: React.FC = () => {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-indigo-500 selection:text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-canvas text-gray-100 selection:bg-accent selection:text-canvas flex flex-col font-sans">
       <ToastContainer />
       
       {/* Navigation Header */}
@@ -42,14 +43,16 @@ const PortfolioApp: React.FC = () => {
 
 export default function App() {
   return (
-    <ToastProvider>
-      <ProjectProvider>
-        <SkillProvider>
-          <ProfileProvider>
-            <PortfolioApp />
-          </ProfileProvider>
-        </SkillProvider>
-      </ProjectProvider>
-    </ToastProvider>
+    <MotionConfig reducedMotion="user">
+      <ToastProvider>
+        <ProjectProvider>
+          <SkillProvider>
+            <ProfileProvider>
+              <PortfolioApp />
+            </ProfileProvider>
+          </SkillProvider>
+        </ProjectProvider>
+      </ToastProvider>
+    </MotionConfig>
   );
 }
