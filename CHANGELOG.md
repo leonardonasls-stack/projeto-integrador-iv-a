@@ -4,6 +4,19 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 > **Regra de Projeto**: Toda nova funcionalidade, correção ou alteração relevante deve obrigatoriamente ser registrada neste changelog acompanhada do **código hash do commit Git** correspondente (`7 caracteres ou hash completo`).
 
+## [4.0.0] — 2026-11-16
+
+### 🎨 Redesign Completo & Paleta Terminal Emerald (`refactor/modern-design`)
+
+- **Design System & Acessibilidade** — Commit [`6ebaef5`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/6ebaef5): Adoção dos tokens semânticos da paleta **Terminal Emerald** (`#090b0e`, `#11151c`, `#10b981`, `#06b6d4`) via `@theme` do Tailwind v4 em [`index.css`](file:///d:/projetos/projeto-integrador-iv-a/src/index.css) e adição de `<MotionConfig reducedMotion="user">` em [`App.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/App.tsx).
+- **Navbar Flutuante & WhatsApp** — Commit [`d9bb47b`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/d9bb47b): Redesign da [`Navbar.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/layout/Navbar.tsx) como *floating pill dock* com indicador animado (`layoutId="nav-pill"`), botão circular direto para o WhatsApp e correção de `fillRule` no `WhatsappIcon` em [`SocialIcons.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/ui/SocialIcons.tsx).
+- **Hero Editorial** — Commit [`c187567`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/c187567): Novo layout editorial assimétrico em [`Hero.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/portfolio/Hero.tsx) mantendo o card de código `api_server.py`.
+- **Sobre Mim & Stack** — Commit [`1de8e34`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/1de8e34): Remoção dos cards em [`AboutSection.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/portfolio/AboutSection.tsx) (timeline vertical acadêmica) e modernização de [`TechStack.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/portfolio/TechStack.tsx) em grade arquitetural de 2 colunas.
+- **Projetos** — Commit [`ccdb088`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/ccdb088): Alinhamento visual editorial e paleta **Terminal Emerald** em [`ProjectGrid.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/portfolio/ProjectGrid.tsx), [`ProjectCard.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/portfolio/ProjectCard.tsx) e [`ProjectModal.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/portfolio/ProjectModal.tsx).
+- **Contato & Footer** — Commits [`5603280`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/5603280) e [`63ecbd6`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/63ecbd6): Remoção do formulário em [`ContactSection.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/portfolio/ContactSection.tsx) para layout editorial em 2 colunas com canais diretos (E-mail, WhatsApp, LinkedIn, GitHub) e modernização de [`Footer.tsx`](file:///d:/projetos/projeto-integrador-iv-a/src/components/layout/Footer.tsx).
+- **Dados do Portfólio** — Commit [`ec6c4f5`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/ec6c4f5): Atualização do projeto **LLSystem OS — Plataforma SaaS Multi-Tenant** e remoção de projetos antigos em [`portfolioData.ts`](file:///d:/projetos/projeto-integrador-iv-a/src/data/portfolioData.ts).
+- **Preview de Paletas** — Commit [`d73d4af`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/d73d4af): Adição de `design-preview/` com comparação HTML/CSS das 3 paletas.
+
 ## [3.1.0] — 2026-10-30
 
 ### 📌 Commit [`254c3c8`](https://github.com/leonardonasls-stack/projeto-integrador-iv-a/commit/254c3c8) — `feat(portfolio): atualiza projeto Milagres Transparente com dominio oficial e logo na capa`
